@@ -91,6 +91,12 @@
   .punch-hero b { font-size: 14px !important; }
   .punch-hero span[style*="opacity"] { display: none !important; }
   .punch-hero span:first-child { font-size: 18px !important; }
+}</style><style>
+@media (max-width: 600px) {
+  .top { padding: 6px 10px !important; flex-wrap: wrap !important; }
+  .top .logo { font-size: 14px !important; width: 100% !important; }
+  .top nav { display: none !important; }          /* 导航隐藏：用页内滚动即可 */
+  .top button, .top select { font-size: 11px !important; padding: 3px 8px !important; }
 }</style></style>
 </head>
 <body>
@@ -98,8 +104,6 @@
 <div class="sub">日历 + 每日三态打卡 / 一次性完成 / 逾期红标 · 打卡即署名 · 数据实时读写任务表+打卡表</div>
 <div class="top">
   <div class="logo">🌸 李书远医美团队 · 资料库工作台</div>
-<div style="background:#e8f4fd;border-left:4px solid #2980b9;padding:10px 16px;border-radius:0 8px 8px 0;font-size:13px;margin-bottom:14px">
-📖 本站全部内容<b>无需登录即可阅读</b>。任务/项目的实时数据以每日 08:00 简报与快照页同步；<b>打卡与录入</b>请在 <a href="https://www.workbuddy.cn/space/s/92g9ugVji8dksZmnCfjRb8" style="color:#c2185b">WorkBuddy 空间</a>内操作（成员均有权限）。</div>
 <div class="bar">
   <span class="sub" style="margin:0">打卡人：</span><input class="inp" id="who" placeholder="昵称">
 <nav style="display:flex;gap:14px;font-size:13px;flex-wrap:wrap;margin:0 0 4px">
@@ -115,6 +119,41 @@
   <div class="calhead" id="calhead"></div>
   <div class="calgrid" id="calgrid"><div class="loading">加载中…</div></div>
 </div>
+
+<div style="background:#e8f4fd;border-left:4px solid #2980b9;padding:10px 16px;border-radius:0 8px 8px 0;font-size:13px;margin-bottom:14px">
+📖 本站全部内容<b>无需登录即可阅读</b>。任务/项目的实时数据以每日 08:00 简报与快照页同步；<b>打卡与录入</b>请在 <a href="https://www.workbuddy.cn/space/s/92g9ugVji8dksZmnCfjRb8" style="color:#c2185b">WorkBuddy 空间</a>内操作（成员均有权限）。</div>
+
+<div style="display:flex;gap:8px;margin:10px 0">
+<input id="q" placeholder="🔍 站内搜索：文案/选题/标准/工具…" style="flex:1;border:1px solid #e6d3da;border-radius:8px;padding:9px 12px;font-size:14px">
+</div>
+<div id="results" class="list" style="display:none;margin-bottom:12px"></div>
+<script src="search-data.js"></script>
+<script>
+(function(){
+  var q=document.getElementById('q'), box=document.getElementById('results');
+  if(!q) return;
+  q.addEventListener('input', function(){
+    var kw=this.value.trim().toLowerCase();
+    if(kw.length<1){box.style.display='none';return;}
+    var hits=[];
+    (window.SEARCH_DATA||[]).forEach(function(p){
+      if(p.t.toLowerCase().indexOf(kw)>=0 || p.x.toLowerCase().indexOf(kw)>=0){
+        hits.push({u:p.u,t:p.t,x:p.x});
+      }
+    });
+    var i, snip;
+    box.style.display='block';
+    if(hits.length===0){ box.innerHTML='<div class="sub">没有找到含「'+kw+'」的页面</div>'; return; }
+    var html='<b style="color:#c2185b">找到 '+hits.length+' 页</b>';
+    for(i=0;i<Math.min(hits.length,10);i++){
+      snip=''; var pos=hits[i].x.toLowerCase().indexOf(kw);
+      if(pos>=0) snip=hits[i].x.slice(Math.max(0,pos-40),pos+80);
+      html+='<div style="padding:6px 0;border-bottom:1px solid #f5eef1"><a href="'+hits[i].u+'" style="color:#c2185b;text-decoration:none;font-weight:600">'+hits[i].t+'</a><div style="font-size:11px;color:#999">'+snip+'…</div></div>';
+    }
+    box.innerHTML=html;
+  });
+})();
+</script>
 
 <a class="punch-hero" href="https://workbuddy.link/p/UHfZtqtvPIyZE9RN7OSahN" style="display:flex;align-items:center;gap:14px;background:linear-gradient(90deg,#c2185b,#e91e63);color:#fff;border-radius:14px;padding:16px 20px;margin:18px 0;text-decoration:none;box-shadow:0 4px 14px rgba(194,24,91,.25)">
 <span style="font-size:26px">🔁</span>
