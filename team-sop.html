@@ -76,23 +76,23 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px
 <body>
 <header class="hero">
   <h1>李书远数据库团队SOP</h1>
-  <p class="hero-summary">title: 李书远数据库团队SOP</p>
+  <p class="hero-summary">title: 🛠️工具链·李书远数据库团队SOP</p>
   <div class="meta"></div>
 </header>
 <main class="wrap">
 <section class="reveal block-card">
-<p>title: 李书远数据库团队SOP</p>
+<p>title: 🛠️工具链·李书远数据库团队SOP</p>
 </section>
 <section class="reveal block-card">
 <p># 李书远数据库 · 团队使用 SOP</p>
 <blockquote></blockquote>
-<p>状态：生效（2026-08-18） 适用范围：所有使用李书远数据库的 Agent / 团队成员 目的：统一&quot;存→管→用→看→协&quot;的规范，让库持续可用、数据不丢、看板常新 关联：<code>素材/WorkBuddy资料库应用参考.md</code>、<code>素材/PEEK/</code> 系列、看板 2 个</p>
+<p>状态：生效（2026-08-18）\ 适用范围：所有使用李书远数据库的 Agent / 团队成员\ 目的：统一&quot;存→管→用→看→协&quot;的规范，让库持续可用、数据不丢、看板常新\ 关联：<code>素材/WorkBuddy资料库应用参考.md</code>、<code>素材/PEEK/</code> 系列、看板 2 个</p>
 <p>## 一、库结构总览</p>
 <p>载体</p>
 <p>位置</p>
 <p>用途</p>
 <p>本地权威库</p>
-<p><code>F:codexdatadomestic-aesthetic-media-ops</code></p>
+<p><code>F:\codex\data\domestic-aesthetic-media-ops\</code></p>
 <p>原始文件（raw / 素材 / 需求 / README）</p>
 <p>云端空间</p>
 <p>WorkBuddy 资料库（35+ 节点）</p>
@@ -106,7 +106,7 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px
 <p>命名：李书远数据库（国内医美自媒体运营）= 本地 + 云端同一库</p>
 <p>## 二、数据入口流程（公众号/链接等）</p>
 <p>任何外部内容进入，先走 intake，禁止直接问&quot;怎么处理&quot;：</p>
-<p>保存归档：公众号链接 → <code>C:HTML MD 网络来源微信公众号</code>（命名：日期_时间_文章ID_标题，HTML+MD 双份）</p>
+<p>保存归档：公众号链接 → <code>C:\HTML MD 网络来源\微信公众号\</code>（命名：日期\_时间\_文章ID\_标题，HTML+MD 双份）</p>
 <p>分流判断：</p>
 <p>进数据库：与 PEEK/医美内容域相关 → 存本地 raw/素材 → 同步云端</p>
 <p>变任务：有明确工程动作 → beads 建任务</p>
@@ -121,9 +121,9 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px
 <p>每个文件头标注：主题、入库日期、用途、来源、关联</p>
 <p>### 3.3 结构化数据（database）★ 重要</p>
 <blockquote></blockquote>
-<p>⚠️ 必须用 CSV 导入，不要用批量添加接口 踩坑记录：<code>batch_add_database_records</code> 写入的记录查询接口读不到（索引不同步）； 正确路径：生成 CSV → <code>import_csv.py --token-stdin  --database-id </code> 覆盖导入。</p>
+<p>⚠️ 必须用 CSV 导入，不要用批量添加接口\ 踩坑记录：<code>batch_add_database_records</code> 写入的记录查询接口读不到（索引不同步）；\ 正确路径：生成 CSV → <code>import_csv.py --token-stdin  --database-id </code> 覆盖导入。</p>
 <p>建表：<code>create_database.py --schema &#x27;{&quot;title&quot;:&quot;...&quot;,&quot;space_id&quot;:&quot;...&quot;,&quot;properties&quot;:[...]}&#x27;</code>（类型嵌在 config 里）</p>
-<p>导入：CSV（utf-8-sig 带表头）→ import_csv</p>
+<p>导入：CSV（utf-8-sig 带表头）→ import\_csv</p>
 <p>字段设计参考：PEEK市场数据（分类/指标/数值/区域/年份/来源/解读）</p>
 <p>## 四、看板维护</p>
 <p>### 现有看板</p>
@@ -143,7 +143,7 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px
 <p>### 看板 HTML 规范</p>
 <p><code>data-sp-bindable=&quot;database&quot;</code> + <code>data-sp-database-id=&quot;&quot;</code> 必须成对</p>
 <p>用 <code>window.__SMART_PAGE__.database</code> SDK：query/getSchema/addRecord/updateRecord</p>
-<p>记录是扁平对象 <code>{字段: 值}</code>，含 record_id</p>
+<p>记录是扁平对象 <code>{字段: 值}</code>，含 record\_id</p>
 <p>## 五、Agent 工作流（团队重点）</p>
 <p>### 干活前</p>
 <p>引用空间：任务会话里引用李书远数据库空间（资料库直接进入上下文），不手动翻文件</p>
@@ -153,7 +153,7 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px
 <p>更新任务：看板/任务表里更新状态、备注</p>
 <p>记录进度：重要产出写 beads notes</p>
 <p>### 数据表维护</p>
-<p>新增数据 → CSV 追加 → import_csv 覆盖导入 → 看板自动更新</p>
+<p>新增数据 → CSV 追加 → import\_csv 覆盖导入 → 看板自动更新</p>
 <p>## 六、任务系统</p>
 <p>层</p>
 <p>工具</p>
@@ -182,7 +182,7 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px
 <p>公众号/链接 intake 归档无堆积</p>
 <blockquote></blockquote>
 <p>⚠️ 本 SOP 随实践迭代；技术细节以资料库 skill 文档为准（<code>page/data-page-flow.md</code>、<code>database/entry.md</code>）。</p>
-<p>KS_DOC_REVIEWS	i4NoCeXRVXPjcSJ7t9Igc6	15284	https://www.workbuddy.cn/space/d/i4NoCeXRVXPjcSJ7t9Igc6</p>
+<p>KS_DOC_REVIEWS	i4NoCeXRVXPjcSJ7t9Igc6	15302	https://www.workbuddy.cn/space/d/i4NoCeXRVXPjcSJ7t9Igc6</p>
 </section>
 <footer>由 WorkBuddy 资料库生成</footer>
 </main>
