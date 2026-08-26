@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-sp-mode="scroll">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>工作台方法论全文</title>
+<style>
+:root {
+  --accent: #fb923c; --accent2: #fbbf24;
+  --bg: #150f0a; --panel: #231910; --text: #f8efe3; --muted: #cdb79c;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", Segoe UI, sans-serif;
+  line-height: 1.7; -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 20px 80px; }
+.hero {
+  padding: 96px 20px 56px; text-align: center;
+  background: radial-gradient(1200px 400px at 50% -120px, var(--accent) 0%, transparent 60%);
+}
+.hero h1 {
+  font-size: clamp(28px, 5vw, 46px); margin: 0 0 18px; line-height: 1.25;
+  background: linear-gradient(90deg, var(--text), var(--accent2));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero-summary {
+  max-width: 720px; margin: 0 auto; font-size: clamp(15px, 2.2vw, 19px);
+  color: var(--text);
+}
+.hero .meta { margin-top: 22px; color: var(--muted); font-size: 13px; letter-spacing: .5px; }
+.block-card {
+  background: var(--panel); border: 1px solid rgba(255,255,255,.06);
+  border-radius: 16px; padding: 28px 30px; margin: 22px 0;
+  box-shadow: 0 8px 30px rgba(0,0,0,.25);
+}
+.block-card h1, .block-card h2 { margin-top: 4px; color: var(--accent2); }
+.block-card h2 { font-size: 22px; border-left: 4px solid var(--accent); padding-left: 12px; }
+.block-card h3 { font-size: 18px; color: var(--text); }
+.block-card p { color: var(--text); }
+.block-card ul, .block-card ol { padding-left: 22px; }
+.block-card li { margin: 6px 0; }
+a { color: var(--accent2); }
+code {
+  background: rgba(255,255,255,.08); padding: 2px 6px; border-radius: 6px;
+  font-family: SFMono-Regular, Consolas, monospace; font-size: .92em;
+}
+pre {
+  background: #0b0f17; border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px; padding: 16px; overflow: auto;
+}
+pre code { background: none; padding: 0; }
+blockquote {
+  margin: 12px 0; padding: 8px 16px; border-left: 4px solid var(--accent);
+  background: rgba(255,255,255,.04); border-radius: 0 10px 10px 0; color: var(--muted);
+}
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+th, td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,.08); text-align: left; }
+th { color: var(--accent2); font-weight: 600; }
+figure { margin: 14px 0; }
+figure img { width: 100%; border-radius: 12px; }
+figcaption { color: var(--muted); font-size: 13px; text-align: center; margin-top: 8px; }
+img { max-width: 100%; }
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.in { opacity: 1; transform: none; }
+footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px 0 0; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+</style>
+</head>
+<body>
+<header class="hero">
+  <h1>工作台方法论全文</h1>
+  <p class="hero-summary">eports\workbench-methodology</p>
+  <div class="meta"></div>
+</header>
+<main class="wrap">
+<section class="reveal block-card">
+<p>&lt;!-- 来源: https://mp.weixin.qq.com/s/iIAQXioHkN2pbHtV34l6dg --&gt;</p>
+<blockquote><p>公众号：普通人能学的AI课 · 抓取于 2026-08-26（406 行全文零删减）</p><p>精读结论：已按本文方法论升级李书远医美团队工作台 v6（五模块/双Schema/权限边界/每日简报/六条检验），</p><p>落地回执见 beads codex-0z89；repo 全文备份 F:\codex</p></blockquote>
+<p>eports\workbench-methodology</p>
+</section>
+<section class="reveal block-card">
+<p>AI 个人工作台指南 开始 WorkBuddy · Codex 搭一张 属于自己的工作台 胡楚靓最近发布了一条只有几十秒的视频，标题是《如何用AI做自己的专属工作台，别太简单》。 随后出现的跟做版本里，有人把雅思学习、生理期记录、日常日志、饮水睡眠和收支记账全部塞进同一个页面。过去散落在七八个 App 里的生活，终于被收回一张桌面。 这容易产生一个误会： 模块摆在一起，只能得到一个看板；数据能够持续进入、提醒能够按时发生、每周还能自动复盘，它才开始像工作台 。 看板负责把信息摆整齐，工作台负责把下一步推出来。 这篇就从一个最小版本开始，分别用 WorkBuddy 和 Codex 搭建。不会代码也能跟着做。 本指南目录 01 个人工作台要装什么 02 先定数据，再设计页面 03 用 WorkBuddy 搭一个低门槛版本 04 用 Codex 搭一个可长期扩展的版本 05 WorkBuddy 和 Codex 怎么选 06 我的实测：公众号内容工作台 07 工作台能否长期使用，看这六条 01 个人工作台 · 该装什么 先回答五个问题， 再决定要哪些模块 很多人的第一反应是列功能：日程、记账、健身、阅读、学习、项目……功能越列越长，最后做出一个首页很漂亮、第三天就懒得打开的&quot;人生管理驾驶舱&quot;。 一个能长期使用的个人工作台，只需回答五个问题： Q1 今天最该做什么？ Q2 我手上有哪些项目正在推进？ Q3 最近收集了哪些资料和想法？ Q4 哪些事情已经延期或停滞？ Q5 这一周做得怎么样，下周要改什么？ 与之对应的是五个基础模块。 📥 收件箱 Inbox 所有临时任务、灵感、链接和截图先进入这里，不要求立即分类。 📅 今日 Today 只展示今天必须处理、适合今天处理和已经超期的事项。 🎯 项目 Projects 记录目标、阶段、下一步动作、截止日期和当前风险。 📚 资料库 Library 保存文章、Prompt、模板、会议记录和可复用成果。 🔄 复盘 Review 按周统计完成情况、停滞原因和下周优先级。 原则 · 工作台的功能不由&quot;我还想记录什么&quot;决定，而由&quot;我经常需要做什么决定&quot;决定。健康、记账、阅读、内容创作等可以作为扩展模块逐步加入。初始版本最好不超过三个生活领域。 02 数据先行 · 再做页面 先准备四份文件， 页面才有稳定的数据 如果直接告诉 AI&quot;帮我做一个高级的个人工作台&quot;，它通常会做出许多漂亮卡片：今日目标、专注时长、人生愿景、情绪指数。问题在于，卡片下面没有稳定的数据。 搭建前先准备四份文件： WORKSPACE STRUCTURE personal-workspace/ ├── ME.md ├── WORKBENCH.md ├── DATA-SCHEMA.md └── RULES.md ME ME.md 关于我 · 职业、主要项目、目前目标、常用工具、工作时间和表达偏好。 WB WORKBENCH.md 工作台解决什么 · 只写三件最想改善的事，例如选题散落、复盘想不起来、重要任务没有下一步动作。 DS DATA-SCHEMA.md 每条数据记录什么 · 任务和项目分别应该保留的字段定义。 RL RULES.md AI 可以做什么 · 可以、需要确认、禁止的边界清单。 ▍任务 · TASK SCHEMA · 标题 · 所属领域 · 状态 · 优先级 · 截止日期 · 下一步动作 · 来源 · 最后更新时间 ▍项目 · PROJECT SCHEMA · 项目名称 · 目标 · 当前阶段 · 下一里程碑 · 下一步动作 · 风险 · 截止日期 权限边界 · 可以： 整理、分类、生成摘要、提醒、制作周报。 需要确认： 修改已有文件、批量移动数据、对外发送信息。 禁止： 删除原始资料、自动付款、代替我作重要决定。 这些文件看起来没有首页那么漂亮，却决定了系统以后会不会越来越乱。 03 WorkBuddy · 低门槛 不想碰代码， 用 WorkBuddy 也能搭出可用的版本 WorkBuddy 适合不想配置开发环境，又希望 AI 可以直接处理文档、表格和本地文件的人。腾讯官方文档显示，WorkBuddy 提供三种工作模式。 Ask · 问一问 只分析，不修改 让 AI 阅读材料并给出建议，不接触任何文件。 Plan · 想一想 先计划，再执行 先制定完整方案并等待确认。 Craft · 做一做 直接动手 直接创建和修改文件。 第一次搭工作台，建议从 Plan 开始。 1 第一步 · 新建独立工作空间 在电脑里创建： 个人AI工作台/ 个人AI工作台/ ├── 00_收件箱 ├── 01_数据 ├── 02_规则 ├── 03_周报 ├── 04_导出备份 └── 05_工作台页面 在 WorkBuddy 中新建任务，将这个文件夹设置为工作空间。 注意 · 不要直接授权桌面、文档根目录或整个硬盘。官方也建议把任务放在独立目录，并优先使用默认权限；涉及脚本、删除、外部程序或敏感路径时，由用户再次确认。 2 第二步 · 先让它做需求设计 选择 Plan 模式，输入： ▍ WORKBUDDY · PLAN 需求设计指令 我想搭建一个长期使用的个人AI工作台。  它需要解决三个问题： 1. 每天明确最重要的任务； 2. 追踪正在推进的项目； 3. 每周自动生成复盘。  请先不要制作页面。  请完成： 1. 检查我的需求是否过多； 2. 设计最小可用的模块； 3. 列出每个模块需要保存的数据字段； 4. 设计文件夹和数据文件结构； 5. 说明哪些信息需要手动输入，哪些可以由AI生成； 6. 给出页面草图； 7. 列出可能涉及的隐私和权限风险。  如有必要，最多向我提5个问题。 这一步完成后，先删除不必要的模块。首页最好控制在： 首页 · 5 块 今日概览 收件箱 项目进度 本周复盘 快速录入 3 第三步 · 生成可运行版本 确认方案后切换到 Craft ： ▍ WORKBUDDY · CRAFT 构建指令 请按照已经确认的方案，在当前工作空间创建个人工作台。 技术要求：</p>
+<ol><li>使用HTML、CSS和JavaScript； 2. 无需安装开发环境，打开index.html即可使用； 3. 数据保存在浏览器localStorage； 4. 支持新增、编辑、删除和筛选； 5. 支持JSON导入和导出； 6. 刷新页面后数据不能丢失； 7. 提供少量可删除的示例数据； 8. 不连接外部API，不上传个人数据。</li></ol>
+<p>视觉要求：</p>
+<ol><li>中文界面； 2. 参考苹果App的克制风格； 3. 浅灰背景、白色内容区、黑色正文； 4. 蓝色和绿色作为功能强调色； 5. 不使用渐变、大面积紫色和夸张圆角； 6. 页面在电脑和手机尺寸下都能正常显示。  完成后请测试：新增任务、修改状态、刷新后数据保留、导出JSON、清空数据后重新导入、手机宽度下没有文字重叠。请把测试结果写入TEST-REPORT.md。</li></ol>
+<p>4 第四步 · 增加每日简报 工作台能用后，再配置自动化。可设置工作日上午 8 点执行： ▍ AUTOMATION · 每日 每日简报指令 读取当前工作空间中的任务和项目数据。  生成今日简报，保存到03_周报/daily-brief.md。  内容包括： 1. 今天到期的任务； 2. 已经超期的任务； 3. 没有&quot;下一步动作&quot;的项目； 4. 今天最值得推进的三件事； 5. 可以交给AI处理的重复工作。  不要修改原始数据，不要自动发送消息。 自动化底线 · 先手动试运行三次，再开启定时任务。无人值守的自动化不适合删除文件、对外发消息、操作账户或处理资金。 04 Codex · 可长期扩展 希望深度定制， 用 Codex 把它做成继续迭代的应用 Codex 更适合希望深度定制、保存版本、增加 Skills，或者将来把工作台做成小程序、网站和本地 App 的人。Codex 已经不只处理代码：官方列出的知识工作场景包括研究、数据分析、报告、仪表盘、内部工具和工作流自动化；Skills 可以封装规则与脚本，Automations 可以定时运行重复任务。 1 第一步 · 建立项目 将前面准备的四份文件放入项目目录： personal-workbench/ personal-workbench/ ├── ME.md ├── WORKBENCH.md ├── DATA-SCHEMA.md ├── RULES.md ├── data/ ├── exports/ ├── reviews/ └── app/ 打开 Codex，将该目录作为项目工作区。 2 第二步 · 让 Codex 先审需求 ▍ CODEX · AUDIT 需求审计指令 请阅读当前目录中的ME.md、WORKBENCH.md、DATA-SCHEMA.md和RULES.md。  暂时不要写代码。  请检查： 1. 工作台目标是否清楚； 2. 数据字段是否足够且没有重复； 3. 哪些功能不适合放在第一版； 4. 哪些操作必须保留人工确认； 5. 给出第一版页面结构； 6. 制定开发和测试计划。  第一版必须能够在一天内完成。 等它给出计划后，把所有&quot;以后可能用到&quot;的功能先放进待办清单。 3 第三步 · 构建并验收 构建要求 · 7 条 所有数据优先保存在本地； 不需要登录和云数据库； 支持新增、编辑、筛选、搜索和归档； 支持JSON备份与恢复； 所有删除操作必须二次确认； 不得修改工作空间外的文件； 提供清晰的空状态和错误提示。 验收步骤 · 7 步 启动本地预览； 检查 1440×900 桌面视图； 检查 390×844 手机视图； 测试数据持久化； 测试错误 JSON 导入； 修复发现的问题； 生成一份使用说明和测试报告。 Codex 的优势在这里逐渐显现：它不只是生成首页，还能继续修改代码、运行测试、检查页面和保留版本。 4 第四步 · 把固定规则做成 Skill 工作台稳定后，可以创建一个 personal-workbench Skill，把长期规则写进去： Personal-Workbench · Skill 定义 触发场景： 用户要求晨间规划 / 每周复盘 / 整理项目 执行规则： 读取任务和项目数据 → 先检查来源和更新时间 → 区分事实、推测和建议 不自动删除或覆盖原数据； 输出到 reviews 目录； 涉及健康、财务和对外发送时必须询问用户； 每次输出都列出依据的数据文件。 区别 · Prompt 解决一次任务，Skill 保存一套反复使用的判断标准。 5 第五步 · 再考虑 Automation 可以逐步增加： 每天生成晨间简报 每周五生成项目复盘 每月整理过期资料 定期检查没有下一步动作的项目 汇总文章、学习和收入数据 节奏建议 · 不要一开始就设置十个自动任务。工作台还没稳定时，自动化只会更快地制造噪音。 05 对比 · 怎么选 WorkBuddy 与 Codex， 按使用目标选 不想折腾开发环境，可以先用 WorkBuddy 验证需求；已经确定自己会长期使用，再让 Codex 做成更完整的应用。两者也可以分工：WorkBuddy 负责每天录入、文件整理和提醒；Codex 负责维护工作台、生成分析和增加新功能。 对比 WB WorkBuddy CD Codex 上手难度 较低 中等 适合人群 办公用户、零基础 希望深度定制的人 文件处理 授权本地工作空间 项目目录与工作区 快速产物 文档、表格、PPT、简单页面 网站、工具、脚本、完整应用 Skills 市场安装或自然语言创建 可编写、修改并纳入项目 自动化 定时执行，可推送小程序 定时任务与长期项目 调试能力 适合常见办公任务 更适合复杂逻辑和产品迭代 后续扩展 连接器、MCP、办公生态 代码、插件、数据库、部署 06 实测 · 公众号内容工作台 与其做万能系统， 不如先做一个具体的版本 与其做一个包含健康、记账、学习和生活的全能系统，我更建议先做一个与你工作贴合的版本（以我的公众号为例）它包括六个模块。 PAGE 01 今日编辑台 今天要查、要写、要排版的内容。 PAGE 02 文章流水线 选题、检索、写作、排版、待发布、已发布。 PAGE 03 素材收件箱 新闻、论文、截图、读者留言和临时想法。 PAGE 04 Prompt 库 科研、工具、图片、写作、核查等分类。 PAGE 05 数据复盘 阅读、点赞、分享、收藏、新增关注。 PAGE 06 选题分析 高于历史中位数 / 持续低迷方向。 ▍ CODEX · 实测指令 公众号内容工作台 · 第一版 请在当前目录创建一个中文个人内容工作台， 名称为&quot;普通人能学的AI课｜内容工作台&quot;。 使用者： 一名长期写AI科普、工具教程和行业观察的公众号作者。 工作台需要解决：</p>
+<ol><li>选题散落，容易遗忘； 2. 文章进度不清楚； 3. 资料来源与正文脱节； 4. Prompt难以复用； 5. 发布后很少系统复盘数据。  请先制定计划，确认后再开发。</li></ol>
+<p>第一版包含六个页面： 一、首页 本周计划发布数 / 正在撰写文章数 / 待核实事实数 / 下一篇计划发布时间 / 今日最重要的三项任务 / 最近七天文章进度 二、文章流水线 阶段：选题池、资料检索、框架完成、正文撰写、排版配图、待发布、已发布 字段：标题、内容类型、核心角度、读者问题、当前状态、优先级、计划日期、事实核查状态、配图状态、下一步动作、备注 支持拖动或按钮切换阶段。 三、素材收件箱 字段：标题、链接、来源、素材类型、关联文章、可信度等级、是否已阅读、摘录和备注 四、Prompt库 分类：行业研究、工具教程、论文科研、事实核查、图片生成、文章润色、标题优化 支持搜索、复制、编辑、收藏和标签筛选。 五、发布数据 记录：文章标题、发布日期、阅读量、点赞、在看、分享、收藏、新增关注、文章字数和内容类型 自动计算：历史阅读中位数、高于中位数的文章、不同内容类型的平均表现、阅读与收藏比例、最近四周趋势 六、周复盘 根据现有数据生成：本周完成内容、表现最好的主题、表现较弱的主题、尚未完成的任务、下周三个优先选题、需要停止继续投入的方向 功能要求： 可新增、编辑、删除、筛选和搜索；数据保存在localStorage；支持JSON导入和导出；刷新后数据保留；删除前二次确认；提供5条可删除的示例数据；不调用外部API；不需要登录；打开index.html即可使用。 视觉要求： 苹果App式克制设计 / 浅灰背景和白色工作区 / 黑色正文，蓝色、绿色用于状态 / 卡片圆角不超过8px / 不使用渐变、紫色光效和巨大标题 / 信息密度适中，适合长期工作 / 桌面端使用左侧导航 / 手机端切换为底部导航 / 所有中文文字不得重叠或溢出  完成后请：运行并检查页面；测试新增文章和状态切换；测试Prompt复制；测试数据统计；测试JSON备份恢复；检查桌面和手机界面；修复问题后生成使用说明。 07 长期使用 · 六条检验 先连续用七天， 再决定要不要继续 页面完成后，不要急着继续加功能。先连续使用七天，再检查下面六条： ✓ 一条信息是否只需录入一次？ ✓ 首页能否直接给出下一步动作？ ✓ 项目停滞时，系统能否及时提醒？ ✓ AI 的分析能否追溯到原始数据？ ✓ 所有数据能否完整导出？ ✓ 离开当前工具后，数据是否还能迁移？ 两个常见失败模式 · 如果每天需要填写十几个字段，它很快会被放弃；如果所有内容都存在一段无限增长的聊天记录里，它也很难成为稳定系统。 &quot;个人工作台不是把生活做成一张精美报表。&quot; 它更像一张持续更新的操作界面：信息从哪里进来，事情下一步去哪，哪些工作交给 AI，哪些决定仍由自己保留。 看板负责 摆整齐 ， 工作台负责 推下一步 。 一张能长期使用的个人工作台，不靠更多模块，而靠更少却更准确的数据、更少却更稳定的规则、更少却更清晰的自动化。 从今晚的一个目录、四份文件和一句话的工作台目标开始。 上海稀宇科技有限公司 沪公网安备31010402010179号 沪ICP备2023003282号-38 模型名称：MiniMax 备案号：Shanghai-MiniMax-202505230046 用户协议隐私政策 预览时标签不可点 微信扫一扫 关注该公众号 知道了 微信扫一扫 使用小程序 取消 允许 取消 允许 取消 允许 × 分析 微信扫一扫可打开此内容， 使用完整服务</p>
+</section>
+<footer>由 WorkBuddy 资料库生成</footer>
+</main>
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els = document.querySelectorAll('.reveal');
+  if (reduce || !('IntersectionObserver' in window)) {
+    els.forEach(function (el) { el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function (el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-sp-mode="scroll">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>工作台运转章程</title>
+<style>
+:root {
+  --accent: #fb923c; --accent2: #fbbf24;
+  --bg: #150f0a; --panel: #231910; --text: #f8efe3; --muted: #cdb79c;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", Segoe UI, sans-serif;
+  line-height: 1.7; -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 20px 80px; }
+.hero {
+  padding: 96px 20px 56px; text-align: center;
+  background: radial-gradient(1200px 400px at 50% -120px, var(--accent) 0%, transparent 60%);
+}
+.hero h1 {
+  font-size: clamp(28px, 5vw, 46px); margin: 0 0 18px; line-height: 1.25;
+  background: linear-gradient(90deg, var(--text), var(--accent2));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero-summary {
+  max-width: 720px; margin: 0 auto; font-size: clamp(15px, 2.2vw, 19px);
+  color: var(--text);
+}
+.hero .meta { margin-top: 22px; color: var(--muted); font-size: 13px; letter-spacing: .5px; }
+.block-card {
+  background: var(--panel); border: 1px solid rgba(255,255,255,.06);
+  border-radius: 16px; padding: 28px 30px; margin: 22px 0;
+  box-shadow: 0 8px 30px rgba(0,0,0,.25);
+}
+.block-card h1, .block-card h2 { margin-top: 4px; color: var(--accent2); }
+.block-card h2 { font-size: 22px; border-left: 4px solid var(--accent); padding-left: 12px; }
+.block-card h3 { font-size: 18px; color: var(--text); }
+.block-card p { color: var(--text); }
+.block-card ul, .block-card ol { padding-left: 22px; }
+.block-card li { margin: 6px 0; }
+a { color: var(--accent2); }
+code {
+  background: rgba(255,255,255,.08); padding: 2px 6px; border-radius: 6px;
+  font-family: SFMono-Regular, Consolas, monospace; font-size: .92em;
+}
+pre {
+  background: #0b0f17; border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px; padding: 16px; overflow: auto;
+}
+pre code { background: none; padding: 0; }
+blockquote {
+  margin: 12px 0; padding: 8px 16px; border-left: 4px solid var(--accent);
+  background: rgba(255,255,255,.04); border-radius: 0 10px 10px 0; color: var(--muted);
+}
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+th, td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,.08); text-align: left; }
+th { color: var(--accent2); font-weight: 600; }
+figure { margin: 14px 0; }
+figure img { width: 100%; border-radius: 12px; }
+figcaption { color: var(--muted); font-size: 13px; text-align: center; margin-top: 8px; }
+img { max-width: 100%; }
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.in { opacity: 1; transform: none; }
+footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px 0 0; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+</style>
+</head>
+<body>
+<header class="hero">
+  <h1>工作台运转章程</h1>
+  <p class="hero-summary">原则：功能不由&quot;我还想记录什么&quot;决定，而由&quot;我经常需要做什么决定&quot;决定。</p>
+  <div class="meta"></div>
+</header>
+<main class="wrap">
+<section class="reveal block-card">
+<blockquote><p>2026-08-26 立。方法论蓝本：《如何搭建个人 AI 工作台：从一张看板，到一套会运转的系统》（全文存档于团队 repo reports/workbench-methodology/）。核心原则：<strong>看板负责摆整齐，工作台负责推下一步</strong>。</p></blockquote>
+</section>
+<section class="reveal block-card">
+<h2>一、五模块（工作台装什么）</h2>
+<div class="table-wrap"><table><thead><tr><th>模块</th><th>回答的问题</th><th>本工作台落点</th></tr></thead><tbody><tr><td>📥 收件箱 Inbox</td><td>最近收集了哪些资料和想法？</td><td>「素材收件箱」表——灵感先进来不急分类</td></tr><tr><td>📅 今日 Today</td><td>今天最该做什么？</td><td>任务日历 + 今日例行打卡</td></tr><tr><td>🎯 项目 Projects</td><td>哪些项目在推进？</td><td>「项目进度表」（阶段/里程碑/风险）</td></tr><tr><td>📚 资料库 Library</td><td>成果和模板存哪？</td><td>对标文案库 / PEEK 知识体系 / 书单</td></tr><tr><td>🔄 复盘 Review</td><td>这周做得怎么样？</td><td>周复盘五问（每周五）</td></tr></tbody></table></div>
+<p>原则：功能不由&quot;我还想记录什么&quot;决定，而由&quot;我经常需要做什么决定&quot;决定。</p>
+</section>
+<section class="reveal block-card">
+<h2>二、数据先行（每条数据记什么）</h2>
+<h3>任务 Schema（任务表 13 字段）</h3>
+<p>标题 · 所属板块 · 渠道/平台 · 任务模式(每天例行/单次) · 状态 · 优先级 · 负责人 · 截止日 · 备注 · 完成时间 · 完成人 · <strong>下一步动作</strong> · <strong>来源</strong></p>
+<blockquote><p>规则：每条任务必须有「下一步动作」；「来源」标记任务从哪来（快速录入/入料口批次/周复盘）；最后更新由平台 version+updatedBy 承担。</p></blockquote>
+<h3>项目 Schema（项目进度表七字段）</h3>
+<p>项目名称 · 目标 · 当前阶段（筹备→推进中→待验收→已完成/停滞）· 下一里程碑 · 下一步动作 · 风险 · 截止日</p>
+<h3>素材收件箱 Schema</h3>
+<p>标题 · 链接 · 来源 · 素材类型（视频灵感/文案金句/截图/文献/读者留言/竞品动态/临时想法）· 关联任务/项目 · 可信度（高中低/待核实）· 是否已处理 · 摘录与备注</p>
+</section>
+<section class="reveal block-card">
+<h2>三、权限边界（AI 与成员的行为红线）</h2>
+<ul><li><strong>可以</strong>：整理、分类、生成摘要、提醒、制作周报；</li><li><strong>需要确认</strong>：修改已有文件、批量移动数据、对外发送信息；</li><li><strong>禁止</strong>：删除原始资料、自动付款、代替负责人作重要决定。</li></ul>
+</section>
+<section class="reveal block-card">
+<h2>四、每日简报（每个工作日 08:00 自动生成）</h2>
+<p>内容固定五项：</p>
+<ol><li>今天到期的任务；</li><li>已经超期的任务；</li><li>没有「下一步动作」的项目；</li><li>今天最值得推进的三件事；</li><li>可以交给 AI 处理的重复工作。</li></ol>
+<p>自动化底线：先手动试运行三次再开启定时；无人值守不做删除文件、对外发消息、操作账户、处理资金类动作。</p>
+</section>
+<section class="reveal block-card">
+<h2>五、长期使用六条检验（连续用七天再评估）</h2>
+<ol><li>一条信息是否只需录入一次？</li><li>首页能否直接给出下一步动作？</li><li>项目停滞时系统能否及时提醒？</li><li>AI 的分析能否追溯到原始数据？</li><li>所有数据能否完整导出？</li><li>离开当前工具后数据是否还能迁移？</li></ol>
+</section>
+<section class="reveal block-card">
+<h2>六、两个常见失败模式（警惕）</h2>
+<ul><li>每天要填十几个字段 → 很快被放弃（本台录入只填 标题+下一步动作 两项，其余可选）；</li><li>所有内容堆在无限增长的聊天记录里 → 不成系统（一切进表、进文档）。</li></ul>
+</section>
+<section class="reveal block-card">
+<h2>七、与本机治理衔接</h2>
+<ul><li>数据变更走 beads 任务号（codex-*）；采集类操作挂《抖音作品转文案入库标准 v2》质量门；素材入库走入料口批次登记。</li></ul>
+</section>
+<footer>由 WorkBuddy 资料库生成</footer>
+</main>
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els = document.querySelectorAll('.reveal');
+  if (reduce || !('IntersectionObserver' in window)) {
+    els.forEach(function (el) { el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function (el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>
