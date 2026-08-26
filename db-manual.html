@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-sp-mode="scroll">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>李书远数据库使用说明</title>
+<style>
+:root {
+  --accent: #fb923c; --accent2: #fbbf24;
+  --bg: #150f0a; --panel: #231910; --text: #f8efe3; --muted: #cdb79c;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", Segoe UI, sans-serif;
+  line-height: 1.7; -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 20px 80px; }
+.hero {
+  padding: 96px 20px 56px; text-align: center;
+  background: radial-gradient(1200px 400px at 50% -120px, var(--accent) 0%, transparent 60%);
+}
+.hero h1 {
+  font-size: clamp(28px, 5vw, 46px); margin: 0 0 18px; line-height: 1.25;
+  background: linear-gradient(90deg, var(--text), var(--accent2));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero-summary {
+  max-width: 720px; margin: 0 auto; font-size: clamp(15px, 2.2vw, 19px);
+  color: var(--text);
+}
+.hero .meta { margin-top: 22px; color: var(--muted); font-size: 13px; letter-spacing: .5px; }
+.block-card {
+  background: var(--panel); border: 1px solid rgba(255,255,255,.06);
+  border-radius: 16px; padding: 28px 30px; margin: 22px 0;
+  box-shadow: 0 8px 30px rgba(0,0,0,.25);
+}
+.block-card h1, .block-card h2 { margin-top: 4px; color: var(--accent2); }
+.block-card h2 { font-size: 22px; border-left: 4px solid var(--accent); padding-left: 12px; }
+.block-card h3 { font-size: 18px; color: var(--text); }
+.block-card p { color: var(--text); }
+.block-card ul, .block-card ol { padding-left: 22px; }
+.block-card li { margin: 6px 0; }
+a { color: var(--accent2); }
+code {
+  background: rgba(255,255,255,.08); padding: 2px 6px; border-radius: 6px;
+  font-family: SFMono-Regular, Consolas, monospace; font-size: .92em;
+}
+pre {
+  background: #0b0f17; border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px; padding: 16px; overflow: auto;
+}
+pre code { background: none; padding: 0; }
+blockquote {
+  margin: 12px 0; padding: 8px 16px; border-left: 4px solid var(--accent);
+  background: rgba(255,255,255,.04); border-radius: 0 10px 10px 0; color: var(--muted);
+}
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+th, td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,.08); text-align: left; }
+th { color: var(--accent2); font-weight: 600; }
+figure { margin: 14px 0; }
+figure img { width: 100%; border-radius: 12px; }
+figcaption { color: var(--muted); font-size: 13px; text-align: center; margin-top: 8px; }
+img { max-width: 100%; }
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.in { opacity: 1; transform: none; }
+footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px 0 0; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+</style>
+</head>
+<body>
+<header class="hero">
+  <h1>李书远数据库使用说明</h1>
+  <p class="hero-summary">title: 李书远数据库·使用说明</p>
+  <div class="meta"></div>
+</header>
+<main class="wrap">
+<section class="reveal block-card">
+<p>title: 李书远数据库·使用说明</p>
+</section>
+<section class="reveal block-card">
+<p># 国内医美自媒体运营数据库</p>
+<blockquote></blockquote>
+<p>载体：Markdown 文件库 注册制：已登记（见 <code>F:codexcatalogdatabase-registry-v0.json</code>） 创建日期：2026-08-14</p>
+<p>## 用途</p>
+<p>收录国内医美自媒体运营素材：短视频文案、朋友圈文案、账号简介、话术、风格基准等。供国内医美/整形领域的自媒体内容创作、拍摄脚本、运营排期取用。</p>
+<p>## 主题关系（重要）</p>
+<p>骨相审美 = 理念/内容层：先立&quot;骨相审美&quot;的人设与认知（账号简介、开场钩子、金句），建立审美高度</p>
+<p>PEEK = 落地业务层：骨相审美文案最终服务于 PEEK（聚醚醚酮）3D 打印骨相填充/轮廓手术推广——审美理念引流，PEEK 技术承接</p>
+<p>创作顺序建议：骨相审美文案做开场与主张 → PEEK 材料科普/对比/案例做承接与转化</p>
+<p>素材对应：骨相审美见 <code>素材/骨相审美/</code>，PEEK 见 <code>素材/PEEK/</code>（含材料知识/卖点/账号源）</p>
+<p>## 目录结构</p>
+<pre><code>  domestic-aesthetic-media-ops/
+  ├── README.md              # 本说明
+  ├── raw/                   # 原始素材存档（用户原文 / 抓取原文，只读归档）
+  ├── 需求/                  # 创作要求/需求规格（用户原话 + 解析）
+  └── 素材/                  # 整理后的文案条目
+      ├── 骨相审美/          # 按主题分目录
+      ├── PEEK/              # PEEK 材料知识 / 文案关键词与卖点 / 平台账号源 / 结构化数据（2026-08-16 从 medical-aesthetic-corpus 归集）
+      └── 风格基准/          # 文案风格基准 / 语感规范</code></pre>
+<p>## 条目规范（写库时必须遵守）</p>
+<p>每条文案条目 = 1 个 Markdown 文件，或同主题合集文件内的一个编号小节</p>
+<p>每条条目必须包含字段：</p>
+<p><code>id</code>：<code>GM--</code>（GM = 国内医美 Guomei）</p>
+<p><code>原文</code>：文案原文（保留原话，不改写）</p>
+<p><code>主题</code>：骨相审美 / 鼻部 / 眼周 / ...</p>
+<p><code>用途</code>：短视频开场 / 短视频收尾 / 朋友圈 / 简介 / 金句 ...</p>
+<p><code>时长</code>（短视频类）：15s / 30s / 60s</p>
+<p><code>入库日期</code></p>
+<p><code>来源</code>：用户提供 / 精编 / 生成</p>
+<p>用户提供的原文必须原样归档到 <code>raw/</code>，然后才在 <code>素材/</code> 中整理</p>
+<p>风格基准见 <code>素材/风格基准/</code>，新文案应遵守</p>
+<p>## 与医美语料库的关系</p>
+<p>本库 = 运营/创作素材库（文案、话术、脚本）</p>
+<p><code>F:codexdatamedical-aesthetic-corpus</code> = 行业知识语料库（文章、手术、风险、产品）</p>
+<p>两者互补：创作文案时先查本库找表达，需要医学事实/合规依据时查语料库</p>
+<p>KS_DOC_REVIEWS	VDxW4UaJXkKhNhvcCgYrWz	4423	https://www.workbuddy.cn/space/d/VDxW4UaJXkKhNhvcCgYrWz</p>
+</section>
+<footer>由 WorkBuddy 资料库生成</footer>
+</main>
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els = document.querySelectorAll('.reveal');
+  if (reduce || !('IntersectionObserver' in window)) {
+    els.forEach(function (el) { el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function (el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>

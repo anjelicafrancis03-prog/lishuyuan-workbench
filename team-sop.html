@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-sp-mode="scroll">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>李书远数据库团队SOP</title>
+<style>
+:root {
+  --accent: #fb923c; --accent2: #fbbf24;
+  --bg: #150f0a; --panel: #231910; --text: #f8efe3; --muted: #cdb79c;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", Segoe UI, sans-serif;
+  line-height: 1.7; -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 20px 80px; }
+.hero {
+  padding: 96px 20px 56px; text-align: center;
+  background: radial-gradient(1200px 400px at 50% -120px, var(--accent) 0%, transparent 60%);
+}
+.hero h1 {
+  font-size: clamp(28px, 5vw, 46px); margin: 0 0 18px; line-height: 1.25;
+  background: linear-gradient(90deg, var(--text), var(--accent2));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero-summary {
+  max-width: 720px; margin: 0 auto; font-size: clamp(15px, 2.2vw, 19px);
+  color: var(--text);
+}
+.hero .meta { margin-top: 22px; color: var(--muted); font-size: 13px; letter-spacing: .5px; }
+.block-card {
+  background: var(--panel); border: 1px solid rgba(255,255,255,.06);
+  border-radius: 16px; padding: 28px 30px; margin: 22px 0;
+  box-shadow: 0 8px 30px rgba(0,0,0,.25);
+}
+.block-card h1, .block-card h2 { margin-top: 4px; color: var(--accent2); }
+.block-card h2 { font-size: 22px; border-left: 4px solid var(--accent); padding-left: 12px; }
+.block-card h3 { font-size: 18px; color: var(--text); }
+.block-card p { color: var(--text); }
+.block-card ul, .block-card ol { padding-left: 22px; }
+.block-card li { margin: 6px 0; }
+a { color: var(--accent2); }
+code {
+  background: rgba(255,255,255,.08); padding: 2px 6px; border-radius: 6px;
+  font-family: SFMono-Regular, Consolas, monospace; font-size: .92em;
+}
+pre {
+  background: #0b0f17; border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px; padding: 16px; overflow: auto;
+}
+pre code { background: none; padding: 0; }
+blockquote {
+  margin: 12px 0; padding: 8px 16px; border-left: 4px solid var(--accent);
+  background: rgba(255,255,255,.04); border-radius: 0 10px 10px 0; color: var(--muted);
+}
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+th, td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,.08); text-align: left; }
+th { color: var(--accent2); font-weight: 600; }
+figure { margin: 14px 0; }
+figure img { width: 100%; border-radius: 12px; }
+figcaption { color: var(--muted); font-size: 13px; text-align: center; margin-top: 8px; }
+img { max-width: 100%; }
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.in { opacity: 1; transform: none; }
+footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px 0 0; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+</style>
+</head>
+<body>
+<header class="hero">
+  <h1>李书远数据库团队SOP</h1>
+  <p class="hero-summary">title: 李书远数据库团队SOP</p>
+  <div class="meta"></div>
+</header>
+<main class="wrap">
+<section class="reveal block-card">
+<p>title: 李书远数据库团队SOP</p>
+</section>
+<section class="reveal block-card">
+<p># 李书远数据库 · 团队使用 SOP</p>
+<blockquote></blockquote>
+<p>状态：生效（2026-08-18） 适用范围：所有使用李书远数据库的 Agent / 团队成员 目的：统一&quot;存→管→用→看→协&quot;的规范，让库持续可用、数据不丢、看板常新 关联：<code>素材/WorkBuddy资料库应用参考.md</code>、<code>素材/PEEK/</code> 系列、看板 2 个</p>
+<p>## 一、库结构总览</p>
+<p>载体</p>
+<p>位置</p>
+<p>用途</p>
+<p>本地权威库</p>
+<p><code>F:codexdatadomestic-aesthetic-media-ops</code></p>
+<p>原始文件（raw / 素材 / 需求 / README）</p>
+<p>云端空间</p>
+<p>WorkBuddy 资料库（35+ 节点）</p>
+<p>团队共享、在线查看、协作</p>
+<p>数据表</p>
+<p>PEEK市场数据（FYFcrIsyKj9IavloAVGXQd）、医美运营任务表（glqvIFb5dyy2kNicdbpSFp）</p>
+<p>结构化数据</p>
+<p>看板</p>
+<p>任务看板、PEEK 数据看板（已发布）</p>
+<p>团队可视化查看</p>
+<p>命名：李书远数据库（国内医美自媒体运营）= 本地 + 云端同一库</p>
+<p>## 二、数据入口流程（公众号/链接等）</p>
+<p>任何外部内容进入，先走 intake，禁止直接问&quot;怎么处理&quot;：</p>
+<p>保存归档：公众号链接 → <code>C:HTML MD 网络来源微信公众号</code>（命名：日期_时间_文章ID_标题，HTML+MD 双份）</p>
+<p>分流判断：</p>
+<p>进数据库：与 PEEK/医美内容域相关 → 存本地 raw/素材 → 同步云端</p>
+<p>变任务：有明确工程动作 → beads 建任务</p>
+<p>仅归档：无关联内容 → 保留归档即可</p>
+<p>记录：在 beads 追加 intake 记录（map.beads.intake，intake:wechat）</p>
+<p>## 三、素材入库规范</p>
+<p>### 3.1 原始文件（raw）</p>
+<p>用户原文 / 抓取原文 → <code>raw/</code> 按日期分目录，只读归档</p>
+<p>文献原文 → <code>raw/-PEEK文献原文/</code>，标注来源/DOI/抓取时间</p>
+<p>### 3.2 整理素材（素材/）</p>
+<p>按主题分目录（素材/PEEK/、素材/骨相审美/、素材/风格基准/…）</p>
+<p>每个文件头标注：主题、入库日期、用途、来源、关联</p>
+<p>### 3.3 结构化数据（database）★ 重要</p>
+<blockquote></blockquote>
+<p>⚠️ 必须用 CSV 导入，不要用批量添加接口 踩坑记录：<code>batch_add_database_records</code> 写入的记录查询接口读不到（索引不同步）； 正确路径：生成 CSV → <code>import_csv.py --token-stdin  --database-id </code> 覆盖导入。</p>
+<p>建表：<code>create_database.py --schema &#x27;{&quot;title&quot;:&quot;...&quot;,&quot;space_id&quot;:&quot;...&quot;,&quot;properties&quot;:[...]}&#x27;</code>（类型嵌在 config 里）</p>
+<p>导入：CSV（utf-8-sig 带表头）→ import_csv</p>
+<p>字段设计参考：PEEK市场数据（分类/指标/数值/区域/年份/来源/解读）</p>
+<p>## 四、看板维护</p>
+<p>### 现有看板</p>
+<p>看板</p>
+<p>数据源</p>
+<p>链接</p>
+<p>医美运营任务看板</p>
+<p>任务表 glqvIFb5dyy2kNicdbpSFp</p>
+<p><a href="https://workbuddy.link/p/i2U4UBSzaM6H0sYNT6OY3U" target="_blank" rel="noopener">https://workbuddy.link/p/i2U4UBSzaM6H0sYNT6OY3U</a></p>
+<p>PEEK 市场数据看板</p>
+<p>PEEK市场数据 FYFcrIsyKj9IavloAVGXQd</p>
+<p><a href="https://workbuddy.link/p/Ps4TCCPYfHZMOSm37hY8Cn" target="_blank" rel="noopener">https://workbuddy.link/p/Ps4TCCPYfHZMOSm37hY8Cn</a></p>
+<p>### 维护规则</p>
+<p>数据更新：改数据库 → 看板自动同步（SDK 双向绑定）</p>
+<p>看板改版：改本地 HTML → lint → <code>import_html.py --node-block-id  --databases ...</code> 覆盖 → 重新 publish-page</p>
+<p>lint 要求：含 addRecord 的页面必须有 localStorage 表单缓存（DSDK008）</p>
+<p>### 看板 HTML 规范</p>
+<p><code>data-sp-bindable=&quot;database&quot;</code> + <code>data-sp-database-id=&quot;&quot;</code> 必须成对</p>
+<p>用 <code>window.__SMART_PAGE__.database</code> SDK：query/getSchema/addRecord/updateRecord</p>
+<p>记录是扁平对象 <code>{字段: 值}</code>，含 record_id</p>
+<p>## 五、Agent 工作流（团队重点）</p>
+<p>### 干活前</p>
+<p>引用空间：任务会话里引用李书远数据库空间（资料库直接进入上下文），不手动翻文件</p>
+<p>需要结构化数据 → 从 database 拉取（query）</p>
+<p>### 干完活</p>
+<p>写回空间：新素材 → 本地入库 + 云端同步（doc/database）</p>
+<p>更新任务：看板/任务表里更新状态、备注</p>
+<p>记录进度：重要产出写 beads notes</p>
+<p>### 数据表维护</p>
+<p>新增数据 → CSV 追加 → import_csv 覆盖导入 → 看板自动更新</p>
+<p>## 六、任务系统</p>
+<p>层</p>
+<p>工具</p>
+<p>说明</p>
+<p>日常任务</p>
+<p>医美运营任务表 + 任务看板</p>
+<p>每天/单次任务，看板可视化</p>
+<p>工程追踪</p>
+<p>beads（F:codex.beads）</p>
+<p>跨 agent 任务，坐标/优先级/状态</p>
+<p>进度记录</p>
+<p>beads notes</p>
+<p>重要节点写笔记，可追溯</p>
+<p>任务表字段：任务/板块/渠道·平台/任务模式/状态/优先级/负责人/截止日/备注</p>
+<p>看板操作：新增任务、点卡片改状态、筛选、统计——全部实时同步数据库</p>
+<p>## 七、团队协作</p>
+<p>共享：云端空间对团队可见可编辑（公开链接发布后，链接即访问入口）</p>
+<p>多 agent：每个 agent 按本节工作流取数/写回，不另建孤岛</p>
+<p>发布：看板/页面发布为网站后，链接可分享给团队、客户</p>
+<p>权限：公开页面如需登录，检查空间公开访问设置</p>
+<p>## 八、检查清单（每周维护时过一遍）</p>
+<p>云端节点与本地文件对账（无遗漏）</p>
+<p>任务表状态更新、看板显示正常</p>
+<p>PEEK 数据看板数据是否需更新（季度）</p>
+<p>新入库素材走完&quot;raw→素材→云端&quot;全流程</p>
+<p>公众号/链接 intake 归档无堆积</p>
+<blockquote></blockquote>
+<p>⚠️ 本 SOP 随实践迭代；技术细节以资料库 skill 文档为准（<code>page/data-page-flow.md</code>、<code>database/entry.md</code>）。</p>
+<p>KS_DOC_REVIEWS	i4NoCeXRVXPjcSJ7t9Igc6	15284	https://www.workbuddy.cn/space/d/i4NoCeXRVXPjcSJ7t9Igc6</p>
+</section>
+<footer>由 WorkBuddy 资料库生成</footer>
+</main>
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els = document.querySelectorAll('.reveal');
+  if (reduce || !('IntersectionObserver' in window)) {
+    els.forEach(function (el) { el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function (el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>

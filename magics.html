@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-sp-mode="scroll">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Materialise Magics 3D打印前处理</title>
+<style>
+:root {
+  --accent: #fb923c; --accent2: #fbbf24;
+  --bg: #150f0a; --panel: #231910; --text: #f8efe3; --muted: #cdb79c;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", Segoe UI, sans-serif;
+  line-height: 1.7; -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 20px 80px; }
+.hero {
+  padding: 96px 20px 56px; text-align: center;
+  background: radial-gradient(1200px 400px at 50% -120px, var(--accent) 0%, transparent 60%);
+}
+.hero h1 {
+  font-size: clamp(28px, 5vw, 46px); margin: 0 0 18px; line-height: 1.25;
+  background: linear-gradient(90deg, var(--text), var(--accent2));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero-summary {
+  max-width: 720px; margin: 0 auto; font-size: clamp(15px, 2.2vw, 19px);
+  color: var(--text);
+}
+.hero .meta { margin-top: 22px; color: var(--muted); font-size: 13px; letter-spacing: .5px; }
+.block-card {
+  background: var(--panel); border: 1px solid rgba(255,255,255,.06);
+  border-radius: 16px; padding: 28px 30px; margin: 22px 0;
+  box-shadow: 0 8px 30px rgba(0,0,0,.25);
+}
+.block-card h1, .block-card h2 { margin-top: 4px; color: var(--accent2); }
+.block-card h2 { font-size: 22px; border-left: 4px solid var(--accent); padding-left: 12px; }
+.block-card h3 { font-size: 18px; color: var(--text); }
+.block-card p { color: var(--text); }
+.block-card ul, .block-card ol { padding-left: 22px; }
+.block-card li { margin: 6px 0; }
+a { color: var(--accent2); }
+code {
+  background: rgba(255,255,255,.08); padding: 2px 6px; border-radius: 6px;
+  font-family: SFMono-Regular, Consolas, monospace; font-size: .92em;
+}
+pre {
+  background: #0b0f17; border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px; padding: 16px; overflow: auto;
+}
+pre code { background: none; padding: 0; }
+blockquote {
+  margin: 12px 0; padding: 8px 16px; border-left: 4px solid var(--accent);
+  background: rgba(255,255,255,.04); border-radius: 0 10px 10px 0; color: var(--muted);
+}
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+th, td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,.08); text-align: left; }
+th { color: var(--accent2); font-weight: 600; }
+figure { margin: 14px 0; }
+figure img { width: 100%; border-radius: 12px; }
+figcaption { color: var(--muted); font-size: 13px; text-align: center; margin-top: 8px; }
+img { max-width: 100%; }
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.in { opacity: 1; transform: none; }
+footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px 0 0; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+</style>
+</head>
+<body>
+<header class="hero">
+  <h1>Materialise Magics 3D打印前处理</h1>
+  <p class="hero-summary">title: Materialise Magics — PEEK 3D 打印前处理软件</p>
+  <div class="meta"></div>
+</header>
+<main class="wrap">
+<section class="reveal block-card">
+<p>title: Materialise Magics — PEEK 3D 打印前处理软件</p>
+</section>
+<section class="reveal block-card">
+<p># Materialise Magics — PEEK 3D 打印前处理软件（与 ZBrush 设计端配对）</p>
+<blockquote></blockquote>
+<p>入库日期：2026-08-23 · 来源：魅惑指示（PEEK 工具链情报）· 分类：PEEK 海外推广 / 3D 打印工具链 配对关系：ZBrush = 设计端（雕得好看），Magics = 打印端（打得出来）</p>
+<p>## 一句话定位</p>
+<p>Materialise Magics（比利时 Materialise 公司）是全球 3D 打印行业的数据准备与构建处理标准软件——PEEK 植入物从&quot;设计完成的模型&quot;到&quot;实际打印&quot;之间的必经环节。</p>
+<p>## 与 ZBrush 的分工（魅惑定：设计与打印分别用这两个）</p>
+<pre><code>  【设计端】ZBrush 2022 —— 假体形态雕刻（艺术/美学）
+          ↓ STL 导出
+  【打印端】Materialise Magics —— 打印前处理（工程/制造）
+          ↓ 切片数据
+     PEEK 3D 打印机执行</code></pre>
+<p>环节</p>
+<p>软件</p>
+<p>职责</p>
+<p>设计</p>
+<p>ZBrush</p>
+<p>雕得好看：假体形态、边缘渐薄、美学微调</p>
+<p>打印</p>
+<p>Magics</p>
+<p>打得出来：STL 修复、摆放支撑、切片输出</p>
+<p>## Magics 核心能力</p>
+<p>功能</p>
+<p>对 PEEK 植入物的意义</p>
+<p>STL 自动修复</p>
+<p>雕刻模型常见破面/孔洞/法线翻转，不修好打不出来</p>
+<p>平台摆放优化</p>
+<p>最优打印角度=力学强度+表面质量+支撑成本三平衡</p>
+<p>支撑生成与编辑</p>
+<p>植入物接触面不能留支撑疤痕，需精细手工避让</p>
+<p>壁厚/最小特征分析</p>
+<p>植入物壁厚合规检查（如鼻假体边缘亚毫米级）</p>
+<p>切片引擎</p>
+<p>输出打印机层片数据</p>
+<p>多机型生态</p>
+<p>EOS / Stratasys / SLM 等主流工业机全支持</p>
+<p>## 完整国际主流管线（全家桶视角）</p>
+<pre><code>  CT/3D 扫描 → Mimics（重建）→ 3-matic（解剖设计）→ ZBrush（形态雕刻）
+       → Magics（打印准备）→ PEEK 打印 → 后处理 → 消毒灭菌 → 临床</code></pre>
+<p>Materialise 全家桶（Mimics + 3-matic + Magics）+ ZBrush 组成 PEEK 定制植入物完整国际管线。</p>
+<p>## 医美业务关联（海外推广视角）</p>
+<p>供应链故事点：&quot;医疗级 3D 打印前处理标准软件（Magics）+ 手工数字雕刻（ZBrush）&quot;双认证管线——design-per-patient 的工程可信度背书</p>
+<p>质量话术：Magics 的壁厚/特征合规分析对应植入物安全标准，可与竞品（小作坊流程）拉开差距</p>
+<p>相关条目：《ZBrush 2022 — PEEK 面部设计软件》（本库姊妹篇）</p>
+<p>KS_DOC_REVIEWS	poP7gainXGB6CapXLoQVKU	7170	https://www.workbuddy.cn/space/d/poP7gainXGB6CapXLoQVKU</p>
+</section>
+<footer>由 WorkBuddy 资料库生成</footer>
+</main>
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els = document.querySelectorAll('.reveal');
+  if (reduce || !('IntersectionObserver' in window)) {
+    els.forEach(function (el) { el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function (el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>

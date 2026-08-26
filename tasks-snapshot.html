@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-sp-mode="scroll">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>任务总览快照</title>
+<style>
+:root {
+  --accent: #fb923c; --accent2: #fbbf24;
+  --bg: #150f0a; --panel: #231910; --text: #f8efe3; --muted: #cdb79c;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", Segoe UI, sans-serif;
+  line-height: 1.7; -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 20px 80px; }
+.hero {
+  padding: 96px 20px 56px; text-align: center;
+  background: radial-gradient(1200px 400px at 50% -120px, var(--accent) 0%, transparent 60%);
+}
+.hero h1 {
+  font-size: clamp(28px, 5vw, 46px); margin: 0 0 18px; line-height: 1.25;
+  background: linear-gradient(90deg, var(--text), var(--accent2));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero-summary {
+  max-width: 720px; margin: 0 auto; font-size: clamp(15px, 2.2vw, 19px);
+  color: var(--text);
+}
+.hero .meta { margin-top: 22px; color: var(--muted); font-size: 13px; letter-spacing: .5px; }
+.block-card {
+  background: var(--panel); border: 1px solid rgba(255,255,255,.06);
+  border-radius: 16px; padding: 28px 30px; margin: 22px 0;
+  box-shadow: 0 8px 30px rgba(0,0,0,.25);
+}
+.block-card h1, .block-card h2 { margin-top: 4px; color: var(--accent2); }
+.block-card h2 { font-size: 22px; border-left: 4px solid var(--accent); padding-left: 12px; }
+.block-card h3 { font-size: 18px; color: var(--text); }
+.block-card p { color: var(--text); }
+.block-card ul, .block-card ol { padding-left: 22px; }
+.block-card li { margin: 6px 0; }
+a { color: var(--accent2); }
+code {
+  background: rgba(255,255,255,.08); padding: 2px 6px; border-radius: 6px;
+  font-family: SFMono-Regular, Consolas, monospace; font-size: .92em;
+}
+pre {
+  background: #0b0f17; border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px; padding: 16px; overflow: auto;
+}
+pre code { background: none; padding: 0; }
+blockquote {
+  margin: 12px 0; padding: 8px 16px; border-left: 4px solid var(--accent);
+  background: rgba(255,255,255,.04); border-radius: 0 10px 10px 0; color: var(--muted);
+}
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+th, td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,.08); text-align: left; }
+th { color: var(--accent2); font-weight: 600; }
+figure { margin: 14px 0; }
+figure img { width: 100%; border-radius: 12px; }
+figcaption { color: var(--muted); font-size: 13px; text-align: center; margin-top: 8px; }
+img { max-width: 100%; }
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.in { opacity: 1; transform: none; }
+footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px 0 0; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+</style>
+</head>
+<body>
+<header class="hero">
+  <h1>任务总览快照</h1>
+  
+  <div class="meta"></div>
+</header>
+<main class="wrap">
+<section class="reveal block-card">
+<blockquote><p>静态快照 · 实时版与录入请进 WorkBuddy 空间 · 共 9 条未完成任务</p></blockquote>
+<div class="table-wrap"><table><thead><tr><th>任务</th><th>板块</th><th>渠道</th><th>状态</th><th>优先级</th><th>负责人</th><th>截止日</th><th>下一步动作</th></tr></thead><tbody><tr><td>骨相审美短视频文案系列</td><td>国内运营</td><td>抖音/小红书</td><td>待办</td><td>高</td><td>-</td><td>2026-08-20</td><td>-</td></tr><tr><td>李书远数据库每周维护</td><td>其他</td><td>资料库</td><td>待办</td><td>低</td><td>-</td><td>2026-08-21</td><td>-</td></tr><tr><td>PEEK 海外向英文教育内容</td><td>海外医美</td><td>官网/Blog/YouTube</td><td>待办</td><td>高</td><td>-</td><td>2026-08-23</td><td>-</td></tr><tr><td>PEEK 市场数据季度更新</td><td>海外医美</td><td>数据库</td><td>待办</td><td>中</td><td>-</td><td>2026-09-30</td><td>-</td></tr><tr><td>两个微信号每天朋友圈更新</td><td>国内运营</td><td>微信朋友圈</td><td>待办</td><td>中</td><td>-</td><td>-</td><td>-</td></tr><tr><td>海外推广基础建设（先把网搞好）</td><td>海外医美</td><td>网络基建</td><td>待办</td><td>高</td><td>-</td><td>-</td><td>-</td></tr><tr><td>三层楼Wi-Fi覆盖——中继设备采购与部署</td><td>其他</td><td>网络</td><td>待办</td><td>高</td><td>-</td><td>-</td><td>-</td></tr><tr><td>医美运营任务表巡检</td><td>其他</td><td>资料库</td><td>待办</td><td>低</td><td>-</td><td>-</td><td>-</td></tr><tr><td></td><td></td><td></td><td></td><td></td><td>-</td><td>-</td><td>-</td></tr></tbody></table></div>
+</section>
+<footer>由 WorkBuddy 资料库生成</footer>
+</main>
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els = document.querySelectorAll('.reveal');
+  if (reduce || !('IntersectionObserver' in window)) {
+    els.forEach(function (el) { el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function (el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>
