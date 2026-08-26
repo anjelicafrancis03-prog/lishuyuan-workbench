@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>医美任务日历·打卡一体</title>
+<style>
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#faf7f8;margin:0;padding:24px;color:#333}
+  h1{color:#c2185b;font-size:22px;margin:0 0 4px}.sub{color:#888;font-size:13px;margin-bottom:16px}
+  .bar{display:flex;gap:8px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+  .bar button,.bar select{border:1px solid #e6d3da;background:#fff;border-radius:8px;padding:6px 12px;font-size:13px;color:#c2185b;cursor:pointer}
+  .bar button:hover{background:#fdeef3}
+  .inp{border:1px solid #e6d3da;border-radius:8px;padding:6px 10px;font-size:13px;width:110px}
+  .cal{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.06);overflow:hidden}
+  .calhead{display:grid;grid-template-columns:repeat(7,1fr);background:#c2185b;color:#fff;font-size:13px;padding:8px 0;text-align:center}
+  .calgrid{display:grid;grid-template-columns:repeat(7,1fr)}
+  .cell{min-height:84px;border:1px solid #f0e6ea;padding:6px;font-size:12px}
+  .cell.other{background:#faf5f7;color:#ccc}.cell.today{background:#fdeef3;outline:2px solid #c2185b}
+  .dnum{font-weight:600;color:#c2185b;font-size:13px}
+  .tk{background:#fff0f5;border-left:3px solid #c2185b;border-radius:4px;padding:3px 5px;margin-top:4px;font-size:11px;line-height:1.3}
+  .tk b{display:block;color:#333;font-weight:600}.tk .m{color:#c2185b;font-size:10px}
+  .tk.done{background:#effaf0;border-left-color:#27ae60}.tk.done b{color:#888;text-decoration:line-through}
+  .tk.overdue{background:#fdecea;border-left-color:#e74c3c}
+  h2{color:#c2185b;font-size:17px;margin:22px 0 10px}
+  .list{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:14px 16px;margin-bottom:14px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{text-align:left;color:#888;font-weight:500;font-size:12px;padding:6px 8px;border-bottom:2px solid #f0e6ea}
+  td{padding:8px;border-bottom:1px solid #f5eef1}
+  .tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;color:#fff}
+  .warn{color:#e74c3c;font-weight:600}
+  .row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f5eef1;flex-wrap:wrap}
+  .row:last-child{border-bottom:none}
+  .row .t{flex:1;min-width:200px}.row .t b{display:block}.row .t span{color:#888;font-size:12px}
+  .btn{border:none;border-radius:8px;padding:5px 10px;font-size:12px;cursor:pointer;color:#fff}
+  .btn.ok{background:#27ae60}.btn.skip{background:#f39c12}.btn.miss{background:#e74c3c}.btn.done{background:#27ae60}.btn.gray{background:#bdc3c7}
+  .btn:hover{opacity:.85}
+  .streak{font-size:12px;color:#c2185b;font-weight:600}
+  .empty{color:#aaa;padding:16px;text-align:center}
+  .loading{color:#c2185b;text-align:center;padding:30px}
+  a{color:#c2185b;text-decoration:none}
+<style>
+  *{box-sizing:border-box}
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;margin:0;color:#333;background:#faf7f8}
+  a{color:#c2185b;text-decoration:none}a:hover{text-decoration:underline}
+  .top{position:sticky;top:0;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.06);z-index:9;padding:12px 28px;display:flex;align-items:center;gap:18px}
+  .logo{font-weight:700;color:#c2185b;font-size:17px}
+  .top nav{display:flex;gap:14px;font-size:13px;flex-wrap:wrap}
+  .top nav a{color:#555}.top nav a:hover{color:#c2185b}
+  .hero{background:linear-gradient(135deg,#c2185b,#e91e63 60%,#f06292);color:#fff;padding:52px 28px;text-align:center}
+  .hero h1{font-size:30px;margin:0 0 10px}.hero p{opacity:.92;margin:0 auto;max-width:640px;font-size:14px;line-height:1.7}
+  .stats{display:flex;gap:14px;justify-content:center;margin-top:22px;flex-wrap:wrap}
+  .stat{background:rgba(255,255,255,.16);border-radius:10px;padding:10px 20px;font-size:13px}
+  .stat b{display:block;font-size:22px}
+  main{max-width:1080px;margin:0 auto;padding:34px 24px}
+  h2{color:#c2185b;font-size:19px;border-left:4px solid #c2185b;padding-left:10px;margin:36px 0 14px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+  .card{background:#fff;border-radius:12px;padding:14px 16px;box-shadow:0 2px 10px rgba(0,0,0,.05);transition:.15s}
+  .card:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(193,24,91,.12)}
+  .card b{display:block;margin-bottom:4px;font-size:14px}
+  .card span{color:#888;font-size:12px}
+  .cal-wrap{background:#fff;border-radius:12px;box-shadow:0 4px 18px rgba(0,0,0,.08);overflow:hidden;margin-top:8px}
+  .cal-note{padding:10px 16px;font-size:12px;color:#888;background:#fdf3f7}
+  iframe{width:100%;height:860px;border:none;display:block}
+  footer{background:#fff;margin-top:44px;padding:22px 28px;font-size:12px;color:#999;border-top:1px solid #f0e6ea;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  @media(max-width:720px){.top{flex-direction:column;align-items:flex-start}}
+<style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#faf7f8;margin:0;padding:24px;color:#333}h1{color:#c2185b;font-size:22px;margin:0 0 4px}.sub{color:#888;font-size:13px;margin-bottom:20px}.cal{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.06);overflow:hidden}.calhead{display:grid;grid-template-columns:repeat(7,1fr);background:#c2185b;color:#fff;font-size:13px;padding:8px 0;text-align:center}.calgrid{display:grid;grid-template-columns:repeat(7,1fr)}.cell{min-height:88px;border:1px solid #f0e6ea;padding:6px;font-size:12px;vertical-align:top}.cell.other{background:#faf5f7;color:#ccc}.cell.today{background:#fdeef3;outline:2px solid #c2185b}.dnum{font-weight:600;color:#c2185b;font-size:13px}.tk{background:#fff0f5;border-left:3px solid #c2185b;border-radius:4px;padding:3px 5px;margin-top:4px;font-size:11px;line-height:1.3}.tk b{display:block;color:#333}.tk .m{color:#c2185b;font-size:10px}h2{color:#c2185b;font-size:17px;margin:24px 0 10px}.list{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:16px}table{width:100%;border-collapse:collapse;font-size:13px}th{text-align:left;color:#888;font-weight:500;font-size:12px;padding:6px 8px;border-bottom:2px solid #f0e6ea}td{padding:8px;border-bottom:1px solid #f5eef1}.tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;color:#fff}.warn{color:#e74c3c;font-weight:600}a{color:#c2185b;text-decoration:none}</style><style>
+/* === mobile hardening v6.1 === */
+@media (max-width: 600px) {
+  body { padding: 12px !important; }
+  nav { flex-wrap: wrap !important; gap: 8px !important; }
+  .grid { grid-template-columns: 1fr !important; }
+      .cell { font-size: 11px; padding: 4px; }
+  .list table { display: block; overflow-x: auto; white-space: nowrap; }
+  .punch-hero { flex-direction: row; padding: 12px 14px; }
+}
+</style><style>
+/* === v6.2 mobile: 日历真自适应（不横滑，整体缩进屏宽） === */
+@media (max-width: 600px) {
+  .cal { overflow: visible !important; }
+  .calgrid { min-width: 0 !important; grid-template-columns: repeat(7, 1fr); }
+  .cell { min-height: 54px !important; padding: 3px 2px !important; overflow: hidden; }
+  .dnum { font-size: 11px !important; }
+  .tk { font-size: 9px !important; padding: 1px 3px !important; margin-top: 2px !important; border-left-width: 2px !important; }
+  .tk b { display: inline-block !important; max-width: 100% !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .calhead { font-size: 11px !important; padding: 4px 0 !important; }
+  h1 { font-size: 18px !important; }
+  h2 { font-size: 15px !important; }
+}</style></style>
+</head>
+<body>
+<h1>🗓️ 医美任务日历 · 打卡一体</h1>
+<div class="sub">日历 + 每日三态打卡 / 一次性完成 / 逾期红标 · 打卡即署名 · 数据实时读写任务表+打卡表</div>
+<div class="top">
+  <div class="logo">🌸 李书远医美团队 · 资料库工作台</div>
+<div class="bar">
+  <span class="sub" style="margin:0">打卡人：</span><input class="inp" id="who" placeholder="昵称">
+<nav style="display:flex;gap:14px;font-size:13px;flex-wrap:wrap;margin:0 0 4px">
+<a href="#guonei">🇨🇳 国内自媒体运营</a><a href="#haiwai">🌏 海外运营</a><a href="#zhishi">🧠 PEEK 知识</a><a href="#shudan">📚 书单</a><a href="#gongju">🛠️ 工具链</a><a href="#shoujian">📥 收件箱</a><a href="#xiangmu">🎯 项目</a><a href="#fupan">🔄 周复盘</a></nav>
+  <span class="sub" style="margin:0 0 0 6px">（打卡/完成自动署名）</span>
+  <span style="flex:1"></span>
+  <button id="prev">‹ 上月</button>
+  <select id="monthSel"></select>
+  <button id="next">下月 ›</button>
+</div>
+</div>
+<div class="cal" data-sp-bindable="database" data-sp-database-id="glqvIFb5dyy2kNicdbpSFp">
+  <div class="calhead" id="calhead"></div>
+  <div class="calgrid" id="calgrid"><div class="loading">加载中…</div></div>
+</div>
+
+<a class="punch-hero" href="https://www.workbuddy.cn/space/d/aacKptHlsA7vqIlkwKfOnf" style="display:flex;align-items:center;gap:14px;background:linear-gradient(90deg,#c2185b,#e91e63);color:#fff;border-radius:14px;padding:16px 20px;margin:18px 0;text-decoration:none;box-shadow:0 4px 14px rgba(194,24,91,.25)">
+<span style="font-size:26px">🔁</span>
+<span style="flex:1"><b style="font-size:16px">今日打卡 · 点这里</b><br><span style="font-size:12px;opacity:.9">每日例行三态打卡 ✅➖❌ · 连续天数 🔥 · 日历点亮绿/黄/红（成员登录态可写入）</span></span>
+<span style="font-size:20px">›</span>
+</a>
+<h2 id="kuaisu">⚡ 快速录入（今日概览 · 一句话进任务）</h2>
+<div class="list">
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+    <input class="inp" id="qa_task" placeholder="任务标题（必填）" style="border:1px solid #e6d3da;border-radius:8px;padding:8px 10px;font-size:13px;flex:2;min-width:180px">
+    <input class="inp" id="qa_next" placeholder="下一步动作（如：写脚本初稿）" style="border:1px solid #e6d3da;border-radius:8px;padding:8px 10px;font-size:13px;flex:2;min-width:180px">
+    <input class="inp" id="qa_due" type="date" style="border:1px solid #e6d3da;border-radius:8px;padding:8px 10px;font-size:13px">
+    <button id="qa_btn" style="background:#c2185b;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:13px;cursor:pointer">＋ 录入任务</button>
+  </div>
+  <div class="sub" style="margin-top:6px">录入后自动进入任务表并出现在日历 · 状态默认待办 · 来源标记=工作台快速录入</div>
+</div>
+
+<h2 id="shoujian">📥 素材收件箱（灵感先进来，不急分类）</h2>
+<div class="grid">
+<a class="card" href="https://www.workbuddy.cn/space/d/jwTCD3EkfXLsFms6esyXWD"><b>📥 素材收件箱表</b><span>视频灵感/文案金句/截图/文献/留言/竞品/临时想法 · 可信度标注 · 已处理勾选</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/glqvIFb5dyy2kNicdbpSFp"><b>📋 任务表（含来源与下一步动作）</b><span>每条任务必须有下一步动作 · 录入一次全程复用</span></a>
+</div>
+
+<h2 id="xiangmu">🎯 项目进度（目标 → 里程碑 → 下一步 → 风险）</h2>
+<div class="grid">
+<a class="card" href="https://www.workbuddy.cn/space/d/8HlEQTEuyCnSadGSq0SexD"><b>🎯 项目进度表</b><span>项目名称/目标/当前阶段(筹备·推进中·待验收·已完成·停滞)/下一里程碑/下一步动作/风险/截止日</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/i2U4UBSzaM6H0sYNT6OY3U"><b>📊 医美运营任务看板</b><span>任务视图</span></a>
+</div>
+
+<h2 id="fupan">🔄 周复盘（每周五 · 五问五答）</h2>
+<div class="list" style="font-size:13px;line-height:1.9">
+<b>① 本周完成了什么？</b>（对照任务表已完成项）<br>
+<b>② 表现最好的方向是什么？</b>（高赞选题/爆款结构）<br>
+<b>③ 表现较弱/停滞的是什么？</b>（停滞原因一句话）<br>
+<b>④ 下周三个优先事项？</b>（写成带截止日的任务）<br>
+<b>⑤ 哪个方向该停止投入？</b><br>
+<span class="sub">方法：对照上方日历点亮色（绿=全勤 黄=部分 红=有错过）+ 任务表完成率，10 分钟答完五问，答案贴到团队群或周会。</span>
+</div>
+
+<h2 id="yuanze">📐 运转原则（来自工作台方法论，全文见资料库章程）</h2>
+<div class="grid">
+<a class="card" href="#kuaisu"><b>看板 ≠ 工作台</b><span>摆整齐 vs 推下一步——本页所有区块都指向"下一个动作"</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/zl9vJ6oc6oicZ3OG0wLOus"><b>🔐 权限边界与署名规范</b><span>可以整理摘要提醒 / 改文件需确认 / 删原始资料禁止</span></a>
+</div>
+
+<main>
+<h2 id="guonei">🇨🇳 国内自媒体运营</h2>
+
+<h3>📱 抖音 · 对标矩阵与标准</h3>
+<div class="grid">
+<a class="card" href="https://www.workbuddy.cn/space/d/kF5ROhKvoH6x9hwtU2RwtP"><b>对标矩阵总览</b><span>16 账号 / 文案数 / 统计覆盖</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/7LR5n08tudy2DRFTmDSGmd"><b>Top20 榜单</b><span>每账号按点赞 Top20</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/OhUGUUNwZm06GDEWEg7c4C"><b>作品归口标准 v2</b><span>三件套强制门槛</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/zl9vJ6oc6oicZ3OG0wLOus"><b>协作与署名规范</b><span>全员可编辑 · 全程留痕</span></a>
+</div>
+
+<h3>🎬 短视频 · 文案（对标账号 14 篇）</h3>
+<div class="grid">
+<a class="card" href="https://www.workbuddy.cn/space/d/guIIpPhDzYfGZcEWPCt4oW"><b>成都刘黎明医生</b><span>262 条</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/1lfDj3z6BeI7mzakTghKfH"><b>交大一附院余学元</b><span>516 条</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/dNScar3PpTNGd0yPpAGode"><b>PEEK 家族余老师</b><span>178 条</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/0eqMQRxkLfXlB5GpWsE4KD"><b>浙人医张策 3D打印</b><span>129 条</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/tQdp2CpKmO3jLPrimrlM7W"><b>疯狂爱美的金夕</b><span>115 条</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/isy50RaODFDUrUCTIp1xYe"><b>九院徐海淞博士</b><span>104 条</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/Uc71xCfsDoHKtLSN3eNvVi"><b>金夕很爱美</b><span>71 条</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/n8jCOpvwQvfV25oymJaIhM"><b>八大处乔嘉医生</b><span>65 条</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/7yQRKzFSNvzDlqAYN7rjZz"><b>peek家族娇娇</b><span>52 条</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/9OIRP4QObY5aIFvxbYwL83"><b>I_m 新新</b><span>39 条</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/8Hh1TuufAYih6dgCWvIfC1"><b>云南米娜</b><span>28 条</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/nDQ93aMmQmHCsCA3Fqarab"><b>余老师小号</b><span>27 条</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/km5bDRnG1iJKBz3QzeUfZB"><b>凯莉蜕变记</b><span>13 条</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/JfKMMr2PmJ8vNPeYJB4TlA"><b>明星脸面部指导</b><span>10 条</span></a>
+</div>
+
+<h3>🎥 直播与短视频 · 原片与成品</h3>
+<div class="grid">
+<a class="card" href="https://www.workbuddy.cn/space/d/E06F94kiLYDVaNUgHkjhyG"><b>云飞老师账号素材包（标题+字幕）</b><span>35 条基准线</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/ocL9KP4s2SH0Ho4LnBFHRJ"><b>爆款结构 8 条成稿集</b><span>成品范本</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/#"><b>音视频本体索引（douyin-lab f2-output）</b><span>原声 mp3 + 视频 mp4 指针</span></a>
+</div>
+
+<h3>📊 分析产出（抖音）</h3>
+<div class="grid">
+<a class="card" href="https://www.workbuddy.cn/space/d/T0bK3T0rfG129XJ3zJO9gs"><b>云飞 35 条内容分析报告</b><span>基准线拆解</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/igEbiCBjAqhJ260qa07AGL"><b>爆款结构选题库</b><span>v19 选题复用</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/muZOC3k2kFKBKu9IrVSUQg"><b>OKF-李书远数据库使用手册与创作体系</b><span>团队版知识包</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/78jo32JzCfA1jEX1KL6HWV"><b>OKF-PEEK 材料与设计管线</b><span>团队版知识包</span></a>
+</div>
+
+<h3>✍️ 图文</h3>
+<div class="grid">
+<a class="card" href="https://www.workbuddy.cn/space/d/Xg4Lhs6QROuC1YWQGYkhHN"><b>骨相审美文案集</b><span>创作体系</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/l9iyrDZfyqIMYYJtsfUJRU"><b>语感基准</b><span>创作体系</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/V9RAfUEiU1xTwQ7tdNknp6"><b>创作要求</b><span>创作体系</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/l3gD8In3g7NwUlI054aIdH"><b>PEEK 文案关键词与卖点</b><span>卖点库</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/glqvIFb5dyy2kNicdbpSFp"><b>医美运营任务表</b><span>任务数据源</span></a>
+</div>
+
+<h2 id="haiwai">🌏 海外运营</h2>
+<div class="grid">
+<a class="card" href="https://www.workbuddy.cn/space/d/WV4qFplOBAsDgKRgSCrfq7"><b>PEEK 海外市场数据全景</b><span>海外市场</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/U3stPBely5SrZ3uvlwiCpm"><b>PEEK 美国市场增长数据</b><span>美国线</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/#"><b>海外推广基建（软路由/WiFi）</b><span>网络基建进行中</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/#"><b>海外运营数据库（第10注册库）</b><span>C:\海外运营数据库\ 待挂接</span></a>
+</div>
+
+<h2 id="zhishi">🧠 PEEK 知识体系</h2>
+<div class="grid">
+<a class="card" href="https://www.workbuddy.cn/space/d/h3NEMGyaw9NYk9YtOL5iqJ"><b>PEEK 材料知识</b><span>材料特性与临床</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/WCy1GQqEopTWC64wcuZ1Nf"><b>PEEK 中外研究格局与内容策略</b><span>研究对比+策略</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/Qnsp64rwi62rvkOO5zqvEM"><b>PEEK 市场趋势判断（含外网查证）</b><span>趋势研判</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/KS0zFbcHyxYiOsdyKBejkF"><b>中国 PEEK 医美增长数据</b><span>中国市场</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/lWJB5FDCRhrkSfMF34w3QH"><b>文献调研：PEEK 与软组织关系</b><span>医学证据</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/NcnPEcIogKH3qvDDewDm5Z"><b>文献深挖+POC 案例+Jarvinen2019</b><span>证据扩展</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/#"><b>OKF 索引：市场情报/爆款拆解/入库标准</b><span>见工作台 OKF 清单</span></a>
+</div>
+
+<h2 id="shudan">📚 书单</h2>
+<div class="grid">
+<a class="card" href="https://www.workbuddy.cn/space/d/wfbotYOEKRJpKMlOioLBiN"><b>医学院头部解剖教科书书单</b><span>基础</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/SadnYVm2JA1FYbDEhR8PDG"><b>医美书架专业书单</b><span>专业</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/QcZju4TuSXN38GmgCMj7yW"><b>医美书架完整采购清单</b><span>采购</span></a>
+</div>
+
+<h2 id="gongju">🛠️ 工具链</h2>
+<div class="grid">
+<a class="card" href="https://www.workbuddy.cn/space/d/DJnUzGxJausBGd2UopQsXT"><b>ZBrush 人头分层解剖雕刻教程全网汇总</b><span>雕刻教程</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/PxnWq3eEjSAzXbPUWywT2m"><b>ZBrush 全球地图篇</b><span>教程补充</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/JYNNRxj6VwbyJdanFCthmk"><b>ZBrush 2022 设计软件</b><span>工具</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/poP7gainXGB6CapXLoQVKU"><b>Materialise Magics 3D 打印前处理</b><span>工具</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/xijTZQtz2LOom4UeaBtqZa"><b>PEEK 四大软件深度详解</b><span>CMF/Mimics/ZBrush/Geomagic</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/oQ6zeBjqxuSAW50X61ztZW"><b>PEEK 行业真实设计工具链与培训体系</b><span>体系</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/fHUekyf52zq02Bks5POsOV"><b>CT-DICOM 数据接收与处理标准</b><span>数据标准</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/M0Q0f1L11NISmHZQS1CPFb"><b>视频处理标准</b><span>上传分割规则</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/VDxW4UaJXkKhNhvcCgYrWz"><b>李书远数据库使用说明</b><span>库手册</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/i4NoCeXRVXPjcSJ7t9Igc6"><b>李书远数据库团队 SOP</b><span>流程规范</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/i2U4UBSzaM6H0sYNT6OY3U"><b>医美运营任务看板</b><span>任务中心</span></a>
+<a class="card" href="https://www.workbuddy.cn/space/d/Ps4TCCPYfHZMOSm37hY8Cn"><b>PEEK 市场数据看板</b><span>市场看板</span></a>
+</div>
+</main>
+<div class="list">
+<h2>🔁 今日例行打卡</h2>
+<div class="list" id="dailyZone" data-sp-bindable="database" data-sp-database-id="glqvIFb5dyy2kNicdbpSFp"><div class="loading">加载中…</div></div>
+<h2>📋 全部任务（按截止日排序）</h2>
+<div class="list" data-sp-bindable="database" data-sp-database-id="glqvIFb5dyy2kNicdbpSFp"><div class="loading" id="listwrap">加载中…</div></div>
+<div class="sub">数据源：<a href="https://www.workbuddy.cn/space/d/glqvIFb5dyy2kNicdbpSFp">任务表</a> · <a href="https://www.workbuddy.cn/space/d/STlIbNmsdUkl2qnoVsMVHZ">打卡表</a></div>
+
+  <div>李书远医美团队 · 资料库网站 · 数据与内容由团队协作维护（编辑留痕）</div>
+  <div><a href="https://www.workbuddy.cn/space/s/92g9ugVji8dksZmnCfjRb8">进入资料库空间</a> · <a href="https://workbuddy.link/p/3L8a82BcikllniatCxlnFV">工作台</a></div>
+
+
+<script>
+var db = null;
+var HAS_SDK = !!(window.__SMART_PAGE__ && window.__SMART_PAGE__.database);
+if (HAS_SDK) { db = window.__SMART_PAGE__.database; } else {
+  document.addEventListener('DOMContentLoaded', function(){
+    ['calgrid','dailyZone','listwrap'].forEach(function(id){
+      var el = document.getElementById(id);
+      if (el) el.innerHTML = '<div class="empty">🔒 数据板块需成员登录：请在 <a href="https://www.workbuddy.cn/space/s/92g9ugVji8dksZmnCfjRb8">资料库空间内</a> 打开本页</div>';
+    });
+  });
+}
+var DATABASE_ID = 'glqvIFb5dyy2kNicdbpSFp';
+var PUNCH_DB = 'STlIbNmsdUkl2qnoVsMVHZ';
+var F = {task:'任务', plate:'板块', chan:'渠道/平台', mode:'任务模式', status:'状态', pri:'优先级', due:'截止日', doneAt:'完成时间', doneBy:'完成人'};
+var PF = {task:'任务', date:'日期', st:'打卡状态', who:'打卡人'};
+var ST_COLOR = {'待办':'#e74c3c','进行中':'#2980b9','已完成':'#27ae60'};
+var WD = ['一','二','三','四','五','六','日'];
+var curY = new Date().getFullYear(), curM = new Date().getMonth();
+var punchMap = {}; // "任务\u0000日期" -> 状态
+
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function parseDue(v){ return v ? new Date(v) : null; }
+function fmtDate(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function todayStr(){ return fmtDate(new Date()); }
+function who(){ var w=document.getElementById('who').value.trim(); if(w) localStorage.setItem('wb_who',w); return w||'匿名'; }
+document.getElementById('who').value = localStorage.getItem('wb_who')||'';
+
+function punch(taskName, st){
+  db.addRecord({databaseId:'STlIbNmsdUkl2qnoVsMVHZ', properties:{
+    [PF.task]:{text:taskName},
+    [PF.date]:{date:todayStr()},
+    [PF.st]:{select:st},
+    [PF.who]:{text:who()}
+  }}).then(function(){ punchMap[taskName+'\u0000'+todayStr()]=st; localStorage.removeItem('wb_punch_pending'); reloadAll(); })
+  .catch(function(e){ alert('打卡失败：'+e.message); });
+}
+function finish(taskName, rid){
+  db.updateRecord({databaseId:'glqvIFb5dyy2kNicdbpSFp', recordId:rid, properties:{
+    [F.status]:{text:'已完成'},
+    [F.doneAt]:{date:todayStr()},
+    [F.doneBy]:{text:who()}
+  }}).then(reloadAll).catch(function(e){ alert('完成失败：'+e.message); });
+}
+function streak(taskName){
+  var n=0, d=new Date();
+  for(var i=0;i<365;i++){
+    var st=punchMap[taskName+'\u0000'+fmtDate(d)];
+    if(st==='完成') n++;
+    else if(st!=='跳过'){ if(n>0||i>0) break; if(i===0) break; }
+    d.setDate(d.getDate()-1);
+  }
+  return n;
+}
+
+function renderMonth(rows){
+  var first=new Date(curY,curM,1), offset=(first.getDay()+6)%7;
+  var start=new Date(curY,curM,1-offset), grid=[];
+  for(var i=0;i<42;i++){ var d=new Date(start); d.setDate(start.getDate()+i); grid.push(d); }
+  var byDate={};
+  rows.forEach(function(r){ var dd=parseDue(r[F.due]); if(dd){ var k=fmtDate(dd); (byDate[k]=byDate[k]||[]).push(r); } });
+  var html=grid.map(function(d){
+    var cls='cell'+(d.getMonth()!==curM?' other':'')+(fmtDate(d)===fmtDate(new Date())?' today':'');
+    var tks=byDate[fmtDate(d)]||[], tk='';
+    tks.slice(0,3).forEach(function(t){
+      var done=t[F.status]==='已完成', od=!done&&parseDue(t[F.due])<new Date(new Date().setHours(0,0,0,0));
+      tk+='<div class="tk'+(done?' done':od?' overdue':'')+'"><b>'+esc(String(t[F.task]||'').slice(0,20))+'</b><span class="m">'+esc(t[F.plate]||'')+' · '+esc(t[F.status]||'')+'</span></div>';
+    });
+    if(tks.length>3) tk+='<div class="tk"><b>+'+ (tks.length-3) +' 项</b></div>';
+    return '<div class="'+cls+'"><div class="dnum">'+d.getDate()+'</div>'+tk+'</div>';
+  }).join('');
+  document.getElementById('calhead').innerHTML=WD.map(function(w){return '<div>'+w+'</div>';}).join('');
+  document.getElementById('calgrid').innerHTML=html;
+  document.getElementById('monthSel').value=curY+'-'+String(curM+1).padStart(2,'0');
+}
+
+function renderDaily(rows){
+  var today=todayStr();
+  var daily=rows.filter(function(t){ return String(t[F.mode]||'').indexOf('每天')>=0 && t[F.status]!=='已完成'; });
+  var h='';
+  if(!daily.length){ h='<div class="empty">今日无例行任务</div>'; }
+  daily.forEach(function(t){
+    var st=punchMap[t[F.task]+'\u0000'+today];
+    var stTag=st?('<span class="tag" style="background:'+({完成:'#27ae60',跳过:'#f39c12',错过:'#e74c3c'}[st]||'#7f8c8d')+'">今日'+st+'</span>'):'<span class="tag" style="background:#bdc3c7">未打卡</span>';
+    var btns=st?'<button class="btn gray" disabled>已'+st+'</button>':
+      '<button class="btn ok" onclick="punch(\''+esc(t[F.task])+'\',\'完成\')">✅完成</button>'+
+      '<button class="btn skip" onclick="punch(\''+esc(t[F.task])+'\',\'跳过\')">➖跳过</button>'+
+      '<button class="btn miss" onclick="punch(\''+esc(t[F.task])+'\',\'错过\')">❌错过</button>';
+    h+='<div class="row"><div class="t"><b>'+esc(t[F.task])+'</b><span>'+esc(t[F.plate]||'')+' · '+esc(t[F.chan]||'')+'</span></div>'+
+       '<span class="streak">🔥 连续 '+streak(t[F.task])+' 天</span>'+stTag+'<div>'+btns+'</div></div>';
+  });
+  document.getElementById('dailyZone').innerHTML=h;
+}
+
+function renderList(rows){
+  var today0=new Date(); today0.setHours(0,0,0,0);
+  var h='<table><tr><th>任务</th><th>板块</th><th>状态</th><th>优先级</th><th>截止日</th><th>操作</th></tr>';
+  rows.forEach(function(r){
+    var dd=parseDue(r[F.due]), dueS=dd?fmtDate(dd):'-', od=dd&&dd<today0&&r[F.status]!=='已完成';
+    var done=r[F.status]==='已完成';
+    var btn=done?('<span class="sub">'+esc(r[F.doneAt]?String(r[F.doneAt]).slice(0,10):'-')+' · '+esc(r[F.doneBy]||'-')+'</span>')
+                 :'<button class="btn done" onclick="finish(\''+esc(r[F.task])+'\',\''+r.record_id+'\')">✅完成</button>';
+    h+='<tr><td><b>'+esc(r[F.task]||'')+'</b>'+(od?' <span class="warn">⚠️逾期</span>':'')+'</td><td>'+esc(r[F.plate]||'')+'</td>'+
+       '<td><span class="tag" style="background:'+(ST_COLOR[r[F.status]]||'#7f8c8d')+'">'+esc(r[F.status]||'')+'</span></td>'+
+       '<td>'+esc(r[F.pri]||'')+'</td><td class="'+(od?'warn':'')+'">'+dueS+'</td><td>'+btn+'</td></tr>';
+  });
+  document.getElementById('listwrap').innerHTML=h+'</table>';
+}
+
+function load(){
+  Promise.all([
+    db.query({databaseId:'glqvIFb5dyy2kNicdbpSFp', sorts:[{property:F.due, direction:'ascending'}], pageSize:200}),
+    db.query({databaseId:'STlIbNmsdUkl2qnoVsMVHZ', pageSize:500})
+  ]).then(function(res){
+    var rows=res[0].results||[], punches=res[1].results||[];
+    punchMap={};
+    punches.forEach(function(p){ punchMap[p[PF.task]+'\u0000'+String(p[PF.date]||'').slice(0,10)]=p[PF.st]; });
+    renderMonth(rows); renderDaily(rows); renderList(rows);
+  }).catch(function(e){
+    document.getElementById('calgrid').innerHTML='<div class="empty">加载失败：'+esc(e.message||e)+'</div>';
+  });
+}
+function reloadAll(){
+  db.query({databaseId:'glqvIFb5dyy2kNicdbpSFp', sorts:[{property:F.due, direction:'ascending'}], pageSize:200}).then(function(res){
+    var rows=res.results||[];
+    renderMonth(rows); renderDaily(rows); renderList(rows);
+  });
+}
+document.getElementById('prev').onclick=function(){ if(--curM<0){curM=11;curY--;} reloadAll(); };
+document.getElementById('next').onclick=function(){ if(++curM>11){curM=0;curY++;} reloadAll(); };
+document.getElementById('monthSel').onchange=function(){ var p=document.getElementById('monthSel').value.split('-'); curY=+p[0]; curM=+p[1]-1; reloadAll(); };
+document.getElementById('who').addEventListener('change', load);
+load();
+</script>
+
+<script>
+// 快速录入：任务表 addRecord（空间内登录态可用；发布态 HAS_SDK=false 自动隐藏按钮行为）
+(function(){
+  function bindQA(){
+    if (typeof HAS_SDK !== 'undefined' && !HAS_SDK) {
+      var b = document.getElementById('qa_btn');
+      if (b) { b.onclick = function(){ alert('🔒 录入需成员登录：请在资料库空间内打开本页'); }; }
+      return;
+    }
+    var btn = document.getElementById('qa_btn');
+    if (!btn || !window.__SMART_PAGE__) return;
+    var db = window.__SMART_PAGE__.database;
+    btn.onclick = function(){
+      var t = document.getElementById('qa_task').value.trim();
+      if (!t) { alert('请填任务标题'); return; }
+      var nx = document.getElementById('qa_next').value.trim();
+      var due = document.getElementById('qa_due').value;
+      db.addRecord({databaseId:'glqvIFb5dyy2kNicdbpSFp', properties:{
+        '任务':{text:t},
+        '状态':{text:'待办'},
+        '优先级':{text:'中'},
+        '来源':{text:'工作台快速录入'},
+        '下一步动作':{text:nx},
+        '截止日':{date:due||''}
+      }}).then(function(){
+        document.getElementById('qa_task').value='';
+        document.getElementById('qa_next').value='';
+        localStorage.removeItem('wb_qa_pending');
+        alert('✅ 已录入任务表，日历刷新可见');
+        setTimeout(function(){ location.reload(); }, 600);
+      }).catch(function(e){ alert('录入失败：'+e); });
+    };
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', bindQA); } else { bindQA(); }
+})();
+</script>
+</body>
+</html>
