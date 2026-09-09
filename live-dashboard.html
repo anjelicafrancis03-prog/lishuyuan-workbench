@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>李书远直播结构仪表盘</title>
+<style>
+:root {
+  --accent: #fb923c; --accent2: #fbbf24; --red: #ef4444; --green: #22c55e; --blue: #3b82f6; --purple: #a78bfa;
+  --bg: #0f172a; --panel: #1e293b; --text: #e2e8f0; --muted: #94a3b8; --border: #334155;
+}
+* { box-sizing: border-box; margin: 0; }
+body { background: var(--bg); color: var(--text); font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.6; }
+.wrap { max-width: 1200px; margin: 0 auto; padding: 20px; }
+.hero { text-align: center; padding: 60px 20px 40px; background: radial-gradient(1000px 300px at 50% -100px, var(--accent) 0%, transparent 60%); }
+.hero h1 { font-size: clamp(24px, 4vw, 40px); background: linear-gradient(90deg, var(--text), var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero p { color: var(--muted); margin-top: 8px; }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin: 30px 0; }
+.stat-card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+.stat-card .num { font-size: 32px; font-weight: 700; color: var(--accent); }
+.stat-card .label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+h2 { font-size: 20px; margin: 40px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); color: var(--accent2); }
+.chart-box { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin: 16px 0; }
+.bar-row { display: flex; align-items: center; margin: 8px 0; }
+.bar-label { width: 180px; font-size: 13px; text-align: right; padding-right: 12px; color: var(--muted); flex-shrink: 0; }
+.bar-track { flex: 1; height: 24px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 4px; transition: width 0.5s; display: flex; align-items: center; padding-left: 8px; font-size: 12px; color: #fff; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--border); }
+th { color: var(--muted); font-weight: 600; }
+.risk-high { color: var(--red); font-weight: 700; }
+.risk-mid { color: var(--accent2); }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; margin: 2px; }
+.tag-peek { background: rgba(251,146,60,0.2); color: var(--accent); }
+.tag-method { background: rgba(59,130,246,0.2); color: var(--blue); }
+.tag-risk { background: rgba(239,68,68,0.2); color: var(--red); }
+.tag-hook { background: rgba(34,197,94,0.2); color: var(--green); }
+.timeline { display: flex; height: 40px; border-radius: 8px; overflow: hidden; margin: 16px 0; }
+.tl-seg { display: flex; align-items: center; justify-content: center; font-size: 10px; color: #fff; white-space: nowrap; overflow: hidden; }
+.footer { text-align: center; padding: 40px 20px; color: var(--muted); font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="hero">
+<h1>李书远直播结构仪表盘</h1>
+<p>88.8 分钟 ｜ 962 句 ｜ 09-09 凌晨场 ｜ 数据源: FunASR SenseVoice+cam++ 交叉矩阵 v3</p>
+</div>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">962</div><div class="label">总句数</div></div>
+<div class="stat-card"><div class="num">33%</div><div class="label">有效内容占比</div></div>
+<div class="stat-card"><div class="num">222</div><div class="label">板块切换次数</div></div>
+<div class="stat-card"><div class="num">73%</div><div class="label">钩子触发率</div></div>
+<div class="stat-card"><div class="num">19</div><div class="label">面诊高危句</div></div>
+<div class="stat-card"><div class="num">84%</div><div class="label">Neutral 情绪</div></div>
+</div>
+
+<h2>📊 板块内容分布</h2>
+<div class="chart-box">
+<div id="board-chart"></div>
+</div>
+
+<h2>🎭 情绪分布</h2>
+<div class="chart-box">
+<div id="emotion-chart"></div>
+</div>
+
+<h2>🪝 钩子效果量化</h2>
+<div class="chart-box">
+<div id="hook-chart"></div>
+</div>
+
+<h2>⏱️ 89 分钟板块时间轴</h2>
+<div class="chart-box">
+<div class="timeline" id="timeline"></div>
+<p style="color:var(--muted);font-size:12px;margin-top:8px">每段颜色代表一个板块，宽度=持续时间</p>
+</div>
+
+<h2>⚠️ 面诊高危三级分层</h2>
+<div class="chart-box">
+<div id="risk-chart"></div>
+</div>
+
+<div class="footer">
+普通40 × 普通42 联合分析 ｜ codex-pi3ub Phase1 ｜ 数据: cross-matrix-v3.json ｜ 生成: 09-09
+</div>
+</div>
+
+<script>
+const data = {"total":962,"boards":{"L3a 眉眼":73,"L3c 下颌轮廓":98,"L3e 皮肤保养":73,"L3g 材料/PEEK":82,"L2 头/发型":64,"L3b 鼻部":35,"L3d 人中下巴":31,"L1 身材":20,"L3f 牙/贴面":17},"emotions":{"Neutral 理性输出":808,"Happy 热情感谢":107,"Angry 攻击互怼":47},"hooks":{"索要点赞":{n:7,rate:85.7},"主页导流":{n:10,rate:80.0},"答谢礼物":{n:9,rate:77.8},"其他钩子":{n:16,rate:75.0},"索要灯牌":{n:3,rate:0.0}},"risks":{"Tier1 红线禁区":{n:6,desc:"私我给你看/发我看"},"Tier2 算法预警":{n:3,desc:"帮你看看/下播看"},"Tier3 语境敏感":{n:6,desc:"个案分析/材料承诺"},"扩展风险":{n:10,desc:"修鼻效果/预约面诊"}},"timeline":[
+[0,5,"暖场"],["5",10,"答疑"],["10",15,"门槛+眉眼"],["15",20,"下颌+比例"],["20",25,"钩子+转化"],["25",30,"个案+对骂"],["30",35,"张力理论"],["35",40,"水肿+科普"],["40",45,"底子论"],["45",50,"投资自己"],["50",55,"转化密集"],["55",60,"眉毛实验"],["60",65,"发际线"],["65",70,"轮廓+对比"],["70",75,"磨皮实验"],["75",80,"发际线上镜"],["80",85,"PEK 深讲"],["85",89,"收尾"]]};
+
+// 板块条形图
+const bc = document.getElementById('board-chart');
+const maxB = Math.max(...Object.values(data.boards));
+for (const [name, n] of Object.entries(data.boards).sort((a,b)=>b[1]-a[1])) {
+  bc.innerHTML += `<div class="bar-row"><div class="bar-label">${name}</div><div class="bar-track"><div class="bar-fill" style="width:${n/maxB*100}%;background:linear-gradient(90deg,var(--accent),var(--accent2))">${n} 句</div></div></div>`;
+}
+
+// 情绪图
+const ec = document.getElementById('emotion-chart');
+const eColors = {'Neutral 理性输出':'var(--blue)','Happy 热情感谢':'var(--green)','Angry 攻击互怼':'var(--red)'};
+const maxE = Math.max(...Object.values(data.emotions));
+for (const [name, n] of Object.entries(data.emotions)) {
+  ec.innerHTML += `<div class="bar-row"><div class="bar-label">${name}</div><div class="bar-track"><div class="bar-fill" style="width:${n/maxE*100}%;background:${eColors[name]}">${n} 句 (${(n/962*100).toFixed(1)}%)</div></div></div>`;
+}
+
+// 钩子图
+const hc = document.getElementById('hook-chart');
+for (const [name, d] of Object.entries(data.hooks)) {
+  const color = d.rate >= 75 ? 'var(--green)' : d.rate > 0 ? 'var(--accent)' : 'var(--red)';
+  hc.innerHTML += `<div class="bar-row"><div class="bar-label">${name} (${d.n}句)</div><div class="bar-track"><div class="bar-fill" style="width:${Math.max(d.rate,3)}%;background:${color}">${d.rate}%</div></div></div>`;
+}
+
+// 时间轴
+const tl = document.getElementById('timeline');
+const tlColors = {'暖场':'var(--muted)','答疑':'var(--blue)','门槛+眉眼':'var(--accent)','下颌+比例':'var(--purple)','钩子+转化':'var(--green)','个案+对骂':'var(--red)','张力理论':'var(--accent2)','水肿+科普':'var(--blue)','底子论':'var(--purple)','投资自己':'var(--accent)','转化密集':'var(--green)','眉毛实验':'var(--accent2)','发际线':'var(--blue)','轮廓+对比':'var(--purple)','磨皮实验':'var(--blue)','发际线上镜':'var(--accent)','PEK 深讲':'var(--red)','收尾':'var(--muted)'};
+for (const [start, end, label] of data.timeline) {
+  const s = typeof start === 'string' ? parseInt(start) : start;
+  const dur = end - s;
+  tl.innerHTML += `<div class="tl-seg" style="width:${dur/89*100}%;background:${tlColors[label]||'var(--muted)'}" title="${label} ${s}-${end}min">${label}</div>`;
+}
+
+// 风险表
+const rc = document.getElementById('risk-chart');
+let riskHtml = '<table><tr><th>级别</th><th>句数</th><th>描述</th></tr>';
+for (const [name, d] of Object.entries(data.risks)) {
+  const cls = name.startsWith('Tier1') ? 'risk-high' : name.startsWith('Tier2') ? 'risk-mid' : '';
+  riskHtml += `<tr><td class="${cls}">${name}</td><td>${d.n}</td><td>${d.desc}</td></tr>`;
+}
+rc.innerHTML = riskHtml + '</table>';
+</script>
+</body>
+</html>
