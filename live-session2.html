@@ -1,0 +1,3974 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>李书远 · 直播第二场 (Session 2) 交叉矩阵复盘与封禁归因全景报告</title>
+<style>
+:root {
+  --bg-main: #09090b;
+  --bg-card: #121215;
+  --bg-card-hover: #18181c;
+  --bg-subtle: #1a1a22;
+  --border-subtle: #27272a;
+  --border-bright: #3f3f46;
+  --text-primary: #f4f4f5;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --accent-cyan: #38bdf8;
+  --accent-blue: #3b82f6;
+  --accent-emerald: #10b981;
+  --accent-amber: #f59e0b;
+  --accent-rose: #f43f5e;
+  --accent-purple: #a855f7;
+  --accent-orange: #f97316;
+  --accent-danger: #ef4444;
+  --accent-fatal: #dc2626;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 14px; background: var(--bg-main); color: var(--text-primary); font-family: var(--font-sans); }
+
+body {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--bg-main);
+  line-height: 1.6;
+}
+
+/* Sidebar Navigation */
+#sidebar {
+  width: 320px;
+  min-width: 320px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  background: #0d0d11;
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  z-index: 50;
+  overflow-y: auto;
+}
+
+.sidebar-header {
+  padding: 20px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: #0d0d11;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.sidebar-header h1 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sidebar-header p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+.sidebar-ban-badge {
+  margin-top: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(239, 68, 68, 0.15);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  color: var(--accent-danger);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  font-weight: 600;
+}
+
+.sidebar-nav {
+  padding: 14px 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 12px;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.88rem;
+  transition: all 0.15s ease;
+  border: 1px solid transparent;
+}
+.nav-item:hover {
+  background: var(--bg-subtle);
+  color: #fff;
+  border-color: var(--border-subtle);
+}
+.nav-item.active {
+  background: rgba(56, 189, 248, 0.12);
+  color: var(--accent-cyan);
+  border-color: rgba(56, 189, 248, 0.3);
+  font-weight: 600;
+}
+.nav-item-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-badge-count {
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.06);
+  color: var(--text-muted);
+}
+.nav-item.active .nav-badge-count {
+  background: rgba(56, 189, 248, 0.25);
+  color: var(--accent-cyan);
+}
+
+.sidebar-filter-box {
+  padding: 16px;
+  border-top: 1px solid var(--border-subtle);
+  background: #0d0d11;
+  position: sticky;
+  bottom: 0;
+}
+.filter-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.filter-input {
+  width: 100%;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 8px 10px;
+  color: #fff;
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.filter-input:focus {
+  border-color: var(--accent-cyan);
+}
+
+/* Main Content */
+#main {
+  flex: 1;
+  max-width: calc(100vw - 320px);
+  padding: 32px 48px 100px 48px;
+  overflow-x: hidden;
+}
+
+/* Hero Section */
+.hero-banner {
+  background: linear-gradient(135deg, rgba(28, 14, 18, 0.95) 0%, rgba(14, 14, 18, 0.95) 100%);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 14px;
+  padding: 36px;
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+.hero-banner::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.2) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.tag-danger {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+}
+.tag-cyan {
+  background: rgba(56, 189, 248, 0.12);
+  color: var(--accent-cyan);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+.tag-amber {
+  background: rgba(245, 158, 11, 0.12);
+  color: var(--accent-amber);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.hero-title {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.hero-subtitle {
+  font-size: 1.02rem;
+  color: var(--text-secondary);
+  max-width: 950px;
+  margin-bottom: 24px;
+  line-height: 1.7;
+}
+
+.hero-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+}
+.hero-stat-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 16px;
+}
+.hero-stat-num {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+  font-family: var(--font-mono);
+}
+.hero-stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* Comparison Callout */
+.comp-banner {
+  margin-top: 20px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 16px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+.comp-item {
+  display: flex;
+  flex-direction: column;
+}
+.comp-label { font-size: 0.75rem; color: var(--text-muted); }
+.comp-val { font-size: 1.05rem; font-weight: 700; color: var(--text-primary); font-family: var(--font-mono); }
+
+/* Content Sections */
+.section-block {
+  margin-bottom: 50px;
+  scroll-margin-top: 30px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  background: var(--bg-card);
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+.section-header {
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 18px;
+  margin-bottom: 24px;
+}
+.section-title {
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-top: 6px;
+}
+
+/* Table Styles */
+.matrix-container {
+  overflow-x: auto;
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+}
+table.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  text-align: center;
+}
+table.data-table th, table.data-table td {
+  padding: 10px 8px;
+  border: 1px solid var(--border-subtle);
+}
+table.data-table th {
+  background: #18181f;
+  color: var(--text-secondary);
+  font-weight: 600;
+  white-space: nowrap;
+}
+table.data-table td.row-header {
+  text-align: left;
+  font-weight: 600;
+  color: #fff;
+  background: #14141a;
+  padding-left: 14px;
+  white-space: nowrap;
+}
+table.data-table td.cell-active {
+  background: rgba(56, 189, 248, 0.1);
+  color: var(--accent-cyan);
+  font-weight: 700;
+}
+table.data-table td.cell-danger {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  font-weight: 700;
+}
+table.data-table tr.total-row td {
+  background: #181822;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* Suspect Forensic Cards */
+.suspects-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.suspect-card {
+  border: 1px solid var(--border-bright);
+  border-radius: 12px;
+  background: #15151c;
+  overflow: hidden;
+  transition: transform 0.15s, border-color 0.15s;
+}
+.suspect-card:hover {
+  border-color: rgba(239, 68, 68, 0.5);
+  transform: translateY(-2px);
+}
+.suspect-header {
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.suspect-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.suspect-badge {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+.badge-sus {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+.badge-cat {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+.badge-fatal {
+  background: rgba(220, 38, 38, 0.35);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.6);
+  animation: pulse-border 2s infinite;
+}
+@keyframes pulse-border {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+  70% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+.suspect-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+}
+.suspect-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.suspect-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.quote-box {
+  background: rgba(0, 0, 0, 0.5);
+  border-left: 3px solid var(--accent-rose);
+  padding: 12px 16px;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.92rem;
+  color: #e4e4e7;
+  line-height: 1.6;
+}
+.quote-item {
+  margin-bottom: 6px;
+  font-family: var(--font-mono);
+}
+.quote-item:last-child { margin-bottom: 0; }
+.legal-box {
+  display: flex;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: var(--accent-amber);
+  background: rgba(245, 158, 11, 0.08);
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+.analysis-text {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* Fatal 80-Second Timeline */
+.timeline-container {
+  position: relative;
+  padding: 20px 0 20px 30px;
+  margin-left: 10px;
+  border-left: 2px dashed var(--border-bright);
+}
+.timeline-event {
+  position: relative;
+  margin-bottom: 28px;
+}
+.timeline-event:last-child { margin-bottom: 0; }
+.timeline-node {
+  position: absolute;
+  left: -41px;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--bg-main);
+  border: 3px solid var(--accent-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.timeline-event.danger .timeline-node {
+  border-color: var(--accent-amber);
+}
+.timeline-event.fatal .timeline-node {
+  border-color: var(--accent-fatal);
+  background: var(--accent-fatal);
+}
+.timeline-content {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 14px 18px;
+}
+.timeline-time {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  margin-bottom: 4px;
+}
+.timeline-event.danger .timeline-time { color: var(--accent-amber); }
+.timeline-event.fatal .timeline-time { color: var(--accent-danger); }
+.timeline-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.timeline-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Emotion Breakdown */
+.emotion-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+.emotion-card {
+  padding: 18px;
+  border-radius: 10px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.emotion-icon { font-size: 2.2rem; }
+.emotion-count { font-size: 1.6rem; font-weight: 700; font-family: var(--font-mono); }
+.emotion-label { font-size: 0.8rem; color: var(--text-muted); }
+
+/* Replacement Phrasing Side-by-Side */
+.replace-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.replace-card {
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  background: #14141b;
+  padding: 20px;
+}
+.replace-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.replace-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.replace-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 900px) {
+  .replace-cols { grid-template-columns: 1fr; }
+}
+.replace-raw {
+  background: rgba(239, 68, 68, 0.05);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 8px;
+  padding: 14px;
+}
+.replace-compliant {
+  background: rgba(16, 185, 129, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 8px;
+  padding: 14px;
+}
+.col-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.col-tag.danger { color: #f87171; }
+.col-tag.safe { color: #34d399; }
+.col-text { font-size: 0.9rem; line-height: 1.65; color: #e4e4e7; }
+.assistant-hint {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: rgba(56, 189, 248, 0.08);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  color: var(--accent-cyan);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Prevention Checklist */
+.checklist-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+.check-phase-card {
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  background: var(--bg-subtle);
+  padding: 20px;
+}
+.phase-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 10px;
+}
+.check-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.check-box {
+  margin-top: 3px;
+  accent-color: var(--accent-emerald);
+  cursor: pointer;
+}
+
+/* Verbatim Sentence Stream */
+.stream-filters-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+  background: var(--bg-subtle);
+  padding: 14px 18px;
+  border-radius: 10px;
+  border: 1px solid var(--border-subtle);
+}
+.pill-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  padding: 4px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.pill-btn:hover, .pill-btn.active {
+  background: var(--accent-blue);
+  color: #fff;
+  border-color: var(--accent-blue);
+}
+
+.stream-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.stream-table th {
+  text-align: left;
+  padding: 10px 14px;
+  background: #181822;
+  border-bottom: 1px solid var(--border-bright);
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+.stream-row {
+  border-bottom: 1px solid var(--border-subtle);
+  transition: background 0.15s;
+}
+.stream-row:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+.stream-row.row-danger {
+  background: rgba(239, 68, 68, 0.06);
+}
+.stream-row.row-fatal {
+  background: rgba(220, 38, 38, 0.15);
+}
+.stream-row td {
+  padding: 12px 14px;
+  vertical-align: top;
+}
+.col-time { font-family: var(--font-mono); color: var(--accent-cyan); white-space: nowrap; }
+.col-text { max-width: 500px; color: var(--text-primary); line-height: 1.6; }
+.raw-subtext { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; font-family: var(--font-mono); }
+.badge-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  padding: 2px 7px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.badge-board { background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan); }
+.badge-type { background: rgba(168, 85, 247, 0.15); color: var(--accent-purple); }
+.badge-risk { background: rgba(239, 68, 68, 0.2); color: #f87171; font-weight: 700; }
+
+/* Responsive adjustments */
+@media (max-width: 1100px) {
+  body { flex-direction: column; }
+  #sidebar { width: 100%; height: auto; position: static; }
+  #main { max-width: 100%; padding: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Sidebar Navigation -->
+<aside id="sidebar">
+  <div class="sidebar-header">
+    <h1><span>李书远 · Session 2</span></h1>
+    <p>2026-09-09 22:25 直播复盘与封禁归因</p>
+    <div class="sidebar-ban-badge">
+      <span>🚫 19:33 系统强制封禁</span>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a href="#section-hero" class="nav-item active">
+      <div class="nav-item-left">
+        <span class="nav-item-icon">📊</span>
+        <span>全景数据与对比</span>
+      </div>
+      <span class="nav-badge-count">20.1m</span>
+    </a>
+    <a href="#section-matrix" class="nav-item">
+      <div class="nav-item-left">
+        <span class="nav-item-icon">🧱</span>
+        <span>16板块交叉矩阵</span>
+      </div>
+      <span class="nav-badge-count">173句</span>
+    </a>
+    <a href="#section-suspects" class="nav-item">
+      <div class="nav-item-left">
+        <span class="nav-item-icon">🚨</span>
+        <span>5大嫌疑点+2催化剂</span>
+      </div>
+      <span class="nav-badge-count">7项</span>
+    </a>
+    <a href="#section-timeline" class="nav-item">
+      <div class="nav-item-left">
+        <span class="nav-item-icon">⏱️</span>
+        <span>致命80秒倒计时</span>
+      </div>
+      <span class="nav-badge-count">18:04~19:33</span>
+    </a>
+    <a href="#section-emotion" class="nav-item">
+      <div class="nav-item-left">
+        <span class="nav-item-icon">🎭</span>
+        <span>情绪波动与极值</span>
+      </div>
+      <span class="nav-badge-count">16次跃迁</span>
+    </a>
+    <a href="#section-replacements" class="nav-item">
+      <div class="nav-item-left">
+        <span class="nav-item-icon">🛡️</span>
+        <span>合规替代口播库</span>
+      </div>
+      <span class="nav-badge-count">6套方案</span>
+    </a>
+    <a href="#section-checklist" class="nav-item">
+      <div class="nav-item-left">
+        <span class="nav-item-icon">📋</span>
+        <span>防封禁全景避坑清单</span>
+      </div>
+      <span class="nav-badge-count">16条铁律</span>
+    </a>
+    <a href="#section-stream" class="nav-item">
+      <div class="nav-item-left">
+        <span class="nav-item-icon">💬</span>
+        <span>全场173句原始流</span>
+      </div>
+      <span class="nav-badge-count">173句</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-filter-box">
+    <div class="filter-title">🔍 快速搜索口播语句</div>
+    <input type="text" id="quick-search" class="filter-input" placeholder="输入关键词如：PEEK、尺子、上海..." oninput="onGlobalSearch(this.value)">
+  </div>
+</aside>
+
+<!-- Main Container -->
+<main id="main">
+
+  <!-- 1. Hero Banner -->
+  <section id="section-hero" class="hero-banner">
+    <div class="hero-tags-row">
+      <span class="hero-tag tag-danger">S-LEVEL 违规熔断</span>
+      <span class="hero-tag tag-cyan">FunASR + SenseVoice 转写</span>
+      <span class="hero-tag tag-amber">单场高危密度 7.9x</span>
+    </div>
+    <h1 class="hero-title">李书远直播间第二场 · 20.1分钟封禁全景复盘</h1>
+    <p class="hero-subtitle">
+      2026年9月9日晚 22:25:10 开播，至 19分33秒 遭抖音风控中心执行强制中断掐断推流。本复盘报告严格采用 <strong>Cross-Matrix v4 旗舰分析框架</strong>，深度透视其在 PEEK 功效承诺、私域切流对抗审查、个案病因诊断、头骨标本相面及致命软尺量脸引发的 CV 视觉绝杀因果链。
+    </p>
+
+    <div class="hero-stats-grid">
+      <div class="hero-stat-card">
+        <div class="hero-stat-num">20.1 <span style="font-size:1rem;color:var(--text-muted)">min</span></div>
+        <div class="hero-stat-label">实际存活时长（至19:33被封）</div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="hero-stat-num">173 <span style="font-size:1rem;color:var(--text-muted)">句</span></div>
+        <div class="hero-stat-label">有效转写口播句数（8.6句/分）</div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="hero-stat-num" style="color:var(--accent-danger)">23 <span style="font-size:1rem;color:var(--text-muted)">句</span></div>
+        <div class="hero-stat-label">高危违规话术（平均每52秒1句）</div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="hero-stat-num" style="color:var(--accent-amber)">13 <span style="font-size:1rem;color:var(--text-muted)">个</span></div>
+        <div class="hero-stat-label">活跃研讨板块（共切成33个片段）</div>
+      </div>
+    </div>
+
+    <!-- Comparison Summary with Session 1 -->
+    <div class="comp-banner">
+      <div class="comp-item">
+        <span class="comp-label">场次对比</span>
+        <span class="comp-val">Session 1 (88.8m) vs Session 2 (20.1m)</span>
+      </div>
+      <div class="comp-item">
+        <span class="comp-label">存活结局</span>
+        <span class="comp-val" style="color:var(--accent-danger)">Session 1 存活完整播完 ｜ Session 2 猝死中断</span>
+      </div>
+      <div class="comp-item">
+        <span class="comp-label">违规爆发频次</span>
+        <span class="comp-val" style="color:var(--accent-rose)">1次/22.2分 ➔ 1次/2.8分 (激增7.9倍)</span>
+      </div>
+      <div class="comp-item">
+        <span class="comp-label">直接死因定位</span>
+        <span class="comp-val" style="color:var(--accent-amber)">ASR慢性累积 + 软尺量脸 CV 瞬时触发</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 16-Board Cross-Matrix Table -->
+  <section id="section-matrix" class="section-block">
+    <div class="section-header">
+      <h2 class="section-title"><span>🧱 16板块 × 11类型全景交叉矩阵表</span></h2>
+      <p class="section-desc">全量精准覆盖全场 173 句口播，横向透视李书远在该场次的内容类型结构与高危违规倾斜。</p>
+    </div>
+
+    <div class="matrix-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>板块名称 (行)</th>
+            <th>审美方法论/理念</th> <th>医美知识/科普</th> <th>PEEK 种草</th> <th>互动钩子</th> <th>对骂/攻击</th> <th>转化/商业</th> <th>风险/合规话术</th> <th>互动应答/过渡</th> <th>真闲聊/杂务</th> <th>碎片/附和</th> <th>面诊高危</th>
+            <th>行合计</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td class="row-header">L1 身材层</td>
+            <td class='cell-active'>8</td> <td class='cell-active'>1</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td class='cell-active'>1</td> <td style='color:#3f3f46'>·</td> <td class='cell-active'>1</td> <td style='color:#3f3f46'>·</td>
+            <td style="font-weight:700;color:#fff">11</td>
+          </tr>
+
+          <tr>
+            <td class="row-header">L2 头/发型层</td>
+            <td class='cell-active'>16</td> <td class='cell-active'>4</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td class='cell-active'>7</td> <td class='cell-active'>1</td> <td class='cell-active'>1</td> <td style='color:#3f3f46'>·</td>
+            <td style="font-weight:700;color:#fff">29</td>
+          </tr>
+
+          <tr>
+            <td class="row-header">L3a 眉眼板块</td>
+            <td class='cell-active'>11</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td>
+            <td style="font-weight:700;color:#fff">11</td>
+          </tr>
+
+          <tr>
+            <td class="row-header">L3b 鼻部板块</td>
+            <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td>
+            <td style="font-weight:700;color:#fff">0</td>
+          </tr>
+
+          <tr>
+            <td class="row-header">L3c 下颌/轮廓板块</td>
+            <td class='cell-active'>3</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td class='cell-active'>4</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td>
+            <td style="font-weight:700;color:#fff">7</td>
+          </tr>
+
+          <tr>
+            <td class="row-header">L3d 人中/下巴板块</td>
+            <td class='cell-active'>2</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td>
+            <td style="font-weight:700;color:#fff">2</td>
+          </tr>
+
+          <tr>
+            <td class="row-header">L3e 皮肤/保养板块</td>
+            <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td>
+            <td style="font-weight:700;color:#fff">0</td>
+          </tr>
+
+          <tr>
+            <td class="row-header">L3f 牙/贴面板块</td>
+            <td style='color:#3f3f46'>·</td> <td class='cell-active'>1</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td>
+            <td style="font-weight:700;color:#fff">1</td>
+          </tr>
+
+          <tr>
+            <td class="row-header">L3g 材料/PEEK 板块</td>
+            <td style='color:#3f3f46'>·</td> <td class='cell-active'>6</td> <td class='cell-active'>2</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td>
+            <td style="font-weight:700;color:#fff">8</td>
+          </tr>
+
+          <tr>
+            <td class="row-header">方法论总纲</td>
+            <td class='cell-active'>7</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td class='cell-active'>7</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td>
+            <td style="font-weight:700;color:#fff">14</td>
+          </tr>
+
+          <tr>
+            <td class="row-header">互动钩子/运营</td>
+            <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td class='cell-active'>6</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td class='cell-active'>1</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td>
+            <td style="font-weight:700;color:#fff">7</td>
+          </tr>
+
+          <tr>
+            <td class="row-header">对骂/攻击</td>
+            <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td>
+            <td style="font-weight:700;color:#fff">0</td>
+          </tr>
+
+          <tr>
+            <td class="row-header">转化/商业</td>
+            <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td class='cell-danger'>7</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td>
+            <td style="font-weight:700;color:#fff">7</td>
+          </tr>
+
+          <tr>
+            <td class="row-header">面诊高危</td>
+            <td style='color:#3f3f46'>·</td> <td class='cell-danger'>4</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td class='cell-danger'>1</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td class='cell-danger'>1</td> <td class='cell-danger'>6</td>
+            <td style="font-weight:700;color:#fff">12</td>
+          </tr>
+
+          <tr>
+            <td class="row-header">封禁相关</td>
+            <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td class='cell-danger'>13</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td>
+            <td style="font-weight:700;color:#fff">13</td>
+          </tr>
+
+          <tr>
+            <td class="row-header">真闲聊/杂务</td>
+            <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td style='color:#3f3f46'>·</td> <td class='cell-active'>6</td> <td class='cell-active'>33</td> <td class='cell-active'>12</td> <td style='color:#3f3f46'>·</td>
+            <td style="font-weight:700;color:#fff">51</td>
+          </tr>
+
+          <tr class="total-row">
+            <td class="row-header" style="color:var(--accent-cyan)">列合计</td>
+            <td>47</td> <td>16</td> <td>2</td> <td>6</td> <td>0</td> <td>8</td> <td>13</td> <td>26</td> <td>34</td> <td>15</td> <td>6</td>
+            <td style="color:var(--accent-cyan)">173</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 3. Suspects & Catalysts Forensic Breakdown -->
+  <section id="section-suspects" class="section-block">
+    <div class="section-header">
+      <h2 class="section-title"><span>🚨 5大嫌疑点 + 2大终极催化剂因果重构</span></h2>
+      <p class="section-desc">结合普通40核心指令深入排查的 5 个关键违规时刻，还原平台多模态风控打击决策树。</p>
+    </div>
+
+    <div class="suspects-grid">
+
+      <div class="suspect-card" id="SUS-01">
+        <div class="suspect-header">
+          <div class="suspect-title-group">
+            <span class="suspect-badge badge-sus">SUS-01</span>
+            <span class="suspect-name">03:23 PEEK 种草、报价与无副作用虚假医疗承诺</span>
+          </div>
+          <div class="suspect-meta">
+            <span>⏱️ 窗口: <strong>03:18 ~ 05:32</strong></span>
+            <span>📍 句段: #017 ~ #030</span>
+            <span>⚠️ 严重度: <strong>Tier 1 (高危医美合规红线)</strong></span>
+          </div>
+        </div>
+        <div class="suspect-body">
+          <div class="quote-box">
+            <div style="font-size:0.75rem;color:var(--accent-rose);text-transform:uppercase;margin-bottom:4px;font-weight:700">现场录音实录</div>
+            <div class='quote-item'>• [03:33] 上 p e k</div><div class='quote-item'>• [04:33] 第一次的话其他地方我不知道数学老师这里差不多是四个左右</div><div class='quote-item'>• [04:46] 凹的话上 p e k 啊如果有一点点的话轻微的话微微调整一下就好了没有什么副作用挺好的</div><div class='quote-item'>• [04:55] 呃有副作用的数学老师都不会上网</div>
+          </div>
+          <div class="legal-box">
+            <span>⚖️ <strong>触犯红线条文</strong>：《医疗美容广告执法指南》第五条及抖音平台禁止宣称医疗技术/材料&#x27;无副作用、零风险&#x27;，禁止直播间非法报价</span>
+          </div>
+          <p class="analysis-text">李书远在短短 2 分钟内，接连触犯多项平台红线：① 口播特定植入材料 PEEK 并引导&#x27;凹了就上 PEEK&#x27;；② 在直播间公然报出价格锚点（&#x27;四个左右&#x27;即4万/4千）；③ 最致命的是在 #025-#026 做出了绝对化疗效保证——&#x27;没有什么副作用挺好的，有副作用都不会上网&#x27;。国家对医疗植入材料监管极严，宣称&#x27;零副作用&#x27;会直接触发平台 ASR 广告法违规拦截字典，被系统判定为虚假医疗宣传。</p>
+        </div>
+      </div>
+
+      <div class="suspect-card" id="SUS-02">
+        <div class="suspect-header">
+          <div class="suspect-title-group">
+            <span class="suspect-badge badge-sus">SUS-02</span>
+            <span class="suspect-name">06:19 私域引流明牌与公然挑衅平台审查机制</span>
+          </div>
+          <div class="suspect-meta">
+            <span>⏱️ 窗口: <strong>06:19 ~ 06:48, 11:09 ~ 11:13</strong></span>
+            <span>📍 句段: #035 ~ #042, #084 ~ #085, #095</span>
+            <span>⚠️ 严重度: <strong>Tier 1 (平台商业反切流与风控绝杀项)</strong></span>
+          </div>
+        </div>
+        <div class="suspect-body">
+          <div class="quote-box">
+            <div style="font-size:0.75rem;color:var(--accent-rose);text-transform:uppercase;margin-bottom:4px;font-weight:700">现场录音实录</div>
+            <div class='quote-item'>• [06:19] 你们可以点头像主页</div><div class='quote-item'>• [06:22] 后面问我</div><div class='quote-item'>• [06:24] 可以回答的详细一点</div><div class='quote-item'>• [06:26] 播间很多东西他输不了</div><div class='quote-item'>• [06:30] 我要是能说的话我直播间也不至于这么点人</div><div class='quote-item'>• [06:41] 不让说</div><div class='quote-item'>• [11:09] 这个英文的这个你可以点我头像主页</div><div class='quote-item'>• [11:13] 点头像主页好吧</div>
+          </div>
+          <div class="legal-box">
+            <span>⚖️ <strong>触犯红线条文</strong>：《抖音直播社区自律公约》严禁跨平台引流、严禁引导私信/主页联系方式、严禁直播中公然宣扬绕过平台审核</span>
+          </div>
+          <p class="analysis-text">这是本场最明目张胆的违规导流。主播不仅连续 4 句催促&#x27;点头像主页、后面问我&#x27;，更致命的是在 #038-#042 公然发表反审查言论：&#x27;直播间很多东西输不了/我也想说/我要是能说直播间不至于这么点人/不让说&#x27;。这直接构成了对平台监管合规底线的明牌挑衅。平台 ASR 巡检系统对&#x27;点头像主页&#x27;配合&#x27;直播间不让说&#x27;的语义组合会直接拉响反切流警报，权重极高。</p>
+        </div>
+      </div>
+
+      <div class="suspect-card" id="SUS-03">
+        <div class="suspect-header">
+          <div class="suspect-title-group">
+            <span class="suspect-badge badge-sus">SUS-03</span>
+            <span class="suspect-name">08:16 针对个体观众面部松弛与体脂的非法线上诊断</span>
+          </div>
+          <div class="suspect-meta">
+            <span>⏱️ 窗口: <strong>05:48 ~ 06:01, 08:16 ~ 08:21</strong></span>
+            <span>📍 句段: #031, #033, #056</span>
+            <span>⚠️ 严重度: <strong>Tier 1 (非法行医与无资质线上问诊)</strong></span>
+          </div>
+        </div>
+        <div class="suspect-body">
+          <div class="quote-box">
+            <div style="font-size:0.75rem;color:var(--accent-rose);text-transform:uppercase;margin-bottom:4px;font-weight:700">现场录音实录</div>
+            <div class='quote-item'>• [05:48] 胖子很正常啊你这个以前肥胖问题导致的就是瘦下来很快有些人他面部松弛你不仅是面部生松弛你的身上也会松弛</div><div class='quote-item'>• [06:01] 这个东西就是你减太快了你多去健健身</div><div class='quote-item'>• [08:16] 你胖了你的皮肤就厚</div><div class='quote-item'>• [08:21] 反正胖了就丑</div>
+          </div>
+          <div class="legal-box">
+            <span>⚖️ <strong>触犯红线条文</strong>：《互联网诊疗监管细则》严禁在非医疗机构网络直播平台提供针对具体个体的病因诊断与治疗方案</span>
+          </div>
+          <p class="analysis-text">主播越界将通用审美科普转变为&#x27;个体患者病因问诊&#x27;：直接对具体观众下定论&#x27;你这个以前肥胖问题导致面部松弛...你减太快了&#x27;，并在 08:16 直断&#x27;你胖了你的皮肤就厚&#x27;。在监管语境下，脱离合法互联网医院牌照而直接对具体人下达病因定性与改善方案，属于违规开展线上诊疗，是医疗垂类直播的重点封杀对象。</p>
+        </div>
+      </div>
+
+      <div class="suspect-card" id="SUS-04">
+        <div class="suspect-header">
+          <div class="suspect-title-group">
+            <span class="suspect-badge badge-sus">SUS-04</span>
+            <span class="suspect-name">13:25 粉丝头骨标本陈列与玄学神断言论</span>
+          </div>
+          <div class="suspect-meta">
+            <span>⏱️ 窗口: <strong>12:57 ~ 14:49</strong></span>
+            <span>📍 句段: #099 ~ #117</span>
+            <span>⚠️ 严重度: <strong>Tier 2 (不良价值观导向与惊悚道具违规)</strong></span>
+          </div>
+        </div>
+        <div class="suspect-body">
+          <div class="quote-box">
+            <div style="font-size:0.75rem;color:var(--accent-rose);text-transform:uppercase;margin-bottom:4px;font-weight:700">现场录音实录</div>
+            <div class='quote-item'>• [12:57] 后面看到头皮发麻</div><div class='quote-item'>• [13:25] 这后面全都是</div><div class='quote-item'>• [13:28] 🎼我的粉丝宝宝们的脑袋</div><div class='quote-item'>• [13:43] 🎼只要你们在数学老师面前我就能知道你们的头骨长得什么样</div><div class='quote-item'>• [14:49] 都是你们的数据明白吗</div>
+          </div>
+          <div class="legal-box">
+            <span>⚖️ <strong>触犯红线条文</strong>：平台画面内容安全规范：严禁展示易引起受众生理不适的骨骼/器官模型；严禁宣扬超自然/相面玄学等非科学论调</span>
+          </div>
+          <p class="analysis-text">主播背景陈列大量 3D 打印头颅骨骼模型，弹幕已直接反馈&#x27;看到头皮发麻&#x27;。主播非但没有回避，反而拿起模型宣称&#x27;全是我粉丝宝宝们的脑袋/天天跟我住在一起&#x27;，更抛出极其荒谬的论断：&#x27;只要你们在数学老师面前我就能知道你们的头骨长得什么样/都是你们的数据&#x27;。这一行为在视觉 CV 检测上识别为人体解剖骨架，在语义上则涉嫌侵犯患者医疗数据隐私与相面算命式的非科学医疗诱导。</p>
+        </div>
+      </div>
+
+      <div class="suspect-card" id="SUS-05">
+        <div class="suspect-header">
+          <div class="suspect-title-group">
+            <span class="suspect-badge badge-sus">SUS-05</span>
+            <span class="suspect-name">15:39 线下上海面诊邀约与无资质非法揽客</span>
+          </div>
+          <div class="suspect-meta">
+            <span>⏱️ 窗口: <strong>15:39</strong></span>
+            <span>📍 句段: #123</span>
+            <span>⚠️ 严重度: <strong>Tier 1 (非法线下医美黑医美揽客)</strong></span>
+          </div>
+        </div>
+        <div class="suspect-body">
+          <div class="quote-box">
+            <div style="font-size:0.75rem;color:var(--accent-rose);text-transform:uppercase;margin-bottom:4px;font-weight:700">现场录音实录</div>
+            <div class='quote-item'>• [15:39] 能不能来能不能可以啊在上海在上海随时欢迎你们啊来找数学老师玩来讨论讨论这个颜值方面的问题都是可以的</div>
+          </div>
+          <div class="legal-box">
+            <span>⚖️ <strong>触犯红线条文</strong>：严禁个人账号在直播间无医疗机构执业许可证的情况下，邀约受众到线下私密场所开展&#x27;看脸/面诊/手术设计&#x27;</span>
+          </div>
+          <p class="analysis-text">此句是引爆线下非法行医风控的引信。主播明确给出城市地理定位（上海），并直接向全网观众发出线下邀约：&#x27;随时欢迎你们来找数学老师玩，讨论讨论颜值方面的问题&#x27;。对于没有任何医疗机构认证资质的普通账号而言，公开在直播间招揽线下个案颜值咨询，平台风控会立刻定性为&#x27;疑似非法行医/黑医美线下拉客&#x27;，安全等级直接打入 S 级待处分队列。</p>
+        </div>
+      </div>
+
+      <div class="suspect-card" id="CAT-01">
+        <div class="suspect-header">
+          <div class="suspect-title-group">
+            <span class="suspect-badge badge-cat">CAT-01</span>
+            <span class="suspect-name">【催化剂一】18:04 加热卡自曝引发人工/风控巡检插队介入</span>
+          </div>
+          <div class="suspect-meta">
+            <span>⏱️ 窗口: <strong>18:04 ~ 18:20</strong></span>
+            <span>📍 句段: #154 ~ #155</span>
+            <span>⚠️ 严重度: <strong>Catalyst (风控审核加速器)</strong></span>
+          </div>
+        </div>
+        <div class="suspect-body">
+          <div class="quote-box">
+            <div style="font-size:0.75rem;color:var(--accent-rose);text-transform:uppercase;margin-bottom:4px;font-weight:700">现场录音实录</div>
+            <div class='quote-item'>• [18:04] 你看这个这个这个平台又送我那个加热卡了我绝对不用了</div><div class='quote-item'>• [18:10] 🎼要不要用呢我用的话我就不能讲什么了你们觉得我要不要用这个加热卡就用平台送了我一张加热卡但是我每次用这个加热卡的时候这平台就会审核我就是我可能就不能讲太多的东西了你们觉得我要用这个加热卡吗</div>
+          </div>
+          <div class="legal-box">
+            <span>⚖️ <strong>触犯红线条文</strong>：直播间公然讨论平台推流与审核规则，自曝风控巡检漏洞</span>
+          </div>
+          <p class="analysis-text">主播自述&#x27;每次用加热卡平台就会审核我&#x27;。加热卡（或流量扶持券）通常附带系统强审核机制。李书远在公屏公开辩论要不要用加热卡，不仅触发平台关于&#x27;平台规则与违规自察&#x27;的敏感词监测，更直接将该直播间推到了人工巡查审视的第一线。此时监管人员或高阶风控流已直接切入直播间！</p>
+        </div>
+      </div>
+
+      <div class="suspect-card" id="CAT-02">
+        <div class="suspect-header">
+          <div class="suspect-title-group">
+            <span class="suspect-badge badge-fatal">CAT-02</span>
+            <span class="suspect-name">【催化剂二 / 致命触发】19:17 掏出软尺当众量面——视觉 CV 触发医疗操作绝杀</span>
+          </div>
+          <div class="suspect-meta">
+            <span>⏱️ 窗口: <strong>15:54 ~ 19:26, 封禁于 19:33</strong></span>
+            <span>📍 句段: #124, #127, #157 ~ #165, #166 ~ #172</span>
+            <span>⚠️ 严重度: <strong>Fatal Trigger (S级即时掐断)</strong></span>
+          </div>
+        </div>
+        <div class="suspect-body">
+          <div class="quote-box">
+            <div style="font-size:0.75rem;color:var(--accent-rose);text-transform:uppercase;margin-bottom:4px;font-weight:700">现场录音实录</div>
+            <div class='quote-item'>• [15:54] 主播脸宽是十一点多这里到这里的距离十一点多哎我尺子呢</div><div class='quote-item'>• [16:18] 我给你拿尺子</div><div class='quote-item'>• [18:47] 那你把你个卷尺给我</div><div class='quote-item'>• [19:17] 看好了啊这个尺子</div><div class='quote-item'>• [19:20] 哎呀这个是软尺</div><div class='quote-item'>• [19:26] 看不着</div><div class='quote-item'>• [19:33] 哎呀为什么把我给封了😡</div><div class='quote-item'>• [19:55] 抓尺子</div><div class='quote-item'>• [19:56] 我拿尺子跟我这个有什么关系</div>
+          </div>
+          <div class="legal-box">
+            <span>⚖️ <strong>触犯红线条文</strong>：《抖音直播行为规范》严禁直播间出现医疗器械操作、手术划线、整形测量工具实操等医疗面诊动作</span>
+          </div>
+          <p class="analysis-text">主播在 19:33 被掐断后第一反应就是：&#x27;抓尺子？我拿尺子跟我这个有什么关系？&#x27;——这正是当事人的直觉印证！在医美直播监管中，【软尺/卷尺/标尺/皮尺测量面部各部位间距】被计算机视觉（CV）模型深度训练为&#x27;非法线下医美面诊/整形设计操作&#x27;的核心视觉特征。李书远历经数分钟翻找后，终于在 19:17 将软尺拿到镜头前开始比划测量。此时直播间在前期已累积 5 重高危扣分的前提下，CV 视觉模型瞬时捕获到&#x27;尺子量脸&#x27;的标志性医疗违规动作，系统无需等待二次告警，直接执行最高等级紧急切断（Auto-Termination），全场直播瞬间黑屏<div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);border-radius:8px;padding:14px;margin-top:14px">
+<p style="font-size:13px;color:#f59e0b"><b>⚠️ 历史案例支撑（魅惑确认）</b>：之前有直播也是因为找尺子被封的。「尺子」相关行为是已知的、反复出现的封禁触发模式。可能触发方式：① ASR 违规词匹配（语音「尺子」→实时转写→匹配违规词库）② CV 视觉识别（镜头画面出现测量工具）。预防策略：直播中完全避免提及和展示测量工具。</p></div>！</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 4. Fatal 80-Second Timeline -->
+  <section id="section-timeline" class="section-block">
+    <div class="section-header">
+      <h2 class="section-title"><span>⏱️ 致命 80 秒倒计时时间线（从加热卡自曝到软尺掐断）</span></h2>
+      <p class="section-desc">重构 18:04 至 19:33 封禁发生时，平台风控引擎从'常规监测'跃升至'人工插队'并最终'CV秒切'的完整时序。</p>
+    </div>
+
+    <div class="timeline-container">
+
+      <div class="timeline-event danger">
+        <div class="timeline-node"></div>
+        <div class="timeline-content">
+          <div class="timeline-time">18:04 ~ 18:20</div>
+          <div class="timeline-title">【催化剂一】加热卡自曝引发人工/风控巡检插队介入 (#154~#155)</div>
+          <div class="timeline-desc">主播在公屏公开纠结：'平台又送我加热卡...每次用这个加热卡的时候平台就会审核我，我可能就不能讲太多东西了'。这一言论直接触发平台风控自察机制，该直播间被自动升权并直接分发至人工安全巡审员桌面待检池。</div>
+        </div>
+      </div>
+
+      <div class="timeline-event normal">
+        <div class="timeline-node"></div>
+        <div class="timeline-content">
+          <div class="timeline-time">18:29 ~ 18:59</div>
+          <div class="timeline-title">翻包寻找软尺，违规意图持续发酵 (#156~#161)</div>
+          <div class="timeline-desc">主播多次在公屏询问并指令助播：'大包包里面有没有吗...那你把你个卷尺给我...哎那我尺子呢'。此时画面出现大幅度低头翻找与器械索要动作，公屏互动暂停，巡审人员视线已完全聚焦直播间。</div>
+        </div>
+      </div>
+
+      <div class="timeline-event fatal">
+        <div class="timeline-node"></div>
+        <div class="timeline-content">
+          <div class="timeline-time">19:17 ~ 19:21</div>
+          <div class="timeline-title">【催化剂二 / 致命触发】软尺出镜并贴近面部拉伸比划 (#162~#164)</div>
+          <div class="timeline-desc">主播亮出实物软尺：'看好了啊这个尺子，哎呀这个是软尺，不好给你们看'，随即把软尺贴近面部轮廓开始实测。计算机视觉（CV）模型瞬时捕获到'手持标尺贴脸测量五官'这一具有高度医疗特征的动作，触发 S 级禁令策略。</div>
+        </div>
+      </div>
+
+      <div class="timeline-event fatal">
+        <div class="timeline-node"></div>
+        <div class="timeline-content">
+          <div class="timeline-time">19:26</div>
+          <div class="timeline-title">最后一句口播：看不着 (#165)</div>
+          <div class="timeline-desc">主播仍在试图用软尺向镜头展示刻度（'看不着'），此时系统内部已生成切流指令并下发至推流网关。</div>
+        </div>
+      </div>
+
+      <div class="timeline-event fatal">
+        <div class="timeline-node"></div>
+        <div class="timeline-content">
+          <div class="timeline-time">19:33</div>
+          <div class="timeline-title">🚨 直播信号强制掐断！系统熔断封禁下发 (#166)</div>
+          <div class="timeline-desc">直播间推流瞬间黑屏，画面显示被平台封禁。李书远发出第一声愤怒与错愕惊呼：'哎呀为什么把我给封了😡'。</div>
+        </div>
+      </div>
+
+      <div class="timeline-event danger">
+        <div class="timeline-node"></div>
+        <div class="timeline-content">
+          <div class="timeline-time">19:39 ~ 19:56</div>
+          <div class="timeline-title">主播错愕质问三连：'抓尺子跟我有什么关系？' (#167~#172)</div>
+          <div class="timeline-desc">在黑屏状态下，麦克风继续收音录下主播与助播的震惊对话：'为什么封我呀😡 / 录音录了吗 / 我没讲什么吧😡 / 抓尺子 / 我拿尺子跟我这个有什么关系'。直观印证了主播完全未意识到 CV 视觉对医疗测量器械的零容忍底线。</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 5. Emotion Analysis -->
+  <section id="section-emotion" class="section-block">
+    <div class="section-header">
+      <h2 class="section-title"><span>🎭 情绪波动与触发热力分析 (SenseVoice Tags)</span></h2>
+      <p class="section-desc">基于 SenseVoice 语气与情绪识别模型，全场 173 句共发生 16 次情绪状态跃迁。</p>
+    </div>
+
+    <div class="emotion-stats-row">
+      <div class="emotion-card">
+        <div class="emotion-icon">😐</div>
+        <div>
+          <div class="emotion-count" style="color:var(--text-primary)">163 <span style="font-size:0.9rem;color:var(--text-muted)">(94.2%)</span></div>
+          <div class="emotion-label">中立/理性叙事 (Neutral)</div>
+        </div>
+      </div>
+      <div class="emotion-card">
+        <div class="emotion-icon">🎉</div>
+        <div>
+          <div class="emotion-count" style="color:var(--accent-emerald)">7 <span style="font-size:0.9rem;color:var(--text-muted)">(4.0%)</span></div>
+          <div class="emotion-label">热情/兴奋驱动 (Happy)</div>
+        </div>
+      </div>
+      <div class="emotion-card">
+        <div class="emotion-icon">💢</div>
+        <div>
+          <div class="emotion-count" style="color:var(--accent-danger)">3 <span style="font-size:0.9rem;color:var(--text-muted)">(1.7%)</span></div>
+          <div class="emotion-label">愤怒/崩溃质问 (Angry)</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--bg-subtle);padding:20px;border-radius:10px;border:1px solid var(--border-subtle)">
+      <h4 style="color:#fff;margin-bottom:12px">情绪极值与催化剂定性剖析：</h4>
+      <p style="font-size:0.92rem;color:var(--text-secondary);line-height:1.7;margin-bottom:10px">
+        • <strong>愤怒爆发点（Angry - 3句）</strong>：100% 集中爆发于 19:33 遭封禁瞬间（#166, #167, #170）。主播连用三个愤怒语气词，伴随对助播'抓尺子'解释的激烈抗辩（'我拿尺子跟我这个有什么关系！'），反映出其对平台风控维度的认知盲区。<br>
+        • <strong>快乐兴奋点（Happy - 7句）</strong>：主要分布在小额啤酒礼物致谢（00:59）、卡灯牌铁粉答谢（03:23）、点赞破 666 幸运数字（12:09）、戏称头骨为'粉丝宝宝脑袋'（13:28）以及发出上海线下邀约（15:39）。主播在触犯高危引流与相面时情绪处于愉悦自得的高峰，防范心理全面失守。
+      </p>
+    </div>
+  </section>
+
+  <!-- 6. High-Risk Phrasing Replacements -->
+  <section id="section-replacements" class="section-block">
+    <div class="section-header">
+      <h2 class="section-title"><span>🛡️ 高危话术合规替代示范库 (Compliant Script Library)</span></h2>
+      <p class="section-desc">针对本场爆发的 6 大高危违规时刻，提供直接可落地的合规口播脚本与助播配合卡片。</p>
+    </div>
+
+    <div class="replace-grid">
+
+      <div class="replace-card">
+        <div class="replace-header">
+          <div class="replace-title">
+            <span class="suspect-badge badge-sus">SUS-01</span>
+            <span>PEEK 种草、报价与无副作用虚假医疗承诺</span>
+          </div>
+          <span style="font-size:0.8rem;color:var(--text-muted);font-family:var(--font-mono)">触发时间：03:18 ~ 05:32</span>
+        </div>
+        <div class="replace-cols">
+          <div class="replace-raw">
+            <div class="col-tag danger">❌ 现场危险原话实录</div>
+            <div class="col-text">"[04:33] 第一次的话数学老师这里差不多是四个左右... [04:46] 凹的话上PEEK，轻微调一下没有任何副作用挺好的，有副作用都不会上网"</div>
+            <div style="font-size:0.75rem;color:var(--accent-danger);margin-top:8px">⚠️ <strong>致命原因</strong>：触犯《医疗美容广告执法指南》关于严禁医疗功效绝对化承诺（零风险、无副作用）的底线，并在公开直播中非资质直接报价，被 ASR 关键词规则库即时拦截。</div>
+          </div>
+          <div class="replace-compliant">
+            <div class="col-tag safe">✅ 标准合规口播替代话术</div>
+            <div class="col-text">“任何外科植入材料都具备严格的医学适应证与潜在排异、感染等客观临床风险，世界上不存在所谓‘零副作用’的万能材料！具体骨骼形态评估必须在具备三级整形外科资质的正规医疗机构，结合高精度三维 CT 影像由执业医师当面面诊诊断。我们在直播间仅探讨通用的骨骼几何解剖比例，不售卖任何材料，也不提供个案商业报价。”</div>
+            <div class="assistant-hint">
+              <span>📋 <strong>助播协同动作</strong>：助播立即向公屏弹窗推送《常见面部骨相植入材料合规特性与适应证自测对照表》，切勿在公屏跟进讨论价格。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="replace-card">
+        <div class="replace-header">
+          <div class="replace-title">
+            <span class="suspect-badge badge-sus">SUS-02</span>
+            <span>私域引流明牌与公然对抗平台审查机制</span>
+          </div>
+          <span style="font-size:0.8rem;color:var(--text-muted);font-family:var(--font-mono)">触发时间：06:19 ~ 06:48, 11:09</span>
+        </div>
+        <div class="replace-cols">
+          <div class="replace-raw">
+            <div class="col-tag danger">❌ 现场危险原话实录</div>
+            <div class="col-text">"[06:19] 你们可以点头像主页，后面问我，可以回答的详细一点，播间很多东西他输不了...我要是能说直播间不至于这么点人...不让说"</div>
+            <div style="font-size:0.75rem;color:var(--accent-danger);margin-top:8px">⚠️ <strong>致命原因</strong>：主播连发私信引导指令，更公然在全屏将平台风控作为对立面吐槽宣泄（&#x27;不让说/输不了&#x27;），直接击穿平台商业反切流系统与社区管理容忍底线。</div>
+          </div>
+          <div class="replace-compliant">
+            <div class="col-tag safe">✅ 标准合规口播替代话术</div>
+            <div class="col-text">“为了营造健康规范的讨论氛围，我们严格遵守平台社区公约，直播间只做通用的面部折叠度美学理论拆解。如果大家想要对照自己的面相做基础的自测与评估，可以直接查看主页置顶视频《面部骨相折叠度自测手册》，根据标准指引在自然光线下自行对照！”</div>
+            <div class="assistant-hint">
+              <span>📋 <strong>助播协同动作</strong>：严禁在评论区引导加私信或回复联系方式，由助播合规引导关注主播官方账号及点亮粉丝灯牌。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="replace-card">
+        <div class="replace-header">
+          <div class="replace-title">
+            <span class="suspect-badge badge-sus">SUS-03</span>
+            <span>针对个体观众面部松弛与体脂的非法线上诊断</span>
+          </div>
+          <span style="font-size:0.8rem;color:var(--text-muted);font-family:var(--font-mono)">触发时间：05:48 ~ 06:01, 08:16</span>
+        </div>
+        <div class="replace-cols">
+          <div class="replace-raw">
+            <div class="col-tag danger">❌ 现场危险原话实录</div>
+            <div class="col-text">"[05:48] 胖子很正常啊你这个以前肥胖问题导致的就是瘦下来很快面部松弛...你减太快了... [08:16] 你胖了你的皮肤就厚，反正胖了就丑"</div>
+            <div style="font-size:0.75rem;color:var(--accent-danger);margin-top:8px">⚠️ <strong>致命原因</strong>：脱离普适性美学理论，对公屏特定提问观众进行明确的病因定性（&#x27;你以前肥胖导致面部松弛&#x27;）与生活方式开方，触碰《互联网诊疗监管细则》关于无资质线上看病的红线。</div>
+          </div>
+          <div class="replace-compliant">
+            <div class="col-tag safe">✅ 标准合规口播替代话术</div>
+            <div class="col-text">“弹幕有朋友问到快速减重后的皮肤状态——从皮肉力学机理来看，当皮下脂肪容量在短期内急剧缩减，浅筋膜 SMAS 层的回弹张力往往滞后，从而在视觉上产生暂时的松弛现象。这是一个普遍的生理动力学规律，但每个人的真皮厚度与胶原储备差异巨大，不能一概而论，具体情况请咨询正规医院皮肤科或运动营养医师。”</div>
+            <div class="assistant-hint">
+              <span>📋 <strong>助播协同动作</strong>：助播在提问筛选板过滤具体个案自报病情的弹幕，只呈递共性理论问题供主播剖析。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="replace-card">
+        <div class="replace-header">
+          <div class="replace-title">
+            <span class="suspect-badge badge-sus">SUS-04</span>
+            <span>粉丝头骨标本陈列与相面神断言论</span>
+          </div>
+          <span style="font-size:0.8rem;color:var(--text-muted);font-family:var(--font-mono)">触发时间：12:57 ~ 14:49</span>
+        </div>
+        <div class="replace-cols">
+          <div class="replace-raw">
+            <div class="col-tag danger">❌ 现场危险原话实录</div>
+            <div class="col-text">"[13:25] 这后面全都是我的粉丝宝宝们的脑袋... [13:43] 只要你们在数学老师面前我就能知道你们的头骨长得什么样，都是你们的数据"</div>
+            <div style="font-size:0.75rem;color:var(--accent-danger);margin-top:8px">⚠️ <strong>致命原因</strong>：密集展示骨骼标本引发受众生理不适；宣称&#x27;只要在面前就能知道头骨长啥样&#x27;涉嫌封建迷信/相面算命式的非科学医疗诱导；宣称&#x27;都是你们的数据&#x27;涉嫌医疗隐私合规隐患。</div>
+          </div>
+          <div class="replace-compliant">
+            <div class="col-tag safe">✅ 标准合规口播替代话术</div>
+            <div class="col-text">“背景陈列的是医用解剖学比例教学模具，仅用于向大家立体展示三庭五眼及颅面骨骼的几何投影规律。人类颅颌面形态非常复杂，必须依靠医学三维螺旋 CT 扫描与专业头影测量系统进行毫米级量化测算，绝不可能单凭肉眼相面而定。希望大家树立严谨的循证科学观念。”</div>
+            <div class="assistant-hint">
+              <span>📋 <strong>助播协同动作</strong>：撤除背景中散落的 3D 打印头骨及零散模型，替换为合规的标准化五官审美比例几何图板或素雅布景。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="replace-card">
+        <div class="replace-header">
+          <div class="replace-title">
+            <span class="suspect-badge badge-sus">SUS-05</span>
+            <span>线下上海面诊邀约与无资质非法揽客</span>
+          </div>
+          <span style="font-size:0.8rem;color:var(--text-muted);font-family:var(--font-mono)">触发时间：15:39</span>
+        </div>
+        <div class="replace-cols">
+          <div class="replace-raw">
+            <div class="col-tag danger">❌ 现场危险原话实录</div>
+            <div class="col-text">"[15:39] 能不能来能不能可以啊在上海在上海随时欢迎你们啊来找数学老师玩来讨论讨论这个颜值方面的问题都是可以的"</div>
+            <div style="font-size:0.75rem;color:var(--accent-danger);margin-top:8px">⚠️ <strong>致命原因</strong>：明确地理位置并直接邀约全网粉丝线下会面讨论颜值与方案，被平台多模态风控系统直接定性为&#x27;非法医疗美容线下引流拉客&#x27;，进入 S 级待查封队列。</div>
+          </div>
+          <div class="replace-compliant">
+            <div class="col-tag safe">✅ 标准合规口播替代话术</div>
+            <div class="col-text">“非常感谢大家对美学理论的关注！但需要郑重声明：任何医疗美容相关的咨询设计均属于严肃的医疗行为，法律规定必须在取得《医疗机构执业许可证》的合法医疗场所进行。本直播间仅限线上大众审美理论交流，不接受任何线下个案预约或私人会面，请大家务必选择合规三甲医疗机构面诊。”</div>
+            <div class="assistant-hint">
+              <span>📋 <strong>助播协同动作</strong>：助播立即口播标准免责声明，并将公屏置顶设为《大众美学通识与合规声明》卡片。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="replace-card">
+        <div class="replace-header">
+          <div class="replace-title">
+            <span class="suspect-badge badge-sus">CAT-02</span>
+            <span>软尺贴脸量面——视觉 CV 触发医疗操作绝杀</span>
+          </div>
+          <span style="font-size:0.8rem;color:var(--text-muted);font-family:var(--font-mono)">触发时间：16:18 ~ 19:26</span>
+        </div>
+        <div class="replace-cols">
+          <div class="replace-raw">
+            <div class="col-tag danger">❌ 现场危险原话实录</div>
+            <div class="col-text">"[16:18] 我给你拿尺子... [18:47] 那你把你个卷尺给我... [19:17] 看好了啊这个尺子，哎呀这个是软尺，不好给你们看... (19:33 被掐断)"</div>
+            <div style="font-size:0.75rem;color:var(--accent-danger);margin-top:8px">⚠️ <strong>致命原因</strong>：计算机视觉（CV）模型深度训练了&#x27;手持软尺/卷尺测量脸部器官间距&#x27;的动作特征，直接匹配&#x27;非法医美面诊及整形手术设计实操&#x27;的 S 级绝杀策略，无需二次警告直接掐断直播流。</div>
+          </div>
+          <div class="replace-compliant">
+            <div class="col-tag safe">✅ 标准合规口播替代话术</div>
+            <div class="col-text">【动作绝对红线】：严禁在直播镜头前拿出任何软尺、卷尺、皮尺或标尺贴近脸部！
+“关于脸宽比例，大家可以在手机相机正常 50mm 焦距平视角度下拍摄一张标准正面照，以两侧颧弓外缘最宽点为基线，对比下颌角间距与全脸高。标准直面型轮廓的纵横比通常在 1:1.3~1.4。大家对照我们课件上的比例图解即可自行测算！”</div>
+            <div class="assistant-hint">
+              <span>📋 <strong>助播协同动作</strong>：严禁在直播台面放置软尺、记号笔或游标卡尺！助播若见主播起意找尺，必须立即肉身递上《标准面部黄金比例参考图卡》隔绝器械操作动作。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 7. Prevention Checklist -->
+  <section id="section-checklist" class="section-block">
+    <div class="section-header">
+      <h2 class="section-title"><span>📋 李书远直播防封禁全景避坑清单 (Operational Checklist)</span></h2>
+      <p class="section-desc">覆盖开播前物料、播中主播口播、助播紧急阻断及平台推流工具使用 4 大防线的 16 条落地铁律。</p>
+    </div>
+
+    <div class="checklist-section">
+
+      <div class="check-phase-card">
+        <div class="phase-title">
+          <span>🚪</span>
+          <span>开播前·物料与场景死线排查 (Pre-Stream Audit)</span>
+        </div>
+        <div class="check-list">
+          
+            <div class="check-item">
+              <input type="checkbox" class="check-box" onclick="saveCheckState()">
+              <div>
+                <strong style="color:#fff">环境道具红线</strong>：背景及桌面绝对禁止出现人体骨骼/头骨模型、假体填充原材料、药剂安瓿瓶、注射器针头等一切医疗器械及生理解剖标本。
+              </div>
+            </div>
+
+            <div class="check-item">
+              <input type="checkbox" class="check-box" onclick="saveCheckState()">
+              <div>
+                <strong style="color:#fff">度量工具红线</strong>：直播间周围彻底清理软尺、卷尺、皮尺、医用画线笔、游标卡尺等工具，防止主播口语起兴翻找拿取。
+              </div>
+            </div>
+
+            <div class="check-item">
+              <input type="checkbox" class="check-box" onclick="saveCheckState()">
+              <div>
+                <strong style="color:#fff">视觉导流屏蔽</strong>：直播画面视线所及处，严禁出现任何微信号、二维码、私人手机号、个人铭牌或未备案机构招牌。
+              </div>
+            </div>
+
+            <div class="check-item">
+              <input type="checkbox" class="check-box" onclick="saveCheckState()">
+              <div>
+                <strong style="color:#fff">镜头与美颜预设</strong>：调节合理灯光色温，禁止将磨皮美白拉满导致面部边缘过曝模糊，防止被风控系统判定为使用非法人偶或低质推流。
+              </div>
+            </div>
+
+        </div>
+      </div>
+
+      <div class="check-phase-card">
+        <div class="phase-title">
+          <span>🎙️</span>
+          <span>播中·主播口播高压红线 (In-Stream Redlines)</span>
+        </div>
+        <div class="check-list">
+          
+            <div class="check-item">
+              <input type="checkbox" class="check-box" onclick="saveCheckState()">
+              <div>
+                <strong style="color:#fff">商业报价绝对禁止</strong>：严禁口播任何医疗材料或手术的直接/隐晦报价（如'四个左右'、'两三个'），一律以'以正规三甲医院挂牌价为准'替代。
+              </div>
+            </div>
+
+            <div class="check-item">
+              <input type="checkbox" class="check-box" onclick="saveCheckState()">
+              <div>
+                <strong style="color:#fff">疗效承诺绝对禁止</strong>：严禁出现'无副作用'、'零风险'、'永久维持'、'100%成功'等绝对化词汇，凡谈及材料必须主动附带适应证与并发症声明。
+              </div>
+            </div>
+
+            <div class="check-item">
+              <input type="checkbox" class="check-box" onclick="saveCheckState()">
+              <div>
+                <strong style="color:#fff">拒绝个体病因诊断</strong>：公屏提问'我脸胖/我下颌方怎么办'，必须泛化为群体解剖规律讲解，严禁使用'你这个是因为减太快/你胖所以皮肤厚'等针对性诊断。
+              </div>
+            </div>
+
+            <div class="check-item">
+              <input type="checkbox" class="check-box" onclick="saveCheckState()">
+              <div>
+                <strong style="color:#fff">严防私域反审言论</strong>：严禁口播'点头像主页后面问我'、'直播间不让说'，严禁将平台安全规则作为吐槽对立面煽动观众逆反情绪。
+              </div>
+            </div>
+
+            <div class="check-item">
+              <input type="checkbox" class="check-box" onclick="saveCheckState()">
+              <div>
+                <strong style="color:#fff">绝不下达线下邀约</strong>：严禁口播'欢迎来上海/来线下找我玩'等任何形式的非正规线下会面邀约，杜绝黑医美非法引流定性。
+              </div>
+            </div>
+
+        </div>
+      </div>
+
+      <div class="check-phase-card">
+        <div class="phase-title">
+          <span>🛡️</span>
+          <span>助播防线·紧急刹车与交接 SOP (Co-Host Safety Net)</span>
+        </div>
+        <div class="check-list">
+          
+            <div class="check-item">
+              <input type="checkbox" class="check-box" onclick="saveCheckState()">
+              <div>
+                <strong style="color:#fff">双屏合规实时监控</strong>：助播必须配备专屏监控抖音直播伴侣风控告警窗及敏感词提示，一旦出现黄标或提示音，立即做出战术手势。
+              </div>
+            </div>
+
+            <div class="check-item">
+              <input type="checkbox" class="check-box" onclick="saveCheckState()">
+              <div>
+                <strong style="color:#fff">合规话术打断阻断</strong>：当主播口风滑向私聊或个案问诊时，助播必须在 3 秒内主动开麦插话：'对，关于骨相自测的具体图解，大家直接看主页置顶视频！'强行切断滑轨。
+              </div>
+            </div>
+
+            <div class="check-item">
+              <input type="checkbox" class="check-box" onclick="saveCheckState()">
+              <div>
+                <strong style="color:#fff">尾盘闭麦交接机制</strong>：下播前 5 分钟属于主播情绪易松懈亢奋期，实行强制分工：主播闭麦仅做招手感谢，所有收尾导流由助播按标准卡片口播。
+              </div>
+            </div>
+
+        </div>
+      </div>
+
+      <div class="check-phase-card">
+        <div class="phase-title">
+          <span>⚡</span>
+          <span>平台功能与推流工具使用规范 (Platform Tools Policy)</span>
+        </div>
+        <div class="check-list">
+          
+            <div class="check-item">
+              <input type="checkbox" class="check-box" onclick="saveCheckState()">
+              <div>
+                <strong style="color:#fff">加热卡/流量券高危期</strong>：加热卡生效通常伴随系统高优先级实时审查队列与人工抽检介入，使用后 20 分钟内一律只讲通识美学，严禁碰触医美与材料。
+              </div>
+            </div>
+
+            <div class="check-item">
+              <input type="checkbox" class="check-box" onclick="saveCheckState()">
+              <div>
+                <strong style="color:#fff">禁止公开谈论推流机制</strong>：严禁在直播间口播讨论'平台送我加热卡'、'用了加热卡会被审核'、'为什么不给我推流'等涉嫌窥探与规避平台风控算法的话题。
+              </div>
+            </div>
+
+            <div class="check-item">
+              <input type="checkbox" class="check-box" onclick="saveCheckState()">
+              <div>
+                <strong style="color:#fff">违规申诉留存规范</strong>：一旦出现突发切断，立即按照预设录音流程保存本地音视频底稿，凭教学通识属性与自测卡片进行合规申诉。
+              </div>
+            </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 8. Verbatim Stream (All 173 Sentences) -->
+  <section id="section-stream" class="section-block">
+    <div class="section-header">
+      <h2 class="section-title"><span>💬 全场 173 句逐句溯源流 (Verbatim Stream)</span></h2>
+      <p class="section-desc">包含每一句的时间戳、说话人、清洗后口播文本、板块与类型分类，并标注高危违规嫌疑标签。</p>
+    </div>
+
+    <div class="stream-filters-bar">
+      <span style="font-size:0.8rem;color:var(--text-muted);margin-right:6px">板块筛选：</span>
+      <button class="pill-btn active" onclick="filterBoard('ALL', this)">全部 (173)</button>
+      <button class="pill-btn" onclick="filterBoard('L2 头/发型层', this)">L2 头/发型 (29)</button>
+      <button class="pill-btn" onclick="filterBoard('面诊高危', this)">面诊高危 (12)</button>
+      <button class="pill-btn" onclick="filterBoard('封禁相关', this)">封禁相关 (13)</button>
+      <button class="pill-btn" onclick="filterBoard('转化/商业', this)">转化商业 (7)</button>
+      <button class="pill-btn" onclick="filterBoard('L3a 眉眼板块', this)">L3a 眉眼 (11)</button>
+      <button class="pill-btn" onclick="filterBoard('L3g 材料/PEEK 板块', this)">L3g PEEK (8)</button>
+      <button class="pill-btn" onclick="filterBoard('真闲聊/杂务', this)">真闲聊/杂务 (51)</button>
+      <span style="margin-left:auto;font-size:0.8rem;color:var(--text-muted)">当前匹配：<strong id="match-count" style="color:var(--accent-cyan)">173</strong> 句</span>
+    </div>
+
+    <div style="border:1px solid var(--border-subtle);border-radius:10px;overflow:hidden">
+      <table class="stream-table">
+        <thead>
+          <tr>
+            <th style="width:60px">#</th>
+            <th style="width:75px">时间</th>
+            <th style="width:70px">说话人</th>
+            <th>口播内容 (清洗后 / ASR 原文)</th>
+            <th style="width:140px">板块归属</th>
+            <th style="width:130px">内容类型</th>
+            <th style="width:70px">情绪</th>
+          </tr>
+        </thead>
+        <tbody id="stream-tbody">
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="好上嗯 好上嗯">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">000</td>
+            <td class="col-time">00:06</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>好上嗯</strong>
+              <div class="raw-subtext">原文: 好上嗯</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">碎片/附和</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="在上海啊在上海 在上海啊在上海">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">001</td>
+            <td class="col-time">00:22</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>在上海啊在上海</strong>
+              <div class="raw-subtext">原文: 在上海啊在上海</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">互动应答/过渡</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="马上了是吧 马上了是吧">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">002</td>
+            <td class="col-time">00:33</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>马上了是吧</strong>
+              <div class="raw-subtext">原文: 马上了是吧</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">互动应答/过渡</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="连不上呀 连不上呀">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">003</td>
+            <td class="col-time">00:53</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>连不上呀</strong>
+              <div class="raw-subtext">原文: 连不上呀</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="互动钩子/运营" data-text="你插错了吗感谢送的啤酒啊谢谢谢谢😊 你插错了吗感谢送的啤酒啊谢谢谢谢😊">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">004</td>
+            <td class="col-time">00:59</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>你插错了吗感谢送的啤酒啊谢谢谢谢😊</strong>
+              <div class="raw-subtext">原文: 你插错了吗感谢送的啤酒啊谢谢谢谢😊</div>
+            </td>
+            <td><span class="badge-tag badge-board">互动钩子/运营</span></td>
+            <td><span class="badge-tag badge-type">互动钩子</span></td>
+            <td style="font-size:0.75rem">🎉 兴奋</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="帮个忙 帮个忙">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">005</td>
+            <td class="col-time">01:09</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>帮个忙</strong>
+              <div class="raw-subtext">原文: 帮个忙</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="不是这个音响啊那边那底下那个你看线啊 不是这个音响啊那边那底下那个你看线啊">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">006</td>
+            <td class="col-time">01:11</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>不是这个音响啊那边那底下那个你看线啊</strong>
+              <div class="raw-subtext">原文: 不是这个音响啊那边那底下那个你看线啊</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="把你把这个灯拔了这个灯是哪根线 把你把这个灯拔了这个灯是哪根线">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">007</td>
+            <td class="col-time">01:18</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>把你把这个灯拔了这个灯是哪根线</strong>
+              <div class="raw-subtext">原文: 把你把这个灯拔了这个灯是哪根线</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="这是哪根线拔了能插到上面去吗 这是哪根线拔了能插到上面去吗">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">008</td>
+            <td class="col-time">01:24</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>这是哪根线拔了能插到上面去吗</strong>
+              <div class="raw-subtext">原文: 这是哪根线拔了能插到上面去吗</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="嗯哦拔了那那那我我移到这里我照在后边 嗯哦拔了那那那我我移到这里我照在后边">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">009</td>
+            <td class="col-time">01:31</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>嗯哦拔了那那那我我移到这里我照在后边</strong>
+              <div class="raw-subtext">原文: 嗯哦拔了那那那我我移到这里我照在后边</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="要插上 要插上">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">010</td>
+            <td class="col-time">01:39</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>要插上</strong>
+              <div class="raw-subtext">原文: 要插上</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="方法论总纲" data-text="微调微调这个东西你都四分了你还微什么调啊你直接开干吧别微调了你要调什么 微调微调这个东西你都四分了你还微什么调啊你直接开干吧别微调了你要调什么">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">011</td>
+            <td class="col-time">02:07</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>微调微调这个东西你都四分了你还微什么调啊你直接开干吧别微调了你要调什么</strong>
+              <div class="raw-subtext">原文: 微调微调这个东西你都四分了你还微什么调啊你直接开干吧别微调了你要调什么</div>
+            </td>
+            <td><span class="badge-tag badge-board">方法论总纲</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="方法论总纲" data-text="直接动手啊 直接动手啊">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">012</td>
+            <td class="col-time">02:23</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>直接动手啊</strong>
+              <div class="raw-subtext">原文: 直接动手啊</div>
+            </td>
+            <td><span class="badge-tag badge-board">方法论总纲</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="接触不良啊没撒紧吗 接触不良啊没撒紧吗">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">013</td>
+            <td class="col-time">02:36</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>接触不良啊没撒紧吗</strong>
+              <div class="raw-subtext">原文: 接触不良啊没撒紧吗</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="啥情况好了好了好了 啥情况好了好了好了">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">014</td>
+            <td class="col-time">02:40</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>啥情况好了好了好了</strong>
+              <div class="raw-subtext">原文: 啥情况好了好了好了</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="十八就可以了不用十九 十八就可以了不用十九">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">015</td>
+            <td class="col-time">02:51</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>十八就可以了不用十九</strong>
+              <div class="raw-subtext">原文: 十八就可以了不用十九</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="方法论总纲" data-text="慢慢来一步一步来没有什么是一口就能吃成胖子 慢慢来一步一步来没有什么是一口就能吃成胖子">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">016</td>
+            <td class="col-time">03:05</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>慢慢来一步一步来没有什么是一口就能吃成胖子</strong>
+              <div class="raw-subtext">原文: 慢慢来一步一步来没有什么是一口就能吃成胖子</div>
+            </td>
+            <td><span class="badge-tag badge-board">方法论总纲</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="L3g 材料/PEEK 板块" data-text="peek t一 k t e k">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">017</td>
+            <td class="col-time">03:18</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-01 PEEK报价/零副作用]</span> <strong>PEEK</strong>
+              <div class="raw-subtext">原文: t一 k t e k</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3g 材料/PEEK 板块</span></td>
+            <td><span class="badge-tag badge-type">PEEK 种草</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="互动钩子/运营" data-text="感谢卡的粉丝团灯牌 感谢卡的粉丝团灯牌">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">018</td>
+            <td class="col-time">03:23</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-01 PEEK报价/零副作用]</span> <strong>感谢卡的粉丝团灯牌</strong>
+              <div class="raw-subtext">原文: 感谢卡的粉丝团灯牌</div>
+            </td>
+            <td><span class="badge-tag badge-board">互动钩子/运营</span></td>
+            <td><span class="badge-tag badge-type">互动钩子</span></td>
+            <td style="font-size:0.75rem">🎉 兴奋</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="L3g 材料/PEEK 板块" data-text="上 peek 上 p e k">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">019</td>
+            <td class="col-time">03:33</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-01 PEEK报价/零副作用]</span> <strong>上 PEEK</strong>
+              <div class="raw-subtext">原文: 上 p e k</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3g 材料/PEEK 板块</span></td>
+            <td><span class="badge-tag badge-type">PEEK 种草</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="L3c 下颌/轮廓板块" data-text="看侧面能看到吗 看侧面能看到吗">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">020</td>
+            <td class="col-time">03:37</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-01 PEEK报价/零副作用]</span> <strong>看侧面能看到吗</strong>
+              <div class="raw-subtext">原文: 看侧面能看到吗</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3c 下颌/轮廓板块</span></td>
+            <td><span class="badge-tag badge-type">互动应答/过渡</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="真闲聊/杂务" data-text="[asr杂音] い">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">021</td>
+            <td class="col-time">03:45</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-01 PEEK报价/零副作用]</span> <strong>[ASR杂音]</strong>
+              <div class="raw-subtext">原文: い</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">碎片/附和</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="L3g 材料/PEEK 板块" data-text="主播还没上全套在想想上全套想上 主播还没上全套在想想上全套想上">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">022</td>
+            <td class="col-time">03:53</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-01 PEEK报价/零副作用]</span> <strong>主播还没上全套在想想上全套想上</strong>
+              <div class="raw-subtext">原文: 主播还没上全套在想想上全套想上</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3g 材料/PEEK 板块</span></td>
+            <td><span class="badge-tag badge-type">医美知识/科普</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="L3c 下颌/轮廓板块" data-text="🎼拐点太低怎么办拐点太低有拐点低的好看不是说拐点低他就丑明白吗那你看那些欧美人的那拐点那么低人家不不妨止不妨碍人家帅呀是不是 🎼拐点太低怎么办拐点太低有拐点低的好看不是说拐点低他就丑明白吗那你看那些欧美人的那拐点那么低人家不不妨止不妨碍人家帅呀是不是">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">023</td>
+            <td class="col-time">04:15</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-01 PEEK报价/零副作用]</span> <strong>🎼拐点太低怎么办拐点太低有拐点低的好看不是说拐点低他就丑明白吗那你看那些欧美人的那拐点那么低人家不不妨止不妨碍人家帅呀是不是</strong>
+              <div class="raw-subtext">原文: 🎼拐点太低怎么办拐点太低有拐点低的好看不是说拐点低他就丑明白吗那你看那些欧美人的那拐点那么低人家不不妨止不妨碍人家帅呀是不是</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3c 下颌/轮廓板块</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="转化/商业" data-text="第一次的话其他地方我不知道【书远老师】这里差不多是四个左右 第一次的话其他地方我不知道数学老师这里差不多是四个左右">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">024</td>
+            <td class="col-time">04:33</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-01 PEEK报价/零副作用]</span> <strong>第一次的话其他地方我不知道【书远老师】这里差不多是四个左右</strong>
+              <div class="raw-subtext">原文: 第一次的话其他地方我不知道数学老师这里差不多是四个左右</div>
+            </td>
+            <td><span class="badge-tag badge-board">转化/商业</span></td>
+            <td><span class="badge-tag badge-type">转化/商业</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="L3g 材料/PEEK 板块" data-text="🎼凹的话上 peek 啊如果有一点点的话轻微的话微微调整一下就好了没有什么副作用挺好的 🎼凹的话上 p e k 啊如果有一点点的话轻微的话微微调整一下就好了没有什么副作用挺好的">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">025</td>
+            <td class="col-time">04:46</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-01 PEEK报价/零副作用]</span> <strong>🎼凹的话上 PEEK 啊如果有一点点的话轻微的话微微调整一下就好了没有什么副作用挺好的</strong>
+              <div class="raw-subtext">原文: 🎼凹的话上 p e k 啊如果有一点点的话轻微的话微微调整一下就好了没有什么副作用挺好的</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3g 材料/PEEK 板块</span></td>
+            <td><span class="badge-tag badge-type">医美知识/科普</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="L3g 材料/PEEK 板块" data-text="呃有副作用的【书远老师】都不会上网 呃有副作用的数学老师都不会上网">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">026</td>
+            <td class="col-time">04:55</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-01 PEEK报价/零副作用]</span> <strong>呃有副作用的【书远老师】都不会上网</strong>
+              <div class="raw-subtext">原文: 呃有副作用的数学老师都不会上网</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3g 材料/PEEK 板块</span></td>
+            <td><span class="badge-tag badge-type">医美知识/科普</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="互动钩子/运营" data-text="房间外面大几十个人进来看呢可以啊完全可以 房间外面大几十个人进来看呢可以啊完全可以">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">027</td>
+            <td class="col-time">05:03</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-01 PEEK报价/零副作用]</span> <strong>房间外面大几十个人进来看呢可以啊完全可以</strong>
+              <div class="raw-subtext">原文: 房间外面大几十个人进来看呢可以啊完全可以</div>
+            </td>
+            <td><span class="badge-tag badge-board">互动钩子/运营</span></td>
+            <td><span class="badge-tag badge-type">互动应答/过渡</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="L3g 材料/PEEK 板块" data-text="同款的同款 同款的同款">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">028</td>
+            <td class="col-time">05:09</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-01 PEEK报价/零副作用]</span> <strong>同款的同款</strong>
+              <div class="raw-subtext">原文: 同款的同款</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3g 材料/PEEK 板块</span></td>
+            <td><span class="badge-tag badge-type">医美知识/科普</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="方法论总纲" data-text="但是话说回来我这一款的同款你们不太适合啊这需要你五官比例要好整体要协调就是驾驭的话不太好驾驭有点太夸张了 但是话说回来我这一款的同款你们不太适合啊这需要你五官比例要好整体要协调就是驾驭的话不太好驾驭有点太夸张了">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">029</td>
+            <td class="col-time">05:14</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-01 PEEK报价/零副作用]</span> <strong>但是话说回来我这一款的同款你们不太适合啊这需要你五官比例要好整体要协调就是驾驭的话不太好驾驭有点太夸张了</strong>
+              <div class="raw-subtext">原文: 但是话说回来我这一款的同款你们不太适合啊这需要你五官比例要好整体要协调就是驾驭的话不太好驾驭有点太夸张了</div>
+            </td>
+            <td><span class="badge-tag badge-board">方法论总纲</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="L3g 材料/PEEK 板块" data-text="没有异物没有 没有异务没有">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">030</td>
+            <td class="col-time">05:32</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-01 PEEK报价/零副作用]</span> <strong>没有异物没有</strong>
+              <div class="raw-subtext">原文: 没有异务没有</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3g 材料/PEEK 板块</span></td>
+            <td><span class="badge-tag badge-type">医美知识/科普</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="面诊高危" data-text="胖子很正常啊你这个以前肥胖问题导致的就是瘦下来很快有些人他面部松弛你不仅是面部生松弛你的身上也会松弛 胖子很正常啊你这个以前肥胖问题导致的就是瘦下来很快有些人他面部松弛你不仅是面部生松弛你的身上也会松弛">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">031</td>
+            <td class="col-time">05:48</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-03 个案松弛/病因诊断]</span> <strong>胖子很正常啊你这个以前肥胖问题导致的就是瘦下来很快有些人他面部松弛你不仅是面部生松弛你的身上也会松弛</strong>
+              <div class="raw-subtext">原文: 胖子很正常啊你这个以前肥胖问题导致的就是瘦下来很快有些人他面部松弛你不仅是面部生松弛你的身上也会松弛</div>
+            </td>
+            <td><span class="badge-tag badge-board">面诊高危</span></td>
+            <td><span class="badge-tag badge-type">面诊高危</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="方法论总纲" data-text="明白吗 明白吗">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">032</td>
+            <td class="col-time">06:00</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>明白吗</strong>
+              <div class="raw-subtext">原文: 明白吗</div>
+            </td>
+            <td><span class="badge-tag badge-board">方法论总纲</span></td>
+            <td><span class="badge-tag badge-type">互动应答/过渡</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="面诊高危" data-text="这个东西就是你减太快了你多去健健身 这个东西就是你减太快了你多去健健身">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">033</td>
+            <td class="col-time">06:01</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-03 个案松弛/病因诊断]</span> <strong>这个东西就是你减太快了你多去健健身</strong>
+              <div class="raw-subtext">原文: 这个东西就是你减太快了你多去健健身</div>
+            </td>
+            <td><span class="badge-tag badge-board">面诊高危</span></td>
+            <td><span class="badge-tag badge-type">面诊高危</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L1 身材层" data-text="啊多健健身体 啊多健健身体">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">034</td>
+            <td class="col-time">06:04</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>啊多健健身体</strong>
+              <div class="raw-subtext">原文: 啊多健健身体</div>
+            </td>
+            <td><span class="badge-tag badge-board">L1 身材层</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="转化/商业" data-text="你们可以点头像主页 你们可以点头像主页">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">035</td>
+            <td class="col-time">06:19</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-02 私域切流/对抗审查]</span> <strong>你们可以点头像主页</strong>
+              <div class="raw-subtext">原文: 你们可以点头像主页</div>
+            </td>
+            <td><span class="badge-tag badge-board">转化/商业</span></td>
+            <td><span class="badge-tag badge-type">转化/商业</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="转化/商业" data-text="后面问我 后面问我">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">036</td>
+            <td class="col-time">06:22</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-02 私域切流/对抗审查]</span> <strong>后面问我</strong>
+              <div class="raw-subtext">原文: 后面问我</div>
+            </td>
+            <td><span class="badge-tag badge-board">转化/商业</span></td>
+            <td><span class="badge-tag badge-type">转化/商业</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="转化/商业" data-text="可以回答的详细一点 可以回答的详细一点">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">037</td>
+            <td class="col-time">06:24</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-02 私域切流/对抗审查]</span> <strong>可以回答的详细一点</strong>
+              <div class="raw-subtext">原文: 可以回答的详细一点</div>
+            </td>
+            <td><span class="badge-tag badge-board">转化/商业</span></td>
+            <td><span class="badge-tag badge-type">转化/商业</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="封禁相关" data-text="直播间很多东西他说不了 播间很多东西他输不了">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">038</td>
+            <td class="col-time">06:26</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-02 私域切流/对抗审查]</span> <strong>直播间很多东西他说不了</strong>
+              <div class="raw-subtext">原文: 播间很多东西他输不了</div>
+            </td>
+            <td><span class="badge-tag badge-board">封禁相关</span></td>
+            <td><span class="badge-tag badge-type">风险/合规话术</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="封禁相关" data-text="我也想说 我也想说">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">039</td>
+            <td class="col-time">06:28</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-02 私域切流/对抗审查]</span> <strong>我也想说</strong>
+              <div class="raw-subtext">原文: 我也想说</div>
+            </td>
+            <td><span class="badge-tag badge-board">封禁相关</span></td>
+            <td><span class="badge-tag badge-type">风险/合规话术</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="封禁相关" data-text="我要是能说的话我直直播间也不至于这么点人 我要是能说的话我直播间也不至于这么点人">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">040</td>
+            <td class="col-time">06:30</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-02 私域切流/对抗审查]</span> <strong>我要是能说的话我直直播间也不至于这么点人</strong>
+              <div class="raw-subtext">原文: 我要是能说的话我直播间也不至于这么点人</div>
+            </td>
+            <td><span class="badge-tag badge-board">封禁相关</span></td>
+            <td><span class="badge-tag badge-type">风险/合规话术</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="封禁相关" data-text="直直播间肯定是三位数到四位数是往上的 直播间肯定是三位数到四位数是往上的">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">041</td>
+            <td class="col-time">06:36</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-02 私域切流/对抗审查]</span> <strong>直直播间肯定是三位数到四位数是往上的</strong>
+              <div class="raw-subtext">原文: 直播间肯定是三位数到四位数是往上的</div>
+            </td>
+            <td><span class="badge-tag badge-board">封禁相关</span></td>
+            <td><span class="badge-tag badge-type">风险/合规话术</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="封禁相关" data-text="不让说 不让说">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">042</td>
+            <td class="col-time">06:41</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-02 私域切流/对抗审查]</span> <strong>不让说</strong>
+              <div class="raw-subtext">原文: 不让说</div>
+            </td>
+            <td><span class="badge-tag badge-board">封禁相关</span></td>
+            <td><span class="badge-tag badge-type">风险/合规话术</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="对 对">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">043</td>
+            <td class="col-time">06:48</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>对</strong>
+              <div class="raw-subtext">原文: 对</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">碎片/附和</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="方法论总纲" data-text="核心 核心">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">044</td>
+            <td class="col-time">06:49</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>核心</strong>
+              <div class="raw-subtext">原文: 核心</div>
+            </td>
+            <td><span class="badge-tag badge-board">方法论总纲</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L1 身材层" data-text="你见过哪个胖的人他是好看的 你见过哪个胖的人他是好看的">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">045</td>
+            <td class="col-time">06:58</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>你见过哪个胖的人他是好看的</strong>
+              <div class="raw-subtext">原文: 你见过哪个胖的人他是好看的</div>
+            </td>
+            <td><span class="badge-tag badge-board">L1 身材层</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L1 身材层" data-text="胖的 胖的">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">046</td>
+            <td class="col-time">07:05</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>胖的</strong>
+              <div class="raw-subtext">原文: 胖的</div>
+            </td>
+            <td><span class="badge-tag badge-board">L1 身材层</span></td>
+            <td><span class="badge-tag badge-type">碎片/附和</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L1 身材层" data-text="真的有好看的确实有 真的有好看的确实有">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">047</td>
+            <td class="col-time">07:06</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>真的有好看的确实有</strong>
+              <div class="raw-subtext">原文: 真的有好看的确实有</div>
+            </td>
+            <td><span class="badge-tag badge-board">L1 身材层</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L1 身材层" data-text="那叫可爱 那叫可爱">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">048</td>
+            <td class="col-time">07:08</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>那叫可爱</strong>
+              <div class="raw-subtext">原文: 那叫可爱</div>
+            </td>
+            <td><span class="badge-tag badge-board">L1 身材层</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="晚安晚安晚安早点睡觉 晚安晚安晚安早点睡觉">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">049</td>
+            <td class="col-time">07:26</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>晚安晚安晚安早点睡觉</strong>
+              <div class="raw-subtext">原文: 晚安晚安晚安早点睡觉</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="方法论总纲" data-text="不会有的不会有啊你们 不会有的不会有啊你们">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">050</td>
+            <td class="col-time">07:39</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>不会有的不会有啊你们</strong>
+              <div class="raw-subtext">原文: 不会有的不会有啊你们</div>
+            </td>
+            <td><span class="badge-tag badge-board">方法论总纲</span></td>
+            <td><span class="badge-tag badge-type">互动应答/过渡</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="封禁相关" data-text="你们评论区说的这些问题都不会有 你们评论区说的这些问题都不会有">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">051</td>
+            <td class="col-time">07:41</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>你们评论区说的这些问题都不会有</strong>
+              <div class="raw-subtext">原文: 你们评论区说的这些问题都不会有</div>
+            </td>
+            <td><span class="badge-tag badge-board">封禁相关</span></td>
+            <td><span class="badge-tag badge-type">风险/合规话术</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="[asr静音] ">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">052</td>
+            <td class="col-time">07:46</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>[ASR静音]</strong>
+              <div class="raw-subtext">原文: <空></div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">碎片/附和</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="嗯 嗯">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">053</td>
+            <td class="col-time">07:54</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>嗯</strong>
+              <div class="raw-subtext">原文: 嗯</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">碎片/附和</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L1 身材层" data-text="体脂率会影响效果吗 提取率会影响效果吗">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">054</td>
+            <td class="col-time">08:03</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>体脂率会影响效果吗</strong>
+              <div class="raw-subtext">原文: 提取率会影响效果吗</div>
+            </td>
+            <td><span class="badge-tag badge-board">L1 身材层</span></td>
+            <td><span class="badge-tag badge-type">医美知识/科普</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="方法论总纲" data-text="这个问题我要怎么跟你去说呢 这个问题我要怎么跟你去说呢">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">055</td>
+            <td class="col-time">08:09</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>这个问题我要怎么跟你去说呢</strong>
+              <div class="raw-subtext">原文: 这个问题我要怎么跟你去说呢</div>
+            </td>
+            <td><span class="badge-tag badge-board">方法论总纲</span></td>
+            <td><span class="badge-tag badge-type">互动应答/过渡</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="面诊高危" data-text="你胖了你的皮肤就厚 你胖了你的皮肤就厚">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">056</td>
+            <td class="col-time">08:16</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-03 个案松弛/病因诊断]</span> <strong>你胖了你的皮肤就厚</strong>
+              <div class="raw-subtext">原文: 你胖了你的皮肤就厚</div>
+            </td>
+            <td><span class="badge-tag badge-board">面诊高危</span></td>
+            <td><span class="badge-tag badge-type">面诊高危</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L1 身材层" data-text="反正胖了就丑 反正胖了就丑">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">057</td>
+            <td class="col-time">08:21</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>反正胖了就丑</strong>
+              <div class="raw-subtext">原文: 反正胖了就丑</div>
+            </td>
+            <td><span class="badge-tag badge-board">L1 身材层</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L1 身材层" data-text="🎼主播体脂大概多少我体脂多少啊大概 🎼主播体脂大概多少我体子多少啊大概">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">058</td>
+            <td class="col-time">08:27</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>🎼主播体脂大概多少我体脂多少啊大概</strong>
+              <div class="raw-subtext">原文: 🎼主播体脂大概多少我体子多少啊大概</div>
+            </td>
+            <td><span class="badge-tag badge-board">L1 身材层</span></td>
+            <td><span class="badge-tag badge-type">互动应答/过渡</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L1 身材层" data-text="十四十三十四十三体脂 十四十三十四十三皮质">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">059</td>
+            <td class="col-time">08:33</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>十四十三十四十三体脂</strong>
+              <div class="raw-subtext">原文: 十四十三十四十三皮质</div>
+            </td>
+            <td><span class="badge-tag badge-board">L1 身材层</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L3f 牙/贴面板块" data-text="贴面吗贴面 贴片吗贴片">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">060</td>
+            <td class="col-time">08:44</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>贴面吗贴面</strong>
+              <div class="raw-subtext">原文: 贴片吗贴片</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3f 牙/贴面板块</span></td>
+            <td><span class="badge-tag badge-type">医美知识/科普</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="五月 五月">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">061</td>
+            <td class="col-time">09:04</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>五月</strong>
+              <div class="raw-subtext">原文: 五月</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">碎片/附和</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L3g 材料/PEEK 板块" data-text="没有啊没有天生的没有挣过 没有啊没有天生的没有挣过">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">062</td>
+            <td class="col-time">09:07</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>没有啊没有天生的没有挣过</strong>
+              <div class="raw-subtext">原文: 没有啊没有天生的没有挣过</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3g 材料/PEEK 板块</span></td>
+            <td><span class="badge-tag badge-type">医美知识/科普</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="互动钩子/运营" data-text="🎼有问题我一问打公屏上给点点赞 🎼有问题我一问打公屏上给点点赞">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">063</td>
+            <td class="col-time">09:29</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>🎼有问题我一问打公屏上给点点赞</strong>
+              <div class="raw-subtext">原文: 🎼有问题我一问打公屏上给点点赞</div>
+            </td>
+            <td><span class="badge-tag badge-board">互动钩子/运营</span></td>
+            <td><span class="badge-tag badge-type">互动钩子</span></td>
+            <td style="font-size:0.75rem">🎉 兴奋</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="p k p k p k p k">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">064</td>
+            <td class="col-time">09:49</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>p k p k</strong>
+              <div class="raw-subtext">原文: p k p k</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">碎片/附和</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L3a 眉眼板块" data-text="🎼修的话看自己个人吧我觉得修眉毛眉毛这个东西蛮重要的就你看 🎼修的话看自己个人吧我觉得修眉毛眉毛这个东西蛮重要的就你看">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">065</td>
+            <td class="col-time">09:54</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>🎼修的话看自己个人吧我觉得修眉毛眉毛这个东西蛮重要的就你看</strong>
+              <div class="raw-subtext">原文: 🎼修的话看自己个人吧我觉得修眉毛眉毛这个东西蛮重要的就你看</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3a 眉眼板块</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L3a 眉眼板块" data-text="你看主播现在是很协调感觉 你看主播现在是很协调感觉">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">066</td>
+            <td class="col-time">10:00</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>你看主播现在是很协调感觉</strong>
+              <div class="raw-subtext">原文: 你看主播现在是很协调感觉</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3a 眉眼板块</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L3a 眉眼板块" data-text="整体都很 o 整体都很 o">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">067</td>
+            <td class="col-time">10:03</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>整体都很 o</strong>
+              <div class="raw-subtext">原文: 整体都很 o</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3a 眉眼板块</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L3a 眉眼板块" data-text="但是只要主播挡掉一个东西它就会变丑 但是只要主播挡掉一个东西它就会变丑">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">068</td>
+            <td class="col-time">10:04</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>但是只要主播挡掉一个东西它就会变丑</strong>
+              <div class="raw-subtext">原文: 但是只要主播挡掉一个东西它就会变丑</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3a 眉眼板块</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L3a 眉眼板块" data-text="哎你像你们说的眉毛 哎你像你们说的眉毛">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">069</td>
+            <td class="col-time">10:07</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>哎你像你们说的眉毛</strong>
+              <div class="raw-subtext">原文: 哎你像你们说的眉毛</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3a 眉眼板块</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L3a 眉眼板块" data-text="我要是把我眉毛挡的你感觉 我要是把我眉毛挡的你感觉">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">070</td>
+            <td class="col-time">10:09</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>我要是把我眉毛挡的你感觉</strong>
+              <div class="raw-subtext">原文: 我要是把我眉毛挡的你感觉</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3a 眉眼板块</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L3a 眉眼板块" data-text="有没有感觉【书远老师】颜值瞬间下降了一个层次 有没有感觉数学老师颜值瞬间下降了一个层次">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">071</td>
+            <td class="col-time">10:11</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>有没有感觉【书远老师】颜值瞬间下降了一个层次</strong>
+              <div class="raw-subtext">原文: 有没有感觉数学老师颜值瞬间下降了一个层次</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3a 眉眼板块</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L3a 眉眼板块" data-text="感觉整个人是抛的肿的呆的 感觉整个人是抛的肿的呆的">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">072</td>
+            <td class="col-time">10:16</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>感觉整个人是抛的肿的呆的</strong>
+              <div class="raw-subtext">原文: 感觉整个人是抛的肿的呆的</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3a 眉眼板块</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L3a 眉眼板块" data-text="是不是非常的丑 是不是非常的丑">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">073</td>
+            <td class="col-time">10:19</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>是不是非常的丑</strong>
+              <div class="raw-subtext">原文: 是不是非常的丑</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3a 眉眼板块</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L3a 眉眼板块" data-text="但是我一拿掉 但是我一拿掉">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">074</td>
+            <td class="col-time">10:21</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>但是我一拿掉</strong>
+              <div class="raw-subtext">原文: 但是我一拿掉</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3a 眉眼板块</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L3a 眉眼板块" data-text="感觉就出来了 感觉就出来了">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">075</td>
+            <td class="col-time">10:25</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>感觉就出来了</strong>
+              <div class="raw-subtext">原文: 感觉就出来了</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3a 眉眼板块</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L3c 下颌/轮廓板块" data-text="下拐点低你感觉方那是因为你的 下拐点低你感觉方那是因为你的">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">076</td>
+            <td class="col-time">10:32</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>下拐点低你感觉方那是因为你的</strong>
+              <div class="raw-subtext">原文: 下拐点低你感觉方那是因为你的</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3c 下颌/轮廓板块</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L3d 人中/下巴板块" data-text="下巴不够长 下巴不够长">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">077</td>
+            <td class="col-time">10:35</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>下巴不够长</strong>
+              <div class="raw-subtext">原文: 下巴不够长</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3d 人中/下巴板块</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L3d 人中/下巴板块" data-text="下巴不够好看 下巴不够好看">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">078</td>
+            <td class="col-time">10:38</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>下巴不够好看</strong>
+              <div class="raw-subtext">原文: 下巴不够好看</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3d 人中/下巴板块</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="方法论总纲" data-text="配不上明白吗 配不上明白吗">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">079</td>
+            <td class="col-time">10:41</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>配不上明白吗</strong>
+              <div class="raw-subtext">原文: 配不上明白吗</div>
+            </td>
+            <td><span class="badge-tag badge-board">方法论总纲</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="有孩子 有孩子">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">080</td>
+            <td class="col-time">10:49</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>有孩子</strong>
+              <div class="raw-subtext">原文: 有孩子</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="孩子跟我一样大 孩子跟我一样大">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">081</td>
+            <td class="col-time">10:53</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>孩子跟我一样大</strong>
+              <div class="raw-subtext">原文: 孩子跟我一样大</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="跟我争兄道弟的 跟我争兄道弟的">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">082</td>
+            <td class="col-time">10:56</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>跟我争兄道弟的</strong>
+              <div class="raw-subtext">原文: 跟我争兄道弟的</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="方法论总纲" data-text="可以改一下可以改一下 可以改一下可以改一下">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">083</td>
+            <td class="col-time">11:03</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>可以改一下可以改一下</strong>
+              <div class="raw-subtext">原文: 可以改一下可以改一下</div>
+            </td>
+            <td><span class="badge-tag badge-board">方法论总纲</span></td>
+            <td><span class="badge-tag badge-type">互动应答/过渡</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="转化/商业" data-text="这个英文的这个你可以点我头像主页 这个英文的这个你可以点我头像主页">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">084</td>
+            <td class="col-time">11:09</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-02 私域切流/对抗审查]</span> <strong>这个英文的这个你可以点我头像主页</strong>
+              <div class="raw-subtext">原文: 这个英文的这个你可以点我头像主页</div>
+            </td>
+            <td><span class="badge-tag badge-board">转化/商业</span></td>
+            <td><span class="badge-tag badge-type">转化/商业</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="转化/商业" data-text="点头像主页好吧 点头像主页好吧">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">085</td>
+            <td class="col-time">11:13</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-02 私域切流/对抗审查]</span> <strong>点头像主页好吧</strong>
+              <div class="raw-subtext">原文: 点头像主页好吧</div>
+            </td>
+            <td><span class="badge-tag badge-board">转化/商业</span></td>
+            <td><span class="badge-tag badge-type">转化/商业</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="干这完事儿 干这完事儿">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">086</td>
+            <td class="col-time">11:32</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>干这完事儿</strong>
+              <div class="raw-subtext">原文: 干这完事儿</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">碎片/附和</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L1 身材层" data-text="补充蛋白质 补充蛋白质">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">087</td>
+            <td class="col-time">11:35</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>补充蛋白质</strong>
+              <div class="raw-subtext">原文: 补充蛋白质</div>
+            </td>
+            <td><span class="badge-tag badge-board">L1 身材层</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L1 身材层" data-text="是健康的 是健康的">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">088</td>
+            <td class="col-time">11:38</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>是健康的</strong>
+              <div class="raw-subtext">原文: 是健康的</div>
+            </td>
+            <td><span class="badge-tag badge-board">L1 身材层</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="[asr杂音] 包管に">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">089</td>
+            <td class="col-time">11:45</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>[ASR杂音]</strong>
+              <div class="raw-subtext">原文: 包管に</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">碎片/附和</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="在上海 在上海">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">090</td>
+            <td class="col-time">11:58</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>在上海</strong>
+              <div class="raw-subtext">原文: 在上海</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">互动应答/过渡</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="互动钩子/运营" data-text="六百六十六个点赞 六百六十六个点赞">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">091</td>
+            <td class="col-time">12:07</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>六百六十六个点赞</strong>
+              <div class="raw-subtext">原文: 六百六十六个点赞</div>
+            </td>
+            <td><span class="badge-tag badge-board">互动钩子/运营</span></td>
+            <td><span class="badge-tag badge-type">互动钩子</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="互动钩子/运营" data-text="我要点一下我要把它破掉 我要点一下我要把它破掉">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">092</td>
+            <td class="col-time">12:09</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>我要点一下我要把它破掉</strong>
+              <div class="raw-subtext">原文: 我要点一下我要把它破掉</div>
+            </td>
+            <td><span class="badge-tag badge-board">互动钩子/运营</span></td>
+            <td><span class="badge-tag badge-type">互动钩子</span></td>
+            <td style="font-size:0.75rem">🎉 兴奋</td>
+          </tr>
+
+          <tr class="stream-row" data-board="互动钩子/运营" data-text="感谢点赞谢谢你们点赞我看到你们点赞了谢谢😊 感谢点赞谢谢你们点赞我看到你们点赞了谢谢😊">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">093</td>
+            <td class="col-time">12:17</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>感谢点赞谢谢你们点赞我看到你们点赞了谢谢😊</strong>
+              <div class="raw-subtext">原文: 感谢点赞谢谢你们点赞我看到你们点赞了谢谢😊</div>
+            </td>
+            <td><span class="badge-tag badge-board">互动钩子/运营</span></td>
+            <td><span class="badge-tag badge-type">互动钩子</span></td>
+            <td style="font-size:0.75rem">🎉 兴奋</td>
+          </tr>
+
+          <tr class="stream-row" data-board="方法论总纲" data-text="你怎么提升 你怎么提升">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">094</td>
+            <td class="col-time">12:32</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>你怎么提升</strong>
+              <div class="raw-subtext">原文: 你怎么提升</div>
+            </td>
+            <td><span class="badge-tag badge-board">方法论总纲</span></td>
+            <td><span class="badge-tag badge-type">互动应答/过渡</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="转化/商业" data-text="点头像 点头像">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">095</td>
+            <td class="col-time">12:36</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-02 私域切流/对抗审查]</span> <strong>点头像</strong>
+              <div class="raw-subtext">原文: 点头像</div>
+            </td>
+            <td><span class="badge-tag badge-board">转化/商业</span></td>
+            <td><span class="badge-tag badge-type">转化/商业</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="[asr杂音] そ台">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">096</td>
+            <td class="col-time">12:38</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>[ASR杂音]</strong>
+              <div class="raw-subtext">原文: そ台</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">碎片/附和</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="对啦所以你看 对老所以你看">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">097</td>
+            <td class="col-time">12:39</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>对啦所以你看</strong>
+              <div class="raw-subtext">原文: 对老所以你看</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">碎片/附和</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="[asr静音] ">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">098</td>
+            <td class="col-time">12:51</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>[ASR静音]</strong>
+              <div class="raw-subtext">原文: <空></div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">碎片/附和</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="后面看到头皮发麻 后面看到头皮发麻">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">099</td>
+            <td class="col-time">12:57</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>后面看到头皮发麻</strong>
+              <div class="raw-subtext">原文: 后面看到头皮发麻</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">互动应答/过渡</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="像【书远老师】天天都是跟他们打交道的 像数学老师天天都是跟他们打交道的">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">100</td>
+            <td class="col-time">13:01</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>像【书远老师】天天都是跟他们打交道的</strong>
+              <div class="raw-subtext">原文: 像数学老师天天都是跟他们打交道的</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">医美知识/科普</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="都是天天研究这些东西啊 都是天天研究这些东西啊">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">101</td>
+            <td class="col-time">13:06</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>都是天天研究这些东西啊</strong>
+              <div class="raw-subtext">原文: 都是天天研究这些东西啊</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">医美知识/科普</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="他就跟我的孩子一样 他就跟我的孩子一样">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">102</td>
+            <td class="col-time">13:11</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>他就跟我的孩子一样</strong>
+              <div class="raw-subtext">原文: 他就跟我的孩子一样</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="跟我的孩子一样 跟我的孩子一样">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">103</td>
+            <td class="col-time">13:15</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>跟我的孩子一样</strong>
+              <div class="raw-subtext">原文: 跟我的孩子一样</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="跟我的孩子一样 跟我的孩子一样">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">104</td>
+            <td class="col-time">13:21</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>跟我的孩子一样</strong>
+              <div class="raw-subtext">原文: 跟我的孩子一样</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="面诊高危" data-text="这后面全都是 这后面全都是">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">105</td>
+            <td class="col-time">13:25</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk' style='background:rgba(245,158,11,0.25);color:#fbbf24'>[SUS-04 头骨标本/相面神断]</span> <strong>这后面全都是</strong>
+              <div class="raw-subtext">原文: 这后面全都是</div>
+            </td>
+            <td><span class="badge-tag badge-board">面诊高危</span></td>
+            <td><span class="badge-tag badge-type">面诊高危</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="面诊高危" data-text="🎼我的粉丝宝宝们的脑袋 🎼我的粉丝宝宝们的脑袋">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">106</td>
+            <td class="col-time">13:28</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk' style='background:rgba(245,158,11,0.25);color:#fbbf24'>[SUS-04 头骨标本/相面神断]</span> <strong>🎼我的粉丝宝宝们的脑袋</strong>
+              <div class="raw-subtext">原文: 🎼我的粉丝宝宝们的脑袋</div>
+            </td>
+            <td><span class="badge-tag badge-board">面诊高危</span></td>
+            <td><span class="badge-tag badge-type">面诊高危</span></td>
+            <td style="font-size:0.75rem">🎉 兴奋</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="天天都跟我住在一起 天天都跟我住在一起">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">107</td>
+            <td class="col-time">13:34</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>天天都跟我住在一起</strong>
+              <div class="raw-subtext">原文: 天天都跟我住在一起</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="方法论总纲" data-text="每个人长得都不一样 每个人长得都不一样">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">108</td>
+            <td class="col-time">13:40</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>每个人长得都不一样</strong>
+              <div class="raw-subtext">原文: 每个人长得都不一样</div>
+            </td>
+            <td><span class="badge-tag badge-board">方法论总纲</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="面诊高危" data-text="🎼只要你们在【书远老师】面前我就能知道你们的头骨长得什么样 🎼只要你们在数学老师面前我就能知道你们的头骨长得什么样">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">109</td>
+            <td class="col-time">13:43</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk' style='background:rgba(245,158,11,0.25);color:#fbbf24'>[SUS-04 头骨标本/相面神断]</span> <strong>🎼只要你们在【书远老师】面前我就能知道你们的头骨长得什么样</strong>
+              <div class="raw-subtext">原文: 🎼只要你们在数学老师面前我就能知道你们的头骨长得什么样</div>
+            </td>
+            <td><span class="badge-tag badge-board">面诊高危</span></td>
+            <td><span class="badge-tag badge-type">面诊高危</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="哎好多呢 哎好多呢">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">110</td>
+            <td class="col-time">13:56</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>哎好多呢</strong>
+              <div class="raw-subtext">原文: 哎好多呢</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">互动应答/过渡</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="这还有 这还有">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">111</td>
+            <td class="col-time">14:04</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>这还有</strong>
+              <div class="raw-subtext">原文: 这还有</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">互动应答/过渡</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="这还有 这还有">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">112</td>
+            <td class="col-time">14:07</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>这还有</strong>
+              <div class="raw-subtext">原文: 这还有</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">互动应答/过渡</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="天天都是 天天都是">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">113</td>
+            <td class="col-time">14:13</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>天天都是</strong>
+              <div class="raw-subtext">原文: 天天都是</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">互动应答/过渡</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="跟脑袋打交道的 跟党袋打交道的">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">114</td>
+            <td class="col-time">14:18</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>跟脑袋打交道的</strong>
+              <div class="raw-subtext">原文: 跟党袋打交道的</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">医美知识/科普</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="好多呢好多呢 好多呢好多呢">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">115</td>
+            <td class="col-time">14:39</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>好多呢好多呢</strong>
+              <div class="raw-subtext">原文: 好多呢好多呢</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">互动应答/过渡</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="今天都跟脑袋打交道 今天都跟脑袋打交道">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">116</td>
+            <td class="col-time">14:43</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>今天都跟脑袋打交道</strong>
+              <div class="raw-subtext">原文: 今天都跟脑袋打交道</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">医美知识/科普</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="面诊高危" data-text="都是你们的数据明白吗 都是你们的数据明白吗">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">117</td>
+            <td class="col-time">14:49</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk' style='background:rgba(245,158,11,0.25);color:#fbbf24'>[SUS-04 头骨标本/相面神断]</span> <strong>都是你们的数据明白吗</strong>
+              <div class="raw-subtext">原文: 都是你们的数据明白吗</div>
+            </td>
+            <td><span class="badge-tag badge-board">面诊高危</span></td>
+            <td><span class="badge-tag badge-type">医美知识/科普</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="还有 还有">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">118</td>
+            <td class="col-time">14:55</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>还有</strong>
+              <div class="raw-subtext">原文: 还有</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">碎片/附和</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="可以啊可以啊椅子会挡视野吗不会挡啊 可以啊可以啊一子会挡视野吗不会挡啊">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">119</td>
+            <td class="col-time">15:03</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>可以啊可以啊椅子会挡视野吗不会挡啊</strong>
+              <div class="raw-subtext">原文: 可以啊可以啊一子会挡视野吗不会挡啊</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="看看主播的脑袋主播的脑袋是可以啊看看主播的脑袋是吧 看看主播的脑袋主播的脑袋是可以啊看看主播的脑袋是吧">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">120</td>
+            <td class="col-time">15:08</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>看看主播的脑袋主播的脑袋是可以啊看看主播的脑袋是吧</strong>
+              <div class="raw-subtext">原文: 看看主播的脑袋主播的脑袋是可以啊看看主播的脑袋是吧</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">互动应答/过渡</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="主播脑袋里面装鸡蛋壳了待会儿啊我给它倒了呃哎主播的脑袋 主播脑袋里面装鸡蛋壳了待会儿啊我给它倒了呃哎主播的脑袋">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">121</td>
+            <td class="col-time">15:19</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>主播脑袋里面装鸡蛋壳了待会儿啊我给它倒了呃哎主播的脑袋</strong>
+              <div class="raw-subtext">原文: 主播脑袋里面装鸡蛋壳了待会儿啊我给它倒了呃哎主播的脑袋</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="非常标致啊 非常标致啊">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">122</td>
+            <td class="col-time">15:30</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>非常标致啊</strong>
+              <div class="raw-subtext">原文: 非常标致啊</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="面诊高危" data-text="能不能来能不能可以啊在上海在上海随时欢迎你们啊来找【书远老师】玩来讨论讨论这个颜值方面的问题都是可以的 能不能来能不能可以啊在上海在上海随时欢迎你们啊来找数学老师玩来讨论讨论这个颜值方面的问题都是可以的">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">123</td>
+            <td class="col-time">15:39</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk'>[SUS-05 上海线下引流邀约]</span> <strong>能不能来能不能可以啊在上海在上海随时欢迎你们啊来找【书远老师】玩来讨论讨论这个颜值方面的问题都是可以的</strong>
+              <div class="raw-subtext">原文: 能不能来能不能可以啊在上海在上海随时欢迎你们啊来找数学老师玩来讨论讨论这个颜值方面的问题都是可以的</div>
+            </td>
+            <td><span class="badge-tag badge-board">面诊高危</span></td>
+            <td><span class="badge-tag badge-type">转化/商业</span></td>
+            <td style="font-size:0.75rem">🎉 兴奋</td>
+          </tr>
+
+          <tr class="stream-row row-fatal" data-board="L3c 下颌/轮廓板块" data-text="主播脸宽是十一点多这里到这里的距离十一点多哎我尺子呢 主播脸宽是十一点多这里到这里的距离十一点多哎我尺子呢">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">124</td>
+            <td class="col-time">15:54</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk' style='background:rgba(220,38,38,0.4);color:#fca5a5'>[CAT-02 软尺量脸/CV绝杀触发]</span> <strong>主播脸宽是十一点多这里到这里的距离十一点多哎我尺子呢</strong>
+              <div class="raw-subtext">原文: 主播脸宽是十一点多这里到这里的距离十一点多哎我尺子呢</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3c 下颌/轮廓板块</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="其实好像在包里 其实好像在包里">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">125</td>
+            <td class="col-time">16:01</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>其实好像在包里</strong>
+              <div class="raw-subtext">原文: 其实好像在包里</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L3c 下颌/轮廓板块" data-text="十一点多怎么不可能 十一点多怎么不可能">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">126</td>
+            <td class="col-time">16:14</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>十一点多怎么不可能</strong>
+              <div class="raw-subtext">原文: 十一点多怎么不可能</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3c 下颌/轮廓板块</span></td>
+            <td><span class="badge-tag badge-type">互动应答/过渡</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-fatal" data-board="L3c 下颌/轮廓板块" data-text="我给你拿尺子 我给你拿尺子">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">127</td>
+            <td class="col-time">16:18</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk' style='background:rgba(220,38,38,0.4);color:#fca5a5'>[CAT-02 软尺量脸/CV绝杀触发]</span> <strong>我给你拿尺子</strong>
+              <div class="raw-subtext">原文: 我给你拿尺子</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3c 下颌/轮廓板块</span></td>
+            <td><span class="badge-tag badge-type">互动应答/过渡</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L3c 下颌/轮廓板块" data-text="不信是吧 不信是吧">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">128</td>
+            <td class="col-time">16:19</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>不信是吧</strong>
+              <div class="raw-subtext">原文: 不信是吧</div>
+            </td>
+            <td><span class="badge-tag badge-board">L3c 下颌/轮廓板块</span></td>
+            <td><span class="badge-tag badge-type">互动应答/过渡</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="那个我包里面的尺子谁帮我拿一下 那个我包里面的尺子谁帮我拿一下">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">129</td>
+            <td class="col-time">16:21</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>那个我包里面的尺子谁帮我拿一下</strong>
+              <div class="raw-subtext">原文: 那个我包里面的尺子谁帮我拿一下</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="方法论总纲" data-text="主播没有颜值 主播没有颜值">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">130</td>
+            <td class="col-time">16:38</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>主播没有颜值</strong>
+              <div class="raw-subtext">原文: 主播没有颜值</div>
+            </td>
+            <td><span class="badge-tag badge-board">方法论总纲</span></td>
+            <td><span class="badge-tag badge-type">互动应答/过渡</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="方法论总纲" data-text="我又太流行了什么时候流行的 我又太流行了什么时候流行的">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">131</td>
+            <td class="col-time">16:39</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>我又太流行了什么时候流行的</strong>
+              <div class="raw-subtext">原文: 我又太流行了什么时候流行的</div>
+            </td>
+            <td><span class="badge-tag badge-board">方法论总纲</span></td>
+            <td><span class="badge-tag badge-type">互动应答/过渡</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="有点近视吗主播对主播近视加闪光 有点近视吗主播对主播近视加闪光">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">132</td>
+            <td class="col-time">16:49</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>有点近视吗主播对主播近视加闪光</strong>
+              <div class="raw-subtext">原文: 有点近视吗主播对主播近视加闪光</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="怎么没戴眼镜啊 怎么没戴眼镜啊">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">133</td>
+            <td class="col-time">16:52</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>怎么没戴眼镜啊</strong>
+              <div class="raw-subtext">原文: 怎么没戴眼镜啊</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="🎼会不会挡视野不会挡视野怎么会问这种这种这么这这么这么这么奇怪的问题啊 🎼会不会挡视野不会挡视野怎么会问这种这种这么这这么这么这么奇怪的问题啊">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">134</td>
+            <td class="col-time">16:57</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>🎼会不会挡视野不会挡视野怎么会问这种这种这么这这么这么这么奇怪的问题啊</strong>
+              <div class="raw-subtext">原文: 🎼会不会挡视野不会挡视野怎么会问这种这种这么这这么这么这么奇怪的问题啊</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">互动应答/过渡</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="脸咋变短脸变短有很多种方法 脸咋变短脸变短有很多种方法">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">135</td>
+            <td class="col-time">17:07</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>脸咋变短脸变短有很多种方法</strong>
+              <div class="raw-subtext">原文: 脸咋变短脸变短有很多种方法</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="第一种 第一种">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">136</td>
+            <td class="col-time">17:12</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>第一种</strong>
+              <div class="raw-subtext">原文: 第一种</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="发际线 发际线">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">137</td>
+            <td class="col-time">17:13</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>发际线</strong>
+              <div class="raw-subtext">原文: 发际线</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="往下去挤 往下去挤">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">138</td>
+            <td class="col-time">17:14</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>往下去挤</strong>
+              <div class="raw-subtext">原文: 往下去挤</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="你们可以拿出你们的手指来说我跟你讲【书远老师】的手指是 你们可以拿出你们的手指来说我跟你讲数学老师的手指是">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">139</td>
+            <td class="col-time">17:16</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>你们可以拿出你们的手指来说我跟你讲【书远老师】的手指是</strong>
+              <div class="raw-subtext">原文: 你们可以拿出你们的手指来说我跟你讲数学老师的手指是</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="儿童手指手挺小的 儿童手指手挺小的">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">140</td>
+            <td class="col-time">17:19</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>儿童手指手挺小的</strong>
+              <div class="raw-subtext">原文: 儿童手指手挺小的</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="三指 三指">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">141</td>
+            <td class="col-time">17:22</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>三指</strong>
+              <div class="raw-subtext">原文: 三指</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="三子 三子">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">142</td>
+            <td class="col-time">17:26</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>三子</strong>
+              <div class="raw-subtext">原文: 三子</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="六指 六指">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">143</td>
+            <td class="col-time">17:29</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>六指</strong>
+              <div class="raw-subtext">原文: 六指</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="到这里是吧六只 到这里是吧六只">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">144</td>
+            <td class="col-time">17:32</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>到这里是吧六只</strong>
+              <div class="raw-subtext">原文: 到这里是吧六只</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="九指 九指">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">145</td>
+            <td class="col-time">17:35</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>九指</strong>
+              <div class="raw-subtext">原文: 九指</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="九子 九子">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">146</td>
+            <td class="col-time">17:36</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>九子</strong>
+              <div class="raw-subtext">原文: 九子</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="再往下 再往下">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">147</td>
+            <td class="col-time">17:37</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>再往下</strong>
+              <div class="raw-subtext">原文: 再往下</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="十指十一指 十指十一指">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">148</td>
+            <td class="col-time">17:41</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>十指十一指</strong>
+              <div class="raw-subtext">原文: 十指十一指</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="十一指的 十一指的">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">149</td>
+            <td class="col-time">17:43</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>十一指的</strong>
+              <div class="raw-subtext">原文: 十一指的</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="L2 头/发型层" data-text="脸长 练长">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">150</td>
+            <td class="col-time">17:45</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>脸长</strong>
+              <div class="raw-subtext">原文: 练长</div>
+            </td>
+            <td><span class="badge-tag badge-board">L2 头/发型层</span></td>
+            <td><span class="badge-tag badge-type">审美方法论/理念</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="就在我那个大包包里面就最大层 就在我那个大包包里面就最大层">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">151</td>
+            <td class="col-time">17:49</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>就在我那个大包包里面就最大层</strong>
+              <div class="raw-subtext">原文: 就在我那个大包包里面就最大层</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="不挡视也会不会就不算高 不挡视也会不会就不算高">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">152</td>
+            <td class="col-time">17:57</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>不挡视也会不会就不算高</strong>
+              <div class="raw-subtext">原文: 不挡视也会不会就不算高</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">互动应答/过渡</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="挡视野是什么东西啊我靠你自己 挡视野是什么东西啊我靠你自己">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">153</td>
+            <td class="col-time">17:59</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>挡视野是什么东西啊我靠你自己</strong>
+              <div class="raw-subtext">原文: 挡视野是什么东西啊我靠你自己</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">互动应答/过渡</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="封禁相关" data-text="你看这个这个这个平台又送我那个加热卡了我绝对不用了 你看这个这个这个平台又送我那个加热卡了我绝对不用了">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">154</td>
+            <td class="col-time">18:04</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk' style='background:rgba(245,158,11,0.25);color:#fbbf24'>[CAT-01 加热卡审核机制自曝]</span> <strong>你看这个这个这个平台又送我那个加热卡了我绝对不用了</strong>
+              <div class="raw-subtext">原文: 你看这个这个这个平台又送我那个加热卡了我绝对不用了</div>
+            </td>
+            <td><span class="badge-tag badge-board">封禁相关</span></td>
+            <td><span class="badge-tag badge-type">风险/合规话术</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-danger" data-board="封禁相关" data-text="🎼要不要用呢我用的话我就不能讲什么了你们觉得我要不要用这个加热卡就用平台送了我一张加热卡但是我每次用这个加热卡的时候这平台就会审核我就是我可能就不能讲太多的东西了你们觉得我要用这个加热卡吗 🎼要不要用呢我用的话我就不能讲什么了你们觉得我要不要用这个加热卡就用平台送了我一张加热卡但是我每次用这个加热卡的时候这平台就会审核我就是我可能就不能讲太多的东西了你们觉得我要用这个加热卡吗">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">155</td>
+            <td class="col-time">18:10</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk' style='background:rgba(245,158,11,0.25);color:#fbbf24'>[CAT-01 加热卡审核机制自曝]</span> <strong>🎼要不要用呢我用的话我就不能讲什么了你们觉得我要不要用这个加热卡就用平台送了我一张加热卡但是我每次用这个加热卡的时候这平台就会审核我就是我可能就不能讲太多的东西了你们觉得我要用这个加热卡吗</strong>
+              <div class="raw-subtext">原文: 🎼要不要用呢我用的话我就不能讲什么了你们觉得我要不要用这个加热卡就用平台送了我一张加热卡但是我每次用这个加热卡的时候这平台就会审核我就是我可能就不能讲太多的东西了你们觉得我要用这个加热卡吗</div>
+            </td>
+            <td><span class="badge-tag badge-board">封禁相关</span></td>
+            <td><span class="badge-tag badge-type">风险/合规话术</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row" data-board="真闲聊/杂务" data-text="🎼大包里面有没有吗 🎼大包里面有没有吗">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">156</td>
+            <td class="col-time">18:29</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <strong>🎼大包里面有没有吗</strong>
+              <div class="raw-subtext">原文: 🎼大包里面有没有吗</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-fatal" data-board="真闲聊/杂务" data-text="大包包没有那另外一根尺子呢 大包包没有那另外一根尺子呢">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">157</td>
+            <td class="col-time">18:36</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk' style='background:rgba(220,38,38,0.4);color:#fca5a5'>[CAT-02 软尺量脸/CV绝杀触发]</span> <strong>大包包没有那另外一根尺子呢</strong>
+              <div class="raw-subtext">原文: 大包包没有那另外一根尺子呢</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-fatal" data-board="真闲聊/杂务" data-text="看下这大包里面最大层没有 看下这大包里面最大什没有">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">158</td>
+            <td class="col-time">18:43</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk' style='background:rgba(220,38,38,0.4);color:#fca5a5'>[CAT-02 软尺量脸/CV绝杀触发]</span> <strong>看下这大包里面最大层没有</strong>
+              <div class="raw-subtext">原文: 看下这大包里面最大什没有</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-fatal" data-board="真闲聊/杂务" data-text="那你把你个卷尺给我 那你把你个卷尺给我">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">159</td>
+            <td class="col-time">18:47</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk' style='background:rgba(220,38,38,0.4);color:#fca5a5'>[CAT-02 软尺量脸/CV绝杀触发]</span> <strong>那你把你个卷尺给我</strong>
+              <div class="raw-subtext">原文: 那你把你个卷尺给我</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-fatal" data-board="真闲聊/杂务" data-text="哎那我尺子呢我靠这 哎那我尺子呢我靠这">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">160</td>
+            <td class="col-time">18:55</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk' style='background:rgba(220,38,38,0.4);color:#fca5a5'>[CAT-02 软尺量脸/CV绝杀触发]</span> <strong>哎那我尺子呢我靠这</strong>
+              <div class="raw-subtext">原文: 哎那我尺子呢我靠这</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-fatal" data-board="真闲聊/杂务" data-text="月没拿 月没拿">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">161</td>
+            <td class="col-time">18:59</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk' style='background:rgba(220,38,38,0.4);color:#fca5a5'>[CAT-02 软尺量脸/CV绝杀触发]</span> <strong>月没拿</strong>
+              <div class="raw-subtext">原文: 月没拿</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-fatal" data-board="面诊高危" data-text="看好了啊这个尺子 看好了啊这个尺子">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">162</td>
+            <td class="col-time">19:17</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk' style='background:rgba(220,38,38,0.4);color:#fca5a5'>[CAT-02 软尺量脸/CV绝杀触发]</span> <strong>看好了啊这个尺子</strong>
+              <div class="raw-subtext">原文: 看好了啊这个尺子</div>
+            </td>
+            <td><span class="badge-tag badge-board">面诊高危</span></td>
+            <td><span class="badge-tag badge-type">医美知识/科普</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-fatal" data-board="面诊高危" data-text="哎呀这个是软尺 哎呀这个是软尺">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">163</td>
+            <td class="col-time">19:20</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk' style='background:rgba(220,38,38,0.4);color:#fca5a5'>[CAT-02 软尺量脸/CV绝杀触发]</span> <strong>哎呀这个是软尺</strong>
+              <div class="raw-subtext">原文: 哎呀这个是软尺</div>
+            </td>
+            <td><span class="badge-tag badge-board">面诊高危</span></td>
+            <td><span class="badge-tag badge-type">医美知识/科普</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-fatal" data-board="面诊高危" data-text="不好给你们看 不好给你们看">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">164</td>
+            <td class="col-time">19:21</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk' style='background:rgba(220,38,38,0.4);color:#fca5a5'>[CAT-02 软尺量脸/CV绝杀触发]</span> <strong>不好给你们看</strong>
+              <div class="raw-subtext">原文: 不好给你们看</div>
+            </td>
+            <td><span class="badge-tag badge-board">面诊高危</span></td>
+            <td><span class="badge-tag badge-type">医美知识/科普</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-fatal" data-board="面诊高危" data-text="看不着 看不着">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">165</td>
+            <td class="col-time">19:26</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk' style='background:rgba(220,38,38,0.4);color:#fca5a5'>[CAT-02 软尺量脸/CV绝杀触发]</span> <strong>看不着</strong>
+              <div class="raw-subtext">原文: 看不着</div>
+            </td>
+            <td><span class="badge-tag badge-board">面诊高危</span></td>
+            <td><span class="badge-tag badge-type">碎片/附和</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-fatal" data-board="封禁相关" data-text="哎呀为什么把我给封了😡 哎呀为什么把我给封了😡">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">166</td>
+            <td class="col-time">19:33</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk' style='background:#b91c1c;color:#fff'>[BAN 直播掐断/封禁质问]</span> <strong>哎呀为什么把我给封了😡</strong>
+              <div class="raw-subtext">原文: 哎呀为什么把我给封了😡</div>
+            </td>
+            <td><span class="badge-tag badge-board">封禁相关</span></td>
+            <td><span class="badge-tag badge-type">风险/合规话术</span></td>
+            <td style="font-size:0.75rem">💢 愤怒</td>
+          </tr>
+
+          <tr class="stream-row row-fatal" data-board="封禁相关" data-text="为什么封我呀😡 为什么封我呀😡">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">167</td>
+            <td class="col-time">19:39</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk' style='background:#b91c1c;color:#fff'>[BAN 直播掐断/封禁质问]</span> <strong>为什么封我呀😡</strong>
+              <div class="raw-subtext">原文: 为什么封我呀😡</div>
+            </td>
+            <td><span class="badge-tag badge-board">封禁相关</span></td>
+            <td><span class="badge-tag badge-type">风险/合规话术</span></td>
+            <td style="font-size:0.75rem">💢 愤怒</td>
+          </tr>
+
+          <tr class="stream-row row-fatal" data-board="真闲聊/杂务" data-text="录音录音 录音录音">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">168</td>
+            <td class="col-time">19:48</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk' style='background:#b91c1c;color:#fff'>[BAN 直播掐断/封禁质问]</span> <strong>录音录音</strong>
+              <div class="raw-subtext">原文: 录音录音</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-fatal" data-board="真闲聊/杂务" data-text="录音录了吗 录音录了吗">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">169</td>
+            <td class="col-time">19:49</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk' style='background:#b91c1c;color:#fff'>[BAN 直播掐断/封禁质问]</span> <strong>录音录了吗</strong>
+              <div class="raw-subtext">原文: 录音录了吗</div>
+            </td>
+            <td><span class="badge-tag badge-board">真闲聊/杂务</span></td>
+            <td><span class="badge-tag badge-type">真闲聊/杂务</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-fatal" data-board="封禁相关" data-text="我没讲什么吧😡 我没讲什么吧😡">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">170</td>
+            <td class="col-time">19:52</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk' style='background:#b91c1c;color:#fff'>[BAN 直播掐断/封禁质问]</span> <strong>我没讲什么吧😡</strong>
+              <div class="raw-subtext">原文: 我没讲什么吧😡</div>
+            </td>
+            <td><span class="badge-tag badge-board">封禁相关</span></td>
+            <td><span class="badge-tag badge-type">风险/合规话术</span></td>
+            <td style="font-size:0.75rem">💢 愤怒</td>
+          </tr>
+
+          <tr class="stream-row row-fatal" data-board="封禁相关" data-text="抓尺子 抓尺子">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">171</td>
+            <td class="col-time">19:55</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk' style='background:#b91c1c;color:#fff'>[BAN 直播掐断/封禁质问]</span> <strong>抓尺子</strong>
+              <div class="raw-subtext">原文: 抓尺子</div>
+            </td>
+            <td><span class="badge-tag badge-board">封禁相关</span></td>
+            <td><span class="badge-tag badge-type">风险/合规话术</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+          <tr class="stream-row row-fatal" data-board="封禁相关" data-text="我拿尺子跟我这个有什么关系 我拿尺子跟我这个有什么关系">
+            <td style="font-family:var(--font-mono);color:var(--text-muted)">172</td>
+            <td class="col-time">19:56</td>
+            <td style="color:var(--text-secondary)">Spk0</td>
+            <td class="col-text">
+              <span class='badge-tag badge-risk' style='background:#b91c1c;color:#fff'>[BAN 直播掐断/封禁质问]</span> <strong>我拿尺子跟我这个有什么关系</strong>
+              <div class="raw-subtext">原文: 我拿尺子跟我这个有什么关系</div>
+            </td>
+            <td><span class="badge-tag badge-board">封禁相关</span></td>
+            <td><span class="badge-tag badge-type">风险/合规话术</span></td>
+            <td style="font-size:0.75rem">😐 中立</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<script>
+// 筛选与交互脚本
+function onGlobalSearch(query) {
+  const val = query.toLowerCase().trim();
+  const rows = document.querySelectorAll('#stream-tbody tr');
+  let matchCount = 0;
+  
+  rows.forEach(r => {
+    const textData = r.getAttribute('data-text');
+    if (!val || textData.includes(val)) {
+      r.style.display = '';
+      matchCount++;
+    } else {
+      r.style.display = 'none';
+    }
+  });
+  document.getElementById('match-count').innerText = matchCount;
+}
+
+let activeBoardFilter = 'ALL';
+function filterBoard(boardName, btn) {
+  activeBoardFilter = boardName;
+  document.querySelectorAll('.stream-filters-bar .pill-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  
+  const rows = document.querySelectorAll('#stream-tbody tr');
+  let matchCount = 0;
+  
+  rows.forEach(r => {
+    const rBoard = r.getAttribute('data-board');
+    if (boardName === 'ALL' || rBoard === boardName) {
+      r.style.display = '';
+      matchCount++;
+    } else {
+      r.style.display = 'none';
+    }
+  });
+  document.getElementById('match-count').innerText = matchCount;
+}
+
+// 保存清单勾选状态
+function saveCheckState() {
+  const checkboxes = document.querySelectorAll('.check-box');
+  const states = Array.from(checkboxes).map(c => c.checked);
+  localStorage.setItem('lishuyuan_session2_checklist', JSON.stringify(states));
+}
+
+function loadCheckState() {
+  const saved = localStorage.getItem('lishuyuan_session2_checklist');
+  if (saved) {
+    try {
+      const states = JSON.parse(saved);
+      const checkboxes = document.querySelectorAll('.check-box');
+      checkboxes.forEach((c, i) => {
+        if (states[i] !== undefined) c.checked = states[i];
+      });
+    } catch(e) {}
+  }
+}
+
+// 侧边栏高亮联动
+window.addEventListener('scroll', () => {
+  const sections = document.querySelectorAll('main section');
+  const scrollPos = window.scrollY + 100;
+  
+  sections.forEach(s => {
+    if (scrollPos >= s.offsetTop && scrollPos < s.offsetTop + s.offsetHeight) {
+      const id = s.getAttribute('id');
+      document.querySelectorAll('.sidebar-nav .nav-item').forEach(nav => {
+        nav.classList.remove('active');
+        if (nav.getAttribute('href') === '#' + id) {
+          nav.classList.add('active');
+        }
+      });
+    }
+  });
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+  loadCheckState();
+});
+</script>
+</body>
+</html>
