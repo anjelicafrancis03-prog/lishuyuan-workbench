@@ -4,7 +4,7 @@
 适用范围：李书远数据库（资料库空间）的所有文件上传 
 遵守对象：所有向本数据库上传文件的 Agent / 用户
 
----
+***
 
 ## 核心规则（一句话）
 
@@ -29,16 +29,15 @@
 1. **探测**：`ffprobe -v error -show_entries format=duration,size -of json input.mp4`
 1. **算码率**：平均码率 ≈ 文件总大小 ÷ 总时长
 1. **算每段时长**：每段时长（秒）= 90MB ÷ 平均码率（留 10% 余量保险）
-- `-c copy`：不重新编码，画质无损、速度快
+1. **分割**：`ffmpeg -i input.mp4 -c copy -f segment -segment_time <秒数> -reset_timestamps 1 输出_%03d.mp4`
+   - `-c copy`：不重新编码，画质无损、速度快
 1. **校验**：确认每段文件大小 ≤100MB（建议 ≤90MB）
 
 ## 上传流程
 
 1. 检查文件大小（`ls -la` / 文件属性）
 1. ≤100MB → 直接上传
-
-> 100MB → 按上方方法分割 → 逐段上传
-
+> - 100MB → 按上方方法分割 → 逐段上传
 1. 每段命名保持序列（如 `案例视频_001.mp4`、`案例视频_002.mp4`），备注里注明"分片 N/M"
 
 ## 备注规范
@@ -52,8 +51,6 @@
 - 禁止用 `-segment_size`（此选项在本机 FFmpeg 不可用）
 - 禁止重新编码降质（除非用户明确要求压缩）
 
----
+***
 
 *本标准随数据库使用手册同步维护。*
-
-KS_DOC_REVIEWS M0Q0f1L11NISmHZQS1CPFb 4930 https://www.workbuddy.cn/space/d/M0Q0f1L11NISmHZQS1CPFb

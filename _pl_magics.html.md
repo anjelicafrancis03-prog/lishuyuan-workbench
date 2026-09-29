@@ -11,10 +11,10 @@
 
 ```
 【设计端】ZBrush 2022 —— 假体形态雕刻（艺术/美学）
-↓ STL 导出
+        ↓ STL 导出
 【打印端】Materialise Magics —— 打印前处理（工程/制造）
-↓ 切片数据
-PEEK 3D 打印机执行
+        ↓ 切片数据
+   PEEK 3D 打印机执行
 ```
 
 | 环节 | 软件 | 职责 |
@@ -35,6 +35,11 @@ PEEK 3D 打印机执行
 
 ## 完整国际主流管线（全家桶视角）
 
+```
+CT/3D 扫描 → Mimics（重建）→ 3-matic（解剖设计）→ ZBrush（形态雕刻）
+     → Magics（打印准备）→ PEEK 打印 → 后处理 → 消毒灭菌 → 临床
+```
+
 Materialise 全家桶（Mimics + 3-matic + Magics）+ ZBrush 组成 PEEK 定制植入物完整国际管线。
 
 ## 医美业务关联（海外推广视角）
@@ -42,5 +47,3 @@ Materialise 全家桶（Mimics + 3-matic + Magics）+ ZBrush 组成 PEEK 定制�
 - **供应链故事点**："医疗级 3D 打印前处理标准软件（Magics）+ 手工数字雕刻（ZBrush）"双认证管线——design-per-patient 的工程可信度背书
 - **质量话术**：Magics 的壁厚/特征合规分析对应植入物安全标准，可与竞品（小作坊流程）拉开差距
 - 相关条目：《ZBrush 2022 — PEEK 面部设计软件》（本库姊妹篇）
-
-KS_DOC_REVIEWS poP7gainXGB6CapXLoQVKU 7172 https://www.workbuddy.cn/space/d/poP7gainXGB6CapXLoQVKU

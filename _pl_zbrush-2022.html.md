@@ -8,17 +8,17 @@
 
 ## 在 PEEK 设计工作流中的位置
 
-## ```
+```
 患者面部 CT/3D 扫描
-↓ 三维重建（Mimics / 3-matic 等）
+   ↓ 三维重建（Mimics / 3-matic 等）
 标准头部模型 + 缺损区重建
-↓ 【ZBrush 2022 ← 本条目】
+   ↓ 【ZBrush 2022 ← 本条目】
 假体形态雕刻：鼻假体/下巴假体/颧骨/颅骨修补片的形状设计与美学微调
-↓ 导出 STL/OBJ
+   ↓ 导出 STL/OBJ
 3D 打印或 CNC 机加工 PEEK 植入物
 ```
 
-为什么选 ZBrush 做这一环
+## 为什么选 ZBrush 做这一环
 
 | 能力 | 对 PEEK 设计的意义 |
 |---|---|
@@ -45,6 +45,4 @@
 ## 相关条目
 
 - 李书远库：《WorkBuddy资料库应用参考》《PEEK市场数据》看板（分类含"美国面部整形""医美出海"）
-- beads 任务：face\_morpher 面部变形管线评估（codex 自研方案）——ZBrush 为专业级对照物
-
-KS_DOC_REVIEWS JYNNRxj6VwbyJdanFCthmk 5561 https://www.workbuddy.cn/space/d/JYNNRxj6VwbyJdanFCthmk
+- beads 任务：face_morpher 面部变形管线评估（codex 自研方案）——ZBrush 为专业级对照物

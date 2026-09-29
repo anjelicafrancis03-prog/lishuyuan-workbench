@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>视频处理标准</title>
+<title>视频处理标准（李书远数据库）</title>
 <style>
 /* :root 只是变量插槽：值为无彩占位灰，配色由 beautify 覆写决定（见 beautify/beautify-guide.md）。
    下面的排版仅为「结构可读」的最低限度基线，agent 美化时应整体重写，不必沿用。 */
@@ -86,7 +86,7 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px
 </head>
 <body>
 <header class="hero">
-  <h1>视频处理标准</h1>
+  <h1>视频处理标准（李书远数据库）</h1>
   <p class="hero-summary">适用范围：李书远数据库（资料库空间）的所有文件上传 遵守对象：所有向本数据库上传文件的 Agent / 用户</p>
 </header>
 <main class="wrap">
@@ -109,14 +109,14 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px
 <section class="reveal block-card">
 <h2>分割方法（视频，无损按时长法）</h2>
 <blockquote><p>⚠️ FFmpeg 的 <code>-segment_size</code>（按字节分割）在 gyan.dev Windows 版<strong>不可用</strong>（实测 8.1/9.0.1 均报 Unrecognized option）。必须用<strong>按时长法</strong>：</p></blockquote>
-<ol><li><strong>探测</strong>：<code>ffprobe -v error -show_entries format=duration,size -of json input.mp4</code></li><li><strong>算码率</strong>：平均码率 ≈ 文件总大小 ÷ 总时长</li><li><strong>算每段时长</strong>：每段时长（秒）= 90MB ÷ 平均码率（留 10% 余量保险）</li></ol>
+<ol><li><strong>探测</strong>：<code>ffprobe -v error -show_entries format=duration,size -of json input.mp4</code></li><li><strong>算码率</strong>：平均码率 ≈ 文件总大小 ÷ 总时长</li><li><strong>算每段时长</strong>：每段时长（秒）= 90MB ÷ 平均码率（留 10% 余量保险）</li><li><strong>分割</strong>：<code>ffmpeg -i input.mp4 -c copy -f segment -segment_time &lt;秒数&gt; -reset_timestamps 1 输出_%03d.mp4</code></li></ol>
 <ul><li><code>-c copy</code>：不重新编码，画质无损、速度快</li></ul>
 <ol><li><strong>校验</strong>：确认每段文件大小 ≤100MB（建议 ≤90MB）</li></ol>
 </section>
 <section class="reveal block-card">
 <h2>上传流程</h2>
 <ol><li>检查文件大小（<code>ls -la</code> / 文件属性）</li><li>≤100MB → 直接上传</li></ol>
-<blockquote><p>100MB → 按上方方法分割 → 逐段上传</p></blockquote>
+<blockquote><p>- 100MB → 按上方方法分割 → 逐段上传</p></blockquote>
 <ol><li>每段命名保持序列（如 <code>案例视频_001.mp4</code>、<code>案例视频_002.mp4</code>），备注里注明&quot;分片 N/M&quot;</li></ol>
 </section>
 <section class="reveal block-card">
@@ -129,7 +129,6 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px
 </section>
 <section class="reveal block-card">
 <p><em>本标准随数据库使用手册同步维护。</em></p>
-<p>KS_DOC_REVIEWS M0Q0f1L11NISmHZQS1CPFb 4930 https://www.workbuddy.cn/space/d/M0Q0f1L11NISmHZQS1CPFb</p>
 </section>
 <footer>由 WorkBuddy 资料库生成</footer>
 </main>

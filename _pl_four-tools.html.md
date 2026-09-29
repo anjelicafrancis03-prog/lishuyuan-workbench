@@ -8,17 +8,17 @@
 
 ### 数据格式链
 
-### ```
+```
 CT 扫描仪输出：DICOM（.dcm 文件序列）
-↓【Mimics】导入转换
+   ↓【Mimics】导入转换
 Mimics 项目文件（.mcs）内含三维体素场（每个体素带 HU 值）
-↓ 阈值分割 + 区域生长 + Calculate 3D（marching cubes 表面提取）
+   ↓ 阈值分割 + 区域生长 + Calculate 3D（marching cubes 表面提取）
 STL（binary 二进制格式，行业交换标准）
-↓【Geomagic / 3-matic / Magics】修补·设计·验证
+   ↓【Geomagic / 3-matic / Magics】修补·设计·验证
 最终 STL → 切片软件 G-code → PEEK 打印机
 ```
 
-关键概念：Hounsfield 单位（HU）
+### 关键概念：Hounsfield 单位（HU）
 
 - CT 图像每个像素是一个 **HU 值**=X 射线密度测量（水=0，空气=-1000，密质骨可达 +1000 以上）
 - **Mimics 的"阈值分割"就是按 HU 区间筛体素**：预设 Bone (CT) 阈值下限默认 **226**，上限随骨密度浮动（文献常见 226–1405）
@@ -35,7 +35,7 @@ STL（binary 二进制格式，行业交换标准）
 1. File → Export → **Binary STL**
 - 全流程熟练者约 1 天内完成单病例分割（行业节奏：数据采集 0.5-1 天 + 分割 1 天 + 设计审阅 1-2 天 + 验证 1 天）
 
----
+***
 
 ## 一、PROPLAN CMF（手术规划与数据导出）
 
@@ -107,15 +107,13 @@ STL（binary 二进制格式，行业交换标准）
 ## 六、全链路数据格式速查表
 
 ```
-DICOM (.dcm 序列) ← CT/MRI 原始输出（含患者信息+像素矩阵+HU值）
-↓ Mimics
-.mcs 项目 ← Mimics 工程（掩膜+体素+3D对象）
-↓ Calculate 3D
-STL (binary) ← 三角面片，行业交换标准（Freeform/3-matic/Magics 通吃）
-↓ Geomagic Studio （可出 STEP/IGES 参数曲面给 FEA/CAD）
-OBJ / PLY ← 备选网格格式（带颜色/纹理时用 OBJ）
+DICOM (.dcm 序列)     ← CT/MRI 原始输出（含患者信息+像素矩阵+HU值）
+  ↓ Mimics
+.mcs 项目             ← Mimics 工程（掩膜+体素+3D对象）
+  ↓ Calculate 3D
+STL (binary)          ← 三角面片，行业交换标准（Freeform/3-matic/Magics 通吃）
+  ↓ Geomagic Studio   （可出 STEP/IGES 参数曲面给 FEA/CAD）
+OBJ / PLY             ← 备选网格格式（带颜色/纹理时用 OBJ）
 STEP / IGES / Parasolid ← CAD 参数格式（Freeform Plus / 3-matic CAD Link 输出）
-G-code ← 切片软件（Cura 等）生成的打印机指令
+G-code                ← 切片软件（Cura 等）生成的打印机指令
 ```
-
-KS_DOC_REVIEWS xijTZQtz2LOom4UeaBtqZa 22832 https://www.workbuddy.cn/space/d/xijTZQtz2LOom4UeaBtqZa

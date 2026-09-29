@@ -58,7 +58,7 @@
 
 ## 四、"最多最好"资源密度排序（结论）
 
-## ```
+```
 1. 美国（好莱坞生态）：Gnomon+FlippedNormals+Vertex+Grassetti —— 最先进
 2. 全球在线平台：FlippedNormals/ArtStation/Gumroad/CGMA —— 最多
 3. 加拿大（Think Tank）：超写实方向导师制最强
@@ -66,10 +66,8 @@
 5. 中文区：绘学霸/CSDN 图文为主，系统性课程缺位（差距明显）
 ```
 
-五、对 PEEK 业务的可执行建议
+## 五、对 PEEK 业务的可执行建议
 
 1. **人才/合作角度**：CGMA 该课程毕业生 + Grassetti 式雕师 = 可远程合作的假体数字设计者画像（ArtStation 搜索筛选标准）
 1. **自建能力角度**：团队按主篇路径学习，CGMA 课为进阶目标（$~1500-2000/门）
 1. **内容角度**：ZBrush Masters 免费直播回放是英文科普素材的天然来源（翻译改编成本极低）
-
-KS_DOC_REVIEWS PxnWq3eEjSAzXbPUWywT2m 12842 https://www.workbuddy.cn/space/d/PxnWq3eEjSAzXbPUWywT2m

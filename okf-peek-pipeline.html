@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>OKF·PEEK 材料与设计管线</title>
+<title>PEEK 3D打印医美材料知识包</title>
 <style>
 /* :root 只是变量插槽：值为无彩占位灰，配色由 beautify 覆写决定（见 beautify/beautify-guide.md）。
    下面的排版仅为「结构可读」的最低限度基线，agent 美化时应整体重写，不必沿用。 */
@@ -86,13 +86,17 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px
 </head>
 <body>
 <header class="hero">
-  <h1>OKF·PEEK 材料与设计管线</h1>
+  <h1>PEEK 3D打印医美材料知识包</h1>
   <p class="hero-summary"><code>PEEK</code>, <code>PEK</code>, <code>聚醚醚酮</code>, <code>3D打印医美</code>, <code>PEEK植入物</code>, <code>鼻综合材料</code>, <code>下颌角假体</code>, <code>颌面整形材料</code>, <code>医美材料对比</code>, <code>3D打印植入物</code>, <code>PEEK账号源</code>, <code>PEEK医美账号</code>, <code>PEEK数据库</code>, <code>PEK数据库</code>, <code>成都Peek刘黎明医生</code></p>
 </header>
 <main class="wrap">
 <section class="reveal block-card">
+<p>okf_version: &quot;0.1&quot; type: bundle_index title: PEEK 3D打印医美材料知识包 description: 聚醚醚酮(PEEK)在3D打印医美手术中的应用 — 材料特性、临床数据、市场现状、竞品对比、内容创作切入点、全平台账号源；含设计管线四软件实战体系（PROPLAN CMF/Mimics/ZBrush/Geomagic Studio：操作原理、CT→3D流程、数据格式、学习路径） tags: \[medical-aesthetic, PEEK, polyetheretherketone, 3d-printing, implant, rhinoplasty, jaw-contouring, craniofacial, zbrush, magics, mimics, proplan-cmf, geomagic, design-pipeline, ecorche\] trigger: PEEK, PEK, 聚醚醚酮, 3D打印医美, PEEK植入物, 鼻综合材料, 下颌角假体, 颌面整形材料, 医美材料对比, 3D打印植入物, PEEK账号源, PEEK医美账号, PEEK数据库, PEK数据库, 成都Peek刘黎明医生, ZBrush, Materialise Magics, Mimics, PROPLAN CMF, Geomagic, 补洞, 白模, 头骨CT转3D, écorché, 皮肉分层雕刻, PEEK面部设计, PEEK假体设计软件, CT怎么变成3D模型 related:</p>
+<ul><li>F:\\codex\\okf-bundles\\nose-sim-demo\\index.md</li><li>F:\\codex\\okf-bundles\\domestic-social-media-ops\\index.md</li><li>F:\\codex\\okf-bundles\\rag-database-domain\\index.md</li><li>F:\\codex\\data\\medical-aesthetic-corpus\</li><li>F:\\codex\\reports\\redfox-all-groups-eval-peek-report-20260703.md</li><li>F:\\codex\\data\\medical-aesthetic-corpus\\reference\\peek-platform-account-sources-20260705.md</li><li>F:\\codex\\reports\\run-manifests\\2026-07-05-peek-yimei-platform-search-1945\\peek-yimei-platform-account-report.md</li></ul>
+</section>
+<section class="reveal block-card">
 <blockquote><p>证据：见正文 </p></blockquote>
-<p>fresh\_until: 2026-11-04（+90d） 坐标：map.projects.project-assets（主）</p>
+<p>fresh_until: 2026-11-04（+90d） 坐标：map.projects.project-assets（主）</p>
 </section>
 <section class="reveal block-card">
 <h2>触发词</h2>
@@ -163,6 +167,9 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px
 <p><code>codex-43z.1</code> 记录的已入库对象：</p>
 <ul><li>5 个 PEEK 手术程序（<code>proc_peek_*</code>）</li><li>24 条 PEEK 知识项</li><li>5 个供应商（Victrex / Evonik / Solvay / ZYPEEK / 3D Systems）</li><li>8 条风险提示</li><li>16 个 PEEK 标签</li></ul>
 <p>常用查询线索：</p>
+<pre><code>SELECT * FROM procedures WHERE procedure_id LIKE &#x27;proc_peek%&#x27;;
+SELECT * FROM candidate_knowledge_items WHERE source_table = &#x27;research_dossiers&#x27;;
+SELECT * FROM topic_tags WHERE article_id = &#x27;art_peek_master&#x27;;</code></pre>
 <p>边界：</p>
 <ul><li>Beads 只管任务状态和证据指针，不是数据库本体。</li><li>数据库本体在 <code>F:\codex\data\medical-aesthetic-corpus\</code>，查询前先确认具体 SQLite / DuckDB 文件名。</li><li>不直接编辑 <code>.beads\</code> 或数据库文件；需要写入时先做备份/行数校验/最小验证。</li><li>医美公开结论仍需回到原始报告、官方/论文/机构来源核验，Beads notes 只作任务证据线索。</li></ul>
 </section>
@@ -228,7 +235,7 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px
 <section class="reveal block-card">
 <h1>设计管线与软件工具链（2026-08-23 增补，魅惑实战确认）</h1>
 <blockquote><p>来源：李书远数据库 PEEK 系列 8 篇（raw/ 全文收录）+ 云端空间文档 </p></blockquote>
-<p>fresh\_until: 2026-11-21（+90d）</p>
+<p>fresh_until: 2026-11-21（+90d）</p>
 </section>
 <section class="reveal block-card">
 <h2>一句话结论</h2>
@@ -236,54 +243,35 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px
 </section>
 <section class="reveal block-card">
 <h2>实战流程（魅惑定版）</h2>
+<pre><code>PROPLAN CMF（手术规划 → 导出数据，链路入口）
+  → Mimics（CT 分割重建：HU 阈值 226-1405 → 区域生长 → Calculate 3D）
+  → Geomagic Studio（补洞/缺损表面重建——作用小于另外三个）
+  → ZBrush（主力设计雕刻，白模 STL 交付）
+  → Magics（打印前处理验证）→ PEEK 打印</code></pre>
 </section>
 <section class="reveal block-card">
-<h2>```</h2>
-<p>PROPLAN CMF（手术规划 → 导出数据，链路入口） → Mimics（CT 分割重建：HU 阈值 226-1405 → 区域生长 → Calculate 3D） → Geomagic Studio（补洞/缺损表面重建——作用小于另外三个） → ZBrush（主力设计雕刻，白模 STL 交付） → Magics（打印前处理验证）→ PEEK 打印</p>
-<pre><code>
-CT→3D 原理速查
-
-DICOM 序列（每像素带 HU 密度值）→ Mimics 导入转换 → 骨阈值分割（Bone 预设 HU 226–1405）→ Region Growing 分离骨骼 → marching cubes 表面提取 → Binary STL。
-
-## 四软件分工与细节
-
-| 软件 | 职责 | 关键细节 |
-|---|---|---|
-| PROPLAN CMF | 规划+导数据 | 双平台架构（工程师端+医生网页端）；⚠️ 导 iPlan 会绕冠状面转 180°，需 3-matic 先合并坐标系 |
-| Mimics | CT→3D | 七步协议；混入=阈值+Lasso 删 / 缺失=逐层手补 / 小孔=交 Studio |
-| ZBrush | 主力设计 | 患者扫描 STL 底模起雕 → Dynamesh → Move/ClayBuildup/DamStandard/Pinch → 关对称查自然度 |
-| Geomagic Studio | 补洞 | Fill Holes 四步法 + Bridge 大洞架桥 + 网格三件套（Remesh/Relax/Decimate）；中文菜单路径见 raw |
-
-## 工时基准（白模标准）
-
-熟练雕师 **3-4 小时/头像** 成立（Polycount 从业者实测 NPC 级 3-4h）；写实似然级才需 20-60h（VFX 报价单）。设计师&quot;半天一个&quot;说法在白模条件下可信。
-
-## 学习路径（écorché 皮肉分层体系）
-
-1. 入门：中文图文 / Pavlovich 免费系列
-1. 分层核心：Georgian Avasilcutei《Facial Anatomy Tutorial》$65.7（骨→肌肉→**脂肪垫**三层 + 头骨工程文件）
-1. 体系深化：Ryan Kingslien《Digital Realism: The Face》（扫描起雕+脂肪垫建立——与 PEEK 患者工作流同构；Kingslien=ZBrush 创始团队成员、软件自带解剖模型构建者）
-1. 全球中心：好莱坞 Gnomon / FlippedNormals / CGMA《Character Facial Sculpting》（10 周，泥球由内而外分层）
-
-## raw 文件清单（全文）
-
-| 文件 | 云端文档 |
-|---|---|
-| `raw/ZBrush2022-PEEK面部设计软件.md` | [JYNNRxj6VwbyJdanFCthmk](https://www.workbuddy.cn/space/d/JYNNRxj6VwbyJdanFCthmk) |
-| `raw/MaterialiseMagics-PEEK3D打印前处理软件.md` | [poP7gainXGB6CapXLoQVKU](https://www.workbuddy.cn/space/d/poP7gainXGB6CapXLoQVKU) |
-| `raw/ZBrush人头分层解剖雕刻教程全网汇总.md` | [DJnUzGxJausBGd2UopQsXT](https://www.workbuddy.cn/space/d/DJnUzGxJausBGd2UopQsXT) |
-| `raw/ZBrush人头分层解剖教程汇总-补充篇.md` | [oQZe88OhLrMKlx51hojC3H](https://www.workbuddy.cn/space/d/oQZe88OhLrMKlx51hojC3H) |
-| `raw/ZBrush人头解剖雕刻-全球地图篇.md` | [PxnWq3eEjSAzXbPUWywT2m](https://www.workbuddy.cn/space/d/PxnWq3eEjSAzXbPUWywT2m) |
-| `raw/PEEK行业真实设计工具链与培训体系.md` | [oQ6zeBjqxuSAW50X61ztZW](https://www.workbuddy.cn/space/d/oQ6zeBjqxuSAW50X61ztZW) |
-| `raw/PEEK四大软件深度详解.md` | [xijTZQtz2LOom4UeaBtqZa](https://www.workbuddy.cn/space/d/xijTZQtz2LOom4UeaBtqZa) |
-| `raw/PEEK四大软件操作原理篇.md` | [8X3PqrvWJs8awxs35jno06](https://www.workbuddy.cn/space/d/8X3PqrvWJs8awxs35jno06) |
-
-## 推广话术修正
-
-- 英文表述建议用 \*\*&quot;haptic digital sculpting&quot;（触觉数字雕刻）\*\*指 Geomagic Freeform 真实工艺——比 &quot;ZBrush&quot; 更医疗更高端
-- &quot;design-per-patient&quot; 差异化故事：数字雕刻大师手工设计 vs 硅胶批量模具
-
-KS_DOC_REVIEWS 78jo32JzCfA1jEX1KL6HWV 77738 https://www.workbuddy.cn/space/d/78jo32JzCfA1jEX1KL6HWV</code></pre>
+<h2>CT→3D 原理速查</h2>
+<p>DICOM 序列（每像素带 HU 密度值）→ Mimics 导入转换 → 骨阈值分割（Bone 预设 HU 226–1405）→ Region Growing 分离骨骼 → marching cubes 表面提取 → Binary STL。</p>
+</section>
+<section class="reveal block-card">
+<h2>四软件分工与细节</h2>
+<div class="table-wrap"><table><thead><tr><th>软件</th><th>职责</th><th>关键细节</th></tr></thead><tbody><tr><td>PROPLAN CMF</td><td>规划+导数据</td><td>双平台架构（工程师端+医生网页端）；⚠️ 导 iPlan 会绕冠状面转 180°，需 3-matic 先合并坐标系</td></tr><tr><td>Mimics</td><td>CT→3D</td><td>七步协议；混入=阈值+Lasso 删 / 缺失=逐层手补 / 小孔=交 Studio</td></tr><tr><td>ZBrush</td><td>主力设计</td><td>患者扫描 STL 底模起雕 → Dynamesh → Move/ClayBuildup/DamStandard/Pinch → 关对称查自然度</td></tr><tr><td>Geomagic Studio</td><td>补洞</td><td>Fill Holes 四步法 + Bridge 大洞架桥 + 网格三件套（Remesh/Relax/Decimate）；中文菜单路径见 raw</td></tr></tbody></table></div>
+</section>
+<section class="reveal block-card">
+<h2>工时基准（白模标准）</h2>
+<p>熟练雕师 <strong>3-4 小时/头像</strong> 成立（Polycount 从业者实测 NPC 级 3-4h）；写实似然级才需 20-60h（VFX 报价单）。设计师&quot;半天一个&quot;说法在白模条件下可信。</p>
+</section>
+<section class="reveal block-card">
+<h2>学习路径（écorché 皮肉分层体系）</h2>
+<ol><li>入门：中文图文 / Pavlovich 免费系列</li><li>分层核心：Georgian Avasilcutei《Facial Anatomy Tutorial》$65.7（骨→肌肉→<strong>脂肪垫</strong>三层 + 头骨工程文件）</li><li>体系深化：Ryan Kingslien《Digital Realism: The Face》（扫描起雕+脂肪垫建立——与 PEEK 患者工作流同构；Kingslien=ZBrush 创始团队成员、软件自带解剖模型构建者）</li><li>全球中心：好莱坞 Gnomon / FlippedNormals / CGMA《Character Facial Sculpting》（10 周，泥球由内而外分层）</li></ol>
+</section>
+<section class="reveal block-card">
+<h2>raw 文件清单（全文）</h2>
+<div class="table-wrap"><table><thead><tr><th>文件</th><th>云端文档</th></tr></thead><tbody><tr><td><code>raw/ZBrush2022-PEEK面部设计软件.md</code></td><td><a href="https://www.workbuddy.cn/space/d/JYNNRxj6VwbyJdanFCthmk" target="_blank" rel="noopener">JYNNRxj6VwbyJdanFCthmk</a></td></tr><tr><td><code>raw/MaterialiseMagics-PEEK3D打印前处理软件.md</code></td><td><a href="https://www.workbuddy.cn/space/d/poP7gainXGB6CapXLoQVKU" target="_blank" rel="noopener">poP7gainXGB6CapXLoQVKU</a></td></tr><tr><td><code>raw/ZBrush人头分层解剖雕刻教程全网汇总.md</code></td><td><a href="https://www.workbuddy.cn/space/d/DJnUzGxJausBGd2UopQsXT" target="_blank" rel="noopener">DJnUzGxJausBGd2UopQsXT</a></td></tr><tr><td><code>raw/ZBrush人头分层解剖教程汇总-补充篇.md</code></td><td><a href="https://www.workbuddy.cn/space/d/oQZe88OhLrMKlx51hojC3H" target="_blank" rel="noopener">oQZe88OhLrMKlx51hojC3H</a></td></tr><tr><td><code>raw/ZBrush人头解剖雕刻-全球地图篇.md</code></td><td><a href="https://www.workbuddy.cn/space/d/PxnWq3eEjSAzXbPUWywT2m" target="_blank" rel="noopener">PxnWq3eEjSAzXbPUWywT2m</a></td></tr><tr><td><code>raw/PEEK行业真实设计工具链与培训体系.md</code></td><td><a href="https://www.workbuddy.cn/space/d/oQ6zeBjqxuSAW50X61ztZW" target="_blank" rel="noopener">oQ6zeBjqxuSAW50X61ztZW</a></td></tr><tr><td><code>raw/PEEK四大软件深度详解.md</code></td><td><a href="https://www.workbuddy.cn/space/d/xijTZQtz2LOom4UeaBtqZa" target="_blank" rel="noopener">xijTZQtz2LOom4UeaBtqZa</a></td></tr><tr><td><code>raw/PEEK四大软件操作原理篇.md</code></td><td><a href="https://www.workbuddy.cn/space/d/8X3PqrvWJs8awxs35jno06" target="_blank" rel="noopener">8X3PqrvWJs8awxs35jno06</a></td></tr></tbody></table></div>
+</section>
+<section class="reveal block-card">
+<h2>推广话术修正</h2>
+<ul><li>英文表述建议用 \<em>\</em>&quot;haptic digital sculpting&quot;（触觉数字雕刻）\<em>\</em>指 Geomagic Freeform 真实工艺——比 &quot;ZBrush&quot; 更医疗更高端</li><li>&quot;design-per-patient&quot; 差异化故事：数字雕刻大师手工设计 vs 硅胶批量模具</li></ul>
 </section>
 <footer>由 WorkBuddy 资料库生成</footer>
 </main>

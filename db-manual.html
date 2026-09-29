@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>李书远数据库使用说明</title>
+<title>国内医美自媒体运营数据库</title>
 <style>
 /* :root 只是变量插槽：值为无彩占位灰，配色由 beautify 覆写决定（见 beautify/beautify-guide.md）。
    下面的排版仅为「结构可读」的最低限度基线，agent 美化时应整体重写，不必沿用。 */
@@ -86,7 +86,7 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px
 </head>
 <body>
 <header class="hero">
-  <h1>李书远数据库使用说明</h1>
+  <h1>国内医美自媒体运营数据库</h1>
   <p class="hero-summary">注册制：已登记（见 <code>F:\codex\catalog\database-registry-v0.json</code>） 创建日期：2026-08-14</p>
 </header>
 <main class="wrap">
@@ -104,31 +104,22 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px
 </section>
 <section class="reveal block-card">
 <h2>目录结构</h2>
+<pre><code>domestic-aesthetic-media-ops/
+├── README.md              # 本说明
+├── raw/                   # 原始素材存档（用户原文 / 抓取原文，只读归档）
+├── 需求/                  # 创作要求/需求规格（用户原话 + 解析）
+└── 素材/                  # 整理后的文案条目
+    ├── 骨相审美/          # 按主题分目录
+    ├── PEEK/              # PEEK 材料知识 / 文案关键词与卖点 / 平台账号源 / 结构化数据（2026-08-16 从 medical-aesthetic-corpus 归集）
+    └── 风格基准/          # 文案风格基准 / 语感规范</code></pre>
 </section>
 <section class="reveal block-card">
-<h2>```</h2>
-<p>domestic-aesthetic-media-ops/ ├── README.md # 本说明 ├── raw/ # 原始素材存档（用户原文 / 抓取原文，只读归档） ├── 需求/ # 创作要求/需求规格（用户原话 + 解析） └── 素材/ # 整理后的文案条目 ├── 骨相审美/ # 按主题分目录 ├── PEEK/ # PEEK 材料知识 / 文案关键词与卖点 / 平台账号源 / 结构化数据（2026-08-16 从 medical-aesthetic-corpus 归集） └── 风格基准/ # 文案风格基准 / 语感规范</p>
-<pre><code>
-条目规范（写库时必须遵守）
-
-- 每条文案条目 = 1 个 Markdown 文件，或同主题合集文件内的一个编号小节
-- `id`：`GM--`（GM = 国内医美 Guomei）
-- `原文`：文案原文（保留原话，不改写）
-- `主题`：骨相审美 / 鼻部 / 眼周 / ...
-- `用途`：短视频开场 / 短视频收尾 / 朋友圈 / 简介 / 金句 ...
-- `时长`（短视频类）：15s / 30s / 60s
-- `入库日期`
-- `来源`：用户提供 / 精编 / 生成
-- 用户提供的原文必须**原样归档**到 `raw/`，然后才在 `素材/` 中整理
-- 风格基准见 `素材/风格基准/`，新文案应遵守
-
-## 与医美语料库的关系
-
-- 本库 = 运营/创作素材库（文案、话术、脚本）
-- `F:\codex\data\medical-aesthetic-corpus\` = 行业知识语料库（文章、手术、风险、产品）
-- 两者互补：创作文案时先查本库找表达，需要医学事实/合规依据时查语料库
-
-KS_DOC_REVIEWS VDxW4UaJXkKhNhvcCgYrWz 4433 https://www.workbuddy.cn/space/d/VDxW4UaJXkKhNhvcCgYrWz</code></pre>
+<h2>条目规范（写库时必须遵守）</h2>
+<ul><li>每条文案条目 = 1 个 Markdown 文件，或同主题合集文件内的一个编号小节</li><li>每条条目必须包含字段：</li><li><code>id</code>：<code>GM-&lt;主题&gt;-&lt;序号&gt;</code>（GM = 国内医美 Guomei）</li><li><code>原文</code>：文案原文（保留原话，不改写）</li><li><code>主题</code>：骨相审美 / 鼻部 / 眼周 / ...</li><li><code>用途</code>：短视频开场 / 短视频收尾 / 朋友圈 / 简介 / 金句 ...</li><li><code>时长</code>（短视频类）：15s / 30s / 60s</li><li><code>入库日期</code></li><li><code>来源</code>：用户提供 / 精编 / 生成</li><li>用户提供的原文必须<strong>原样归档</strong>到 <code>raw/</code>，然后才在 <code>素材/</code> 中整理</li><li>风格基准见 <code>素材/风格基准/</code>，新文案应遵守</li></ul>
+</section>
+<section class="reveal block-card">
+<h2>与医美语料库的关系</h2>
+<ul><li>本库 = 运营/创作素材库（文案、话术、脚本）</li><li><code>F:\codex\data\medical-aesthetic-corpus\</code> = 行业知识语料库（文章、手术、风险、产品）</li><li>两者互补：创作文案时先查本库找表达，需要医学事实/合规依据时查语料库</li></ul>
 </section>
 <footer>由 WorkBuddy 资料库生成</footer>
 </main>

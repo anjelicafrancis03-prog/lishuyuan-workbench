@@ -1,7 +1,7 @@
----
+***
 
-okf\_version: "0.1" 
-type: bundle\_index 
+okf_version: "0.1" 
+type: bundle_index 
 title: 李书远数据库使用手册 
 description: 国内医美自媒体运营素材库（骨相审美文案 / PEEK 素材 / 朋友圈话术）+ 强制视频处理标准（>100MB 文件必须分割到 ≤100MB 再上传）+ 本地/云端双载体使用规范；raw/ 收录创作体系全文（骨相文案集/语感基准/创作要求/SOP/书单/CT-DICOM 技术标准） 
 tags: \[lishuyuan, 李书远, 医美, 自媒体运营, 骨相审美, PEEK, 视频处理, media-ops, 朋友圈文案, 语感基准, 创作要求, 书单, CT-DICOM\] 
@@ -12,9 +12,9 @@ related:
 - F:\\codex\\okf-bundles\\peek-medical-aesthetic\\index.md（PEEK 医美材料知识）
 - F:\\codex\\tools\\agent-system-map\\catalog\\database-registry-v0.json（权威数据库注册表 db-domestic-aesthetic-media-ops）
 - F:\\codex\\data\\domestic-aesthetic-media-ops\\（本地库文件） 
-fresh\_until: 2026-11-15（+90d）
+fresh_until: 2026-11-15（+90d）
 
----
+***
 
 > 坐标：map.projects / projects.new-media-ops（新媒体运营） 
 呈现：manual-registry（okf:lishuyuan-database）
@@ -23,14 +23,14 @@ fresh\_until: 2026-11-15（+90d）
 
 ## 一句话规则
 
-## ```text
+```text
 李书远数据库 = 国内医美自媒体运营素材库（骨相审美理念 → PEEK 落地业务）；
 双载体 = 本地 F:\codex\data\domestic-aesthetic-media-ops\ + WorkBuddy 资料库云端空间；
 视频标准 = 任何 >100MB 文件必须先分割到 ≤100MB 再上传（FFmpeg 按时长法，-segment_size 不可用）；
 搜索词 = 李书远 / 国内医美自媒体运营 / 骨相审美 / PEEK / 医美运营素材。
 ```
 
-1. 库定位
+## 1. 库定位
 
 - **性质**：国内医美自媒体运营的创作素材库（短视频文案、朋友圈文案、账号简介、话术、风格基准）
 - **主题关系**：骨相审美 = 理念/内容层（立人设与审美认知）；PEEK（聚醚醚酮）= 落地业务层（3D 打印骨相填充/轮廓手术推广）。创作顺序：骨相文案开场 → PEEK 科普/对比承接转化
@@ -46,25 +46,26 @@ fresh\_until: 2026-11-15（+90d）
 
 ## 3. 目录结构（本地库）
 
-## ```
+```
 domestic-aesthetic-media-ops/
-├── README.md # 使用说明（李书远命名 + 视频标准）
-├── raw/ # 原始素材存档（只读归档）
-├── 需求/ # 创作要求/需求规格
-└── 素材/ # 整理后文案条目
-├── 骨相审美/ # 骨相审美文案集（GM-骨相-001~010）
-├── PEEK/ # PEEK材料知识/文案关键词与卖点/平台账号源/结构化数据
-└── 风格基准/ # 语感规范
+├── README.md              # 使用说明（李书远命名 + 视频标准）
+├── raw/                   # 原始素材存档（只读归档）
+├── 需求/                  # 创作要求/需求规格
+└── 素材/                  # 整理后文案条目
+    ├── 骨相审美/          # 骨相审美文案集（GM-骨相-001~010）
+    ├── PEEK/              # PEEK材料知识/文案关键词与卖点/平台账号源/结构化数据
+    └── 风格基准/          # 语感规范
 ```
 
-4. 视频处理标准（强制，所有上传者遵守）
+## 4. 视频处理标准（强制，所有上传者遵守）
 
 > **凡是超过 100MB 的任何文件，都必须分割到 100MB 以内（建议 ≤90MB 留余量）才能上传。** 
 完整细节见云端空间「视频处理标准」文档；摘要如下：
 
 1. **判定**：文件 >100MB → 必须分割
-- `ffprobe` 探测总时长/大小 → 算平均码率 → 每段时长 = 90MB ÷ 码率
-- `ffmpeg -i input.mp4 -c copy -f segment -segment_time -reset_timestamps 1 out_%03d.mp4`
+1. **分割方法**：FFmpeg **按时长法**（`-segment_size` 在 gyan.dev 版不可用，实测 8.1/9.0.1 报 Unrecognized option）：
+   - `ffprobe` 探测总时长/大小 → 算平均码率 → 每段时长 = 90MB ÷ 码率
+   - `ffmpeg -i input.mp4 -c copy -f segment -segment_time <秒> -reset_timestamps 1 out_%03d.mp4`
 1. **校验**：每段 ≤100MB（建议 ≤90MB）
 1. **备注规范**：每段备注必须写原文件名、总大小、分片数、本片序号、分割时间、工具版本（如 FFmpeg 9.0.1）
 1. **禁止**：>100MB 原样上传 / 用 `-segment_size` / 未经同意重新编码降质
@@ -83,7 +84,7 @@ domestic-aesthetic-media-ops/
 
 ## 6. 使用规范（写库必读）
 
-- 条目字段：`GM--` + 原文/主题/用途/时长/入库日期/来源
+- 条目字段：`GM-<主题>-<序号>` + 原文/主题/用途/时长/入库日期/来源
 - 用户原文必须**原样归档**到 `raw/` 再整理
 - 风格基准见 `素材/风格基准/`
 - 与医美语料库（medical-aesthetic-corpus）互补：本库管"表达"，语料库管"医学事实/合规依据"
@@ -95,12 +96,12 @@ domestic-aesthetic-media-ops/
 - `db-002 医美语料库`：行业知识语料库
 - 任务表：云端「医美运营任务表」（每天任务/单次任务，板块/任务模式/状态/优先级/负责人）
 
----
+***
 
 # 创作体系全文收录（2026-08-23 OKF 化增补）
 
 > 来源：李书远本地库 `素材/`+`需求/`（raw/ 全文收录，权威原件仍在本地库） 
-fresh\_until: 2026-11-21（+90d）
+fresh_until: 2026-11-21（+90d）
 
 ## raw 文件清单
 
@@ -119,5 +120,3 @@ fresh\_until: 2026-11-21（+90d）
 - 写骨相文案 → 先读**语感基准**再套**文案集**条目格式
 - PEEK 设计相关技术标准 → 配合 `okf:peek-medical-aesthetic` 的设计管线章节
 - 团队新成员/新 agent 入职 → 必读 SOP 全文
-
-KS_DOC_REVIEWS muZOC3k2kFKBKu9IrVSUQg 17707 https://www.workbuddy.cn/space/d/muZOC3k2kFKBKu9IrVSUQg

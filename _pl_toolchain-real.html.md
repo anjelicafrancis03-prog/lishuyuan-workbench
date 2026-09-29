@@ -9,16 +9,16 @@
 
 原因：医疗器械受 FDA / CE / ISO 13485 法规约束，设计必须用**经过验证的医疗软件**。ZBrush 属娱乐行业工具（无医疗认证），在行业里的角色仅限美学概念辅助。真正的行业标配是：
 
-## ```
+```
 【行业标准栈】（多信源交叉验证一致）
 Mimics（CT 分割重建）
-→ 3-matic（植入物设计：镜像健侧/厚度分布/固定点）
-→ Geomagic Freeform + Phantom 触觉笔（"数字泥塑"——行业版 ZBrush！）
-→ Magics（验证修复打印准备）
-→ PEEK 打印（3D Systems EXT 220 MED 医疗级 FFF / SLM 钛）
+  → 3-matic（植入物设计：镜像健侧/厚度分布/固定点）
+  → Geomagic Freeform + Phantom 触觉笔（"数字泥塑"——行业版 ZBrush！）
+  → Magics（验证修复打印准备）
+  → PEEK 打印（3D Systems EXT 220 MED 医疗级 FFF / SLM 钛）
 ```
 
-二、三个真实公司实例（一手流程公开）
+## 二、三个真实公司实例（一手流程公开）
 
 ### ① MedCAD（美国达拉斯，颅面定制植入）
 
@@ -98,5 +98,3 @@ Mimics（CT 分割重建）
 魅惑实战确认的两个环节修正：
 
 ## 工具链修正补充（魅惑实战确认 2026-08-23）
-
-KS_DOC_REVIEWS oQ6zeBjqxuSAW50X61ztZW 13891 https://www.workbuddy.cn/space/d/oQ6zeBjqxuSAW50X61ztZW

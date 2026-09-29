@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>李书远数据库团队SOP</title>
+<title>李书远数据库 · 团队使用 SOP</title>
 <style>
 /* :root 只是变量插槽：值为无彩占位灰，配色由 beautify 覆写决定（见 beautify/beautify-guide.md）。
    下面的排版仅为「结构可读」的最低限度基线，agent 美化时应整体重写，不必沿用。 */
@@ -86,7 +86,7 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px
 </head>
 <body>
 <header class="hero">
-  <h1>李书远数据库团队SOP</h1>
+  <h1>李书远数据库 · 团队使用 SOP</h1>
   <p class="hero-summary">适用范围：所有使用李书远数据库的 Agent / 团队成员 目的：统一&quot;存→管→用→看→协&quot;的规范，让库持续可用、数据不丢、看板常新 关联：<code>素材/WorkBuddy资料库应用参考.md</code>、<code>素材/PEEK/</code> 系列、看板 2 个</p>
 </header>
 <main class="wrap">
@@ -102,20 +102,20 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px
 <section class="reveal block-card">
 <h2>二、数据入口流程（公众号/链接等）</h2>
 <p><strong>任何外部内容进入，先走 intake，禁止直接问&quot;怎么处理&quot;：</strong></p>
-<ol><li><strong>保存归档</strong>：公众号链接 → <code>C:\HTML MD 网络来源\微信公众号\</code>（命名：日期\_时间\_文章ID\_标题，HTML+MD 双份）</li></ol>
+<ol><li><strong>保存归档</strong>：公众号链接 → <code>C:\HTML MD 网络来源\微信公众号\</code>（命名：日期_时间_文章ID_标题，HTML+MD 双份）</li><li><strong>分流判断</strong>：</li></ol>
 <ul><li><strong>进数据库</strong>：与 PEEK/医美内容域相关 → 存本地 raw/素材 → 同步云端</li><li><strong>变任务</strong>：有明确工程动作 → beads 建任务</li><li><strong>仅归档</strong>：无关联内容 → 保留归档即可</li></ul>
 <ol><li><strong>记录</strong>：在 beads 追加 intake 记录（map.beads.intake，intake:wechat）</li></ol>
 </section>
 <section class="reveal block-card">
 <h2>三、素材入库规范</h2>
 <h3>3.1 原始文件（raw）</h3>
-<ul><li>用户原文 / 抓取原文 → <code>raw/</code> 按日期分目录，只读归档</li><li>文献原文 → <code>raw/-PEEK文献原文/</code>，标注来源/DOI/抓取时间</li></ul>
+<ul><li>用户原文 / 抓取原文 → <code>raw/</code> 按日期分目录，只读归档</li><li>文献原文 → <code>raw/&lt;日期&gt;-PEEK文献原文/</code>，标注来源/DOI/抓取时间</li></ul>
 <h3>3.2 整理素材（素材/）</h3>
 <ul><li>按主题分目录（素材/PEEK/、素材/骨相审美/、素材/风格基准/…）</li><li>每个文件头标注：主题、入库日期、用途、来源、关联</li></ul>
 <h3>3.3 结构化数据（database）★ 重要</h3>
 <blockquote><p>⚠️ <strong>必须用 CSV 导入，不要用批量添加接口</strong> </p></blockquote>
 <p>踩坑记录：<code>batch_add_database_records</code> 写入的记录查询接口读不到（索引不同步）； 正确路径：生成 CSV → <code>import_csv.py --token-stdin --database-id </code> 覆盖导入。</p>
-<ul><li>建表：<code>create_database.py --schema &#x27;{&quot;title&quot;:&quot;...&quot;,&quot;space_id&quot;:&quot;...&quot;,&quot;properties&quot;:[...]}&#x27;</code>（类型嵌在 config 里）</li><li>导入：CSV（utf-8-sig 带表头）→ import\_csv</li><li>字段设计参考：PEEK市场数据（分类/指标/数值/区域/年份/来源/解读）</li></ul>
+<ul><li>建表：<code>create_database.py --schema &#x27;{&quot;title&quot;:&quot;...&quot;,&quot;space_id&quot;:&quot;...&quot;,&quot;properties&quot;:[...]}&#x27;</code>（类型嵌在 config 里）</li><li>导入：CSV（utf-8-sig 带表头）→ import_csv</li><li>字段设计参考：PEEK市场数据（分类/指标/数值/区域/年份/来源/解读）</li></ul>
 </section>
 <section class="reveal block-card">
 <h2>四、看板维护</h2>
@@ -124,7 +124,7 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px
 <h3>维护规则</h3>
 <ul><li><strong>数据更新</strong>：改数据库 → 看板自动同步（SDK 双向绑定）</li><li><strong>看板改版</strong>：改本地 HTML → lint → <code>import_html.py --node-block-id --databases ...</code> 覆盖 → 重新 publish-page</li><li><strong>lint 要求</strong>：含 addRecord 的页面必须有 localStorage 表单缓存（DSDK008）</li></ul>
 <h3>看板 HTML 规范</h3>
-<ul><li><code>data-sp-bindable=&quot;database&quot;</code> + <code>data-sp-database-id=&quot;&quot;</code> 必须成对</li><li>用 <code>window.__SMART_PAGE__.database</code> SDK：query/getSchema/addRecord/updateRecord</li><li>记录是扁平对象 <code>{字段: 值}</code>，含 record\_id</li></ul>
+<ul><li><code>data-sp-bindable=&quot;database&quot;</code> + <code>data-sp-database-id=&quot;&quot;</code> 必须成对</li><li>用 <code>window.__SMART_PAGE__.database</code> SDK：query/getSchema/addRecord/updateRecord</li><li>记录是扁平对象 <code>{字段: 值}</code>，含 record_id</li></ul>
 </section>
 <section class="reveal block-card">
 <h2>五、Agent 工作流（团队重点）</h2>
@@ -133,7 +133,7 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px
 <h3>干完活</h3>
 <ol><li><strong>写回空间</strong>：新素材 → 本地入库 + 云端同步（doc/database）</li><li><strong>更新任务</strong>：看板/任务表里更新状态、备注</li><li><strong>记录进度</strong>：重要产出写 beads notes</li></ol>
 <h3>数据表维护</h3>
-<ul><li>新增数据 → CSV 追加 → import\_csv 覆盖导入 → 看板自动更新</li></ul>
+<ul><li>新增数据 → CSV 追加 → import_csv 覆盖导入 → 看板自动更新</li></ul>
 </section>
 <section class="reveal block-card">
 <h2>六、任务系统</h2>
@@ -146,10 +146,10 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px
 </section>
 <section class="reveal block-card">
 <h2>八、检查清单（每周维护时过一遍）</h2>
+<ul><li>云端节点与本地文件对账（无遗漏）</li><li>任务表状态更新、看板显示正常</li><li>PEEK 数据看板数据是否需更新（季度）</li><li>新入库素材走完&quot;raw→素材→云端&quot;全流程</li><li>公众号/链接 intake 归档无堆积</li></ul>
 </section>
 <section class="reveal block-card">
 <blockquote><p>⚠️ 本 SOP 随实践迭代；技术细节以资料库 skill 文档为准（<code>page/data-page-flow.md</code>、<code>database/entry.md</code>）。</p></blockquote>
-<p>KS_DOC_REVIEWS i4NoCeXRVXPjcSJ7t9Igc6 15302 https://www.workbuddy.cn/space/d/i4NoCeXRVXPjcSJ7t9Igc6</p>
 </section>
 <footer>由 WorkBuddy 资料库生成</footer>
 </main>

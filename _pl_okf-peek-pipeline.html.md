@@ -1,7 +1,7 @@
----
+***
 
-okf\_version: "0.1" 
-type: bundle\_index 
+okf_version: "0.1" 
+type: bundle_index 
 title: PEEK 3D打印医美材料知识包 
 description: 聚醚醚酮(PEEK)在3D打印医美手术中的应用 — 材料特性、临床数据、市场现状、竞品对比、内容创作切入点、全平台账号源；含设计管线四软件实战体系（PROPLAN CMF/Mimics/ZBrush/Geomagic Studio：操作原理、CT→3D流程、数据格式、学习路径） 
 tags: \[medical-aesthetic, PEEK, polyetheretherketone, 3d-printing, implant, rhinoplasty, jaw-contouring, craniofacial, zbrush, magics, mimics, proplan-cmf, geomagic, design-pipeline, ecorche\] 
@@ -16,10 +16,10 @@ related:
 - F:\\codex\\data\\medical-aesthetic-corpus\\reference\\peek-platform-account-sources-20260705.md
 - F:\\codex\\reports\\run-manifests\\2026-07-05-peek-yimei-platform-search-1945\\peek-yimei-platform-account-report.md
 
----
+***
 
 > 证据：见正文 
-fresh\_until: 2026-11-04（+90d） 
+fresh_until: 2026-11-04（+90d） 
 坐标：map.projects.project-assets（主）
 
 # PEEK 3D打印医美材料知识包
@@ -193,6 +193,12 @@ PEEK 是目前3D打印医美植入物的最佳材料选择：弹性模量接近�
 - 16 个 PEEK 标签
 
 常用查询线索：
+
+```sql
+SELECT * FROM procedures WHERE procedure_id LIKE 'proc_peek%';
+SELECT * FROM candidate_knowledge_items WHERE source_table = 'research_dossiers';
+SELECT * FROM topic_tags WHERE article_id = 'art_peek_master';
+```
 
 边界：
 
@@ -375,12 +381,12 @@ GEO 部署优先级：Phase 1 → Organization + FAQPage（最高收益），Pha
 1. JW整形外科. "INNOFIT 3D打印定制鼻部整形术." jwbeauty.cn.
 1. Dr. Tom Liu. Threads PEEK讨论. threads.com.
 
----
+***
 
 # 设计管线与软件工具链（2026-08-23 增补，魅惑实战确认）
 
 > 来源：李书远数据库 PEEK 系列 8 篇（raw/ 全文收录）+ 云端空间文档 
-fresh\_until: 2026-11-21（+90d）
+fresh_until: 2026-11-21（+90d）
 
 ## 一句话结论
 
@@ -388,15 +394,15 @@ PEEK 定制植入物实际管线四件套：**PROPLAN CMF 导数据 → Mimics �
 
 ## 实战流程（魅惑定版）
 
-## ```
+```
 PROPLAN CMF（手术规划 → 导出数据，链路入口）
-→ Mimics（CT 分割重建：HU 阈值 226-1405 → 区域生长 → Calculate 3D）
-→ Geomagic Studio（补洞/缺损表面重建——作用小于另外三个）
-→ ZBrush（主力设计雕刻，白模 STL 交付）
-→ Magics（打印前处理验证）→ PEEK 打印
+  → Mimics（CT 分割重建：HU 阈值 226-1405 → 区域生长 → Calculate 3D）
+  → Geomagic Studio（补洞/缺损表面重建——作用小于另外三个）
+  → ZBrush（主力设计雕刻，白模 STL 交付）
+  → Magics（打印前处理验证）→ PEEK 打印
 ```
 
-CT→3D 原理速查
+## CT→3D 原理速查
 
 DICOM 序列（每像素带 HU 密度值）→ Mimics 导入转换 → 骨阈值分割（Bone 预设 HU 226–1405）→ Region Growing 分离骨骼 → marching cubes 表面提取 → Binary STL。
 
@@ -437,5 +443,3 @@ DICOM 序列（每像素带 HU 密度值）→ Mimics 导入转换 → 骨阈值
 
 - 英文表述建议用 \*\*"haptic digital sculpting"（触觉数字雕刻）\*\*指 Geomagic Freeform 真实工艺——比 "ZBrush" 更医疗更高端
 - "design-per-patient" 差异化故事：数字雕刻大师手工设计 vs 硅胶批量模具
-
-KS_DOC_REVIEWS 78jo32JzCfA1jEX1KL6HWV 77738 https://www.workbuddy.cn/space/d/78jo32JzCfA1jEX1KL6HWV

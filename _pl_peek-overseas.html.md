@@ -6,7 +6,7 @@
 关联：`素材/PEEK/PEEK市场趋势判断.md`、`素材/PEEK/PEEK中外研究格局与内容策略.md` 
 数据可信度：主流机构（Grand View/Precedence/GIA/ISAPS/ASPS）高置信；聚合平台（dataintelo/pmarketresearch/PT71）中置信，引用标注来源
 
----
+***
 
 ## 一、美国 PEEK 植入物市场（核心）
 
@@ -112,13 +112,13 @@
 - 中国团队 PEEK PSI 面部整形研究已发表（Aesthetic Plastic Surgery）——国际临床背书
 - **上海具备唯一性制度优势**：地方标准（DB31/T 1487-2024）+试点医院+外商独资医院+免签+离境退税全齐备
 
----
+***
 
 ## 核心结论（一句话）
 
 **PEEK 在美国是"又大又快"的核心市场（北美 41-48% 份额 + 全球 7.9-8.5% CAGR + FDA 2023-2026 密集放行 + 定制细分 41% 增速），欧美骨性需求真实且已在向 3D 打印/定制 PEEK 整合；中国 PEEK 医疗产业化（中研/康拓/悟空随形）与来华医美消费（翻倍增长、上海 27 万人次）为"上海 PEEK 出海"提供了双轮支撑。**
 
----
+***
 
 ## 数据可信度提示
 
@@ -126,5 +126,3 @@
 - 中置信：dataintelo / pmarketresearch / PT71（ami.net.cn）/ MarketIntelo 等聚合平台——数字口径有差异，引用标注机构
 - 低置信（未证实）：Stryker 收购 3D PEEK 打印服务商等二手传言——不作为论据
 - 提醒：对外宣传用主流机构口径；ASPS 2024 调整统计口径，历史对比需谨慎
-
-KS_DOC_REVIEWS WV4qFplOBAsDgKRgSCrfq7 35078 https://www.workbuddy.cn/space/d/WV4qFplOBAsDgKRgSCrfq7

@@ -53,12 +53,10 @@
 
 ```
 入门：中文图文（绘学霸六步法）建立流程感
-↓
+  ↓
 核心：Georgian《Facial Anatomy Tutorial》——分层体系+头骨工程文件（可当 PEEK 设计底模）
-↓
+  ↓
 进阶：Otana 头骨专精课（骨相精度）+ Victory3D 似然课（个性化形态）
-↓
+  ↓
 应用：以真实患者 CT 重建数据为底，按 écorché 分层法做假体形态设计
 ```
-
-KS_DOC_REVIEWS DJnUzGxJausBGd2UopQsXT 12192 https://www.workbuddy.cn/space/d/DJnUzGxJausBGd2UopQsXT

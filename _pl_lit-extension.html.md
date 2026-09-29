@@ -6,7 +6,7 @@
 原文档案：`raw/2026-08-17-PEEK文献原文/` 
 关联：`素材/PEEK/PEEK与软组织关系-文献调研.md`（9 篇原始文献）
 
----
+***
 
 ## 一、相似于「Zwijnenberg 2026 PEEK 软组织预测」（方法学）
 
@@ -31,7 +31,7 @@
 1. **Forehead/Brow Reduction or Augmentation with Custom Implants** / Eppley BL / Facial Plast Surg 2019;35(5):430-445, PMID 31639868 / [https://pubmed.ncbi.nlm.nih.gov/31639868/](https://pubmed.ncbi.nlm.nih.gov/31639868/) —— 定制假体隆额/隆眉弓代表作，额部定制假体权威
 1. **Forehead augmentation with alloplastic implants** / Wong JK / Facial Plast Surg Clin North Am 2010;18(1):71-77, PMID 20206091 / [https://pubmed.ncbi.nlm.nih.gov/20206091/](https://pubmed.ncbi.nlm.nih.gov/20206091/) —— ePTFE/硅胶隆额综述，不同材料隆额对比叙事
 1. **Forehead Contouring as an Adjunct to Rhinoplasty** / Demirel O / Aesthetic Plast Surg 2021;45(5):2257-2266, PMID 33811290 / [https://pubmed.ncbi.nlm.nih.gov/33811290/](https://pubmed.ncbi.nlm.nih.gov/33811290/) —— 亚洲人额部轮廓塑形+满意度
-1. **Forehead Fat Grafting: Asian Facial Contouring and Augmentation** / Li X et al.（八大处+密歇根）/ Plast Reconstr Surg 2019;144(5):1057-1065 / [https://journals.lww.com/plasreconsurg/fulltext/2020/10000/forehead\_fat\_grafting\_\_asian\_facial\_contouring\_and.49.aspx](https://journals.lww.com/plasreconsurg/fulltext/2020/10000/forehead_fat_grafting__asian_facial_contouring_and.49.aspx) —— 24 例亚洲额部自体脂肪长期随访，同部位不同材料对照
+1. **Forehead Fat Grafting: Asian Facial Contouring and Augmentation** / Li X et al.（八大处+密歇根）/ Plast Reconstr Surg 2019;144(5):1057-1065 / [https://journals.lww.com/plasreconsurg/fulltext/2020/10000/forehead_fat_grafting\__asian_facial_contouring_and.49.aspx](https://journals.lww.com/plasreconsurg/fulltext/2020/10000/forehead_fat_grafting__asian_facial_contouring_and.49.aspx) —— 24 例亚洲额部自体脂肪长期随访，同部位不同材料对照
 1. **Using Methyl Methacrylate in Forehead Contouring** / Song YT / J Craniofac Surg 2013;24(5):1622-1627, DOI 10.1097/SCS.0b013e3182a2e261 —— 骨水泥（MMA）门诊隆额 210 例大样本
 1. **应用聚醚醚酮(PEEK)材料植入物复杂颅面畸形重建术** / 徐州医科大学附属医院刘勇团队 / 脑医汇 / [https://www.brainmed.com/info/48566.jspx](https://www.brainmed.com/info/48566.jspx) —— 中文 PEEK 额部/眉弓病例报道，中文科普溯源
 
@@ -42,7 +42,7 @@
 1. **Atef 2022（见原始 02）**——下巴 109% vs 下颌角 66%，"厚度变化≈植入物一半"的对照证据
 1. **3D printed PEEK implants for esthetic paranasal reconstruction** / J Craniofac Surg 2022 / [https://dx.doi.org/10.1097/SCS.0000000000008824](https://dx.doi.org/10.1097/SCS.0000000000008824) —— 鼻旁凹陷 CBCT 评估，CBCT 是 PEEK 效果评价标准手段
 1. **聚醚醚酮植入矫正鼻唇沟凹陷的效果** / 赵阳、谢志洋等 / 中华医学美学美容杂志 2021;27(6):494-498 / [https://wprim.whocc.org.cn/admin/article/articleDetail?WPRIMID=934466](https://wprim.whocc.org.cn/admin/article/articleDetail?WPRIMID=934466) —— 中文同类，30 例 CBCT+3D 模拟定制 PEEK
-1. **内窥镜辅助聚醚醚酮个性化植入体修复下颌角截骨术后缺损疗效评价** / 中华医学美学美容杂志 2025 / [https://med.wanfangdata.com.cn/Paper/Detail/PeriodicalPaper\_zhyxmr202506002](https://med.wanfangdata.com.cn/Paper/Detail/PeriodicalPaper_zhyxmr202506002) —— 中文 PEEK-PSI 系列，CBCT 设计+术后三维重建（RMSE 0.117-0.315mm）
+1. **内窥镜辅助聚醚醚酮个性化植入体修复下颌角截骨术后缺损疗效评价** / 中华医学美学美容杂志 2025 / [https://med.wanfangdata.com.cn/Paper/Detail/PeriodicalPaper_zhyxmr202506002](https://med.wanfangdata.com.cn/Paper/Detail/PeriodicalPaper_zhyxmr202506002) —— 中文 PEEK-PSI 系列，CBCT 设计+术后三维重建（RMSE 0.117-0.315mm）
 
 ## 五、相似于「Helmy 2024 脂肪 vs PEEK RCT」（下巴填充对比）
 
@@ -51,7 +51,7 @@
 1. **Atef 2022（见原始 02）**——PEEK 下巴软组织增益数据支撑"PEEK 适合严重缺陷"
 1. **Would augmentation genioplasty using patient-specific PEEK implant meet patient's expectations?** / Adb El-Aty et al. / Int J Health Sci 2022;6(S7):1906-1911 / [https://www.researchgate.net/publication/362690698](https://www.researchgate.net/publication/362690698) —— 开罗大学同脉络，PEEK 定制颏成形 FACE-Q 满意度
 1. **Methods for Chin Area Augmentation: Subplatysmal Fat Autograft** / Sechenov University / [https://doaj.org/article/504e5cb7fc7d4beba04ccb7c7e7b1d7b](https://doaj.org/article/504e5cb7fc7d4beba04ccb7c7e7b1d7b) —— 170 例大样本假体 vs 脂肪隆颏投影/并发症，对应"脂肪轻中度、假体重度"分层
-1. **隆下巴哪种方法效果好？** / 39健康网 / [https://m.39.net/cm/a\_b4bv01y.html](https://m.39.net/cm/a_b4bv01y.html) —— 中文科普：注射/假体/脂肪/截骨对比，含"皮肤过薄不适合假体"面诊要点
+1. **隆下巴哪种方法效果好？** / 39健康网 / [https://m.39.net/cm/a_b4bv01y.html](https://m.39.net/cm/a_b4bv01y.html) —— 中文科普：注射/假体/脂肪/截骨对比，含"皮肤过薄不适合假体"面诊要点
 
 ## 六、相似于「蔡康医生 PEEK 皮肤厚度经验」（设计经验/中文科普）
 
@@ -77,13 +77,11 @@
 ## 九、相似于「Järvinen 2019 PEEK PSI 回顾」
 
 1. **Lee NJ 2026（见第八组第 4 条）**——56 例 PEEK 颌面重建（眶/颧/下颌/上颌），直接升级版回顾
-1. **Late Correction of Orbital Deformities Using Customized 3D Implant** / Martinez F, Alister JP, Uribe F, Olate S / Int J Morphol 2021;39(6):1683-1687 / [https://intjmorphol.com/abstract/?art\_id=8339](https://intjmorphol.com/abstract/?art_id=8339) —— PEEK PSI 眶重建 2 例 10 年以上畸形
+1. **Late Correction of Orbital Deformities Using Customized 3D Implant** / Martinez F, Alister JP, Uribe F, Olate S / Int J Morphol 2021;39(6):1683-1687 / [https://intjmorphol.com/abstract/?art_id=8339](https://intjmorphol.com/abstract/?art_id=8339) —— PEEK PSI 眶重建 2 例 10 年以上畸形
 1. **Boniello 2020（见第二组第 2 条）**——PEEK onlay 体积学研究
 1. **Front Surg 2024 PEEK 表面改性综述（见第二组第 5 条）**——PEEK 颅面重建综述含各系列对比
 1. **Chepurnyi et al. Clinical efficacy of PEEK patient-specific implants in orbital reconstruction** / J Oral Biol Craniofac Res 2020 —— 眶重建 PEEK 临床疗效
 
----
+***
 
 > ⚠️ 相似文献链接均来自搜索确认，引用前建议回原文/DOI 二次核验。部分来源（医院推广页、医美科普）非同行评审，运营引用注意可信度分层与合规。
-
-KS_DOC_REVIEWS NcnPEcIogKH3qvDDewDm5Z 19239 https://www.workbuddy.cn/space/d/NcnPEcIogKH3qvDDewDm5Z
