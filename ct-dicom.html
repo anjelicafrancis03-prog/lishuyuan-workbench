@@ -87,11 +87,104 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px
 <body>
 <header class="hero">
   <h1>CT-DICOM数据接收与处理标准</h1>
-  <p class="hero-summary">{&quot;error&quot;: &quot;参数解析失败&quot;}</p>
+  <p class="hero-summary">目的：统一客户头颅 CT 数据的接收、检查、查看、三维重建全流程标准 关联：视频处理标准、李书远数据库团队SOP、素材/技术标准/</p>
 </header>
 <main class="wrap">
 <section class="reveal block-card">
-<p>{&quot;error&quot;: &quot;参数解析失败&quot;}</p>
+<blockquote><p>状态：生效（2026-08-19）｜适用范围：李书远数据库团队全体成员 </p></blockquote>
+<p>目的：统一客户头颅 CT 数据的接收、检查、查看、三维重建全流程标准 关联：视频处理标准、李书远数据库团队SOP、素材/技术标准/</p>
+</section>
+<section class="reveal block-card">
+<h2>一、客户头颅 CT 的标准格式：DICOM（必读）</h2>
+<h3>1.1 什么是 DICOM</h3>
+<ul><li><strong>DICOM</strong> = Digital Imaging and Communications in Medicine（医学数字影像国际标准）</li><li>文件后缀：<code>.dcm</code></li><li>一次头颅 CT 扫描 = <strong>一个文件夹内 200~400 张 .dcm 切片</strong>（层厚 0.5~1mm），命名如 <code>IM-0001-0001.dcm</code></li><li>客户从医院拿到的 = 一个 DICOM 文件夹（光盘 / U 盘拷贝 / 压缩包）</li></ul>
+<h3>1.2 为什么必须是 DICOM（不是截图）</h3>
+<div class="table-wrap"><table><thead><tr><th>数据形态</th><th>能否三维重建</th><th>说明</th></tr></thead><tbody><tr><td>DICOM 文件夹（.dcm × 200~400）</td><td>✅ 能</td><td>含完整空间信息，可 MPR + 三维重建</td></tr><tr><td>CT 报告单</td><td>❌ 不能</td><td>只有文字结论</td></tr><tr><td>截图 / JPG / PNG</td><td>❌ 不能</td><td>只是屏幕照片，无空间信息</td></tr></tbody></table></div>
+<blockquote><p>⚠️ <strong>最高频的坑</strong>：客户发&quot;CT 照片/截图&quot;以为就是数据——那只是看片截图，<strong>无法做三维重建</strong>。必须请客户回医院拷贝 DICOM 原始文件夹。</p></blockquote>
+<h3>1.3 收数据检查清单</h3>
+</section>
+<section class="reveal block-card">
+<h2>二、查看软件（分档推荐）</h2>
+<h3>2.1 快速看片（首选 RadiAnt）</h3>
+<div class="table-wrap"><table><thead><tr><th>软件</th><th>平台</th><th>特点</th><th>费用</th></tr></thead><tbody><tr><td><strong>RadiAnt DICOM Viewer</strong></td><td>Windows</td><td>加载快、界面友好、支持 MPR/3D 重建、中文友好</td><td>免费版够用</td></tr><tr><td><strong>MicroDicom</strong></td><td>Windows</td><td>极简、轻量，快速浏览</td><td>免费</td></tr><tr><td>Horos / OsiriX</td><td>macOS</td><td>Mac 端查看 + 重建</td><td>免费/开源</td></tr></tbody></table></div>
+<h3>2.2 专业分析 + 三维重建（3D Slicer 首选）</h3>
+<div class="table-wrap"><table><thead><tr><th>软件</th><th>平台</th><th>特点</th><th>费用</th></tr></thead><tbody><tr><td><strong>3D Slicer</strong></td><td>Win/Mac/Linux</td><td>医学影像分析全能王：分割 / 重建 / 导出 STL</td><td>免费开源</td></tr><tr><td><strong>InVesalius 3</strong></td><td>Win/Mac/Linux</td><td>DICOM→3D 模型一键转换（约 5 分钟）</td><td>免费开源</td></tr><tr><td><strong>3DSkull</strong>（国产）</td><td>Windows</td><td>专做头骨 CT 导入 / MPR / 三维重建（鄂械注准20242214935）</td><td>商用收费</td></tr></tbody></table></div>
+<h3>2.3 软件安装要点</h3>
+<ul><li><strong>RadiAnt</strong>：官网 radiantviewer.com 下载，Windows 直接安装，免费版可看片（部分高级功能付费）</li><li><strong>3D Slicer</strong>：slicer.org 下载，跨平台；首次打开加载模块较多，内存建议 ≥8GB</li><li><strong>InVesalius</strong>：官网免费下载，四步向导（导入→分割→重建→导出），对新手最友好</li></ul>
+</section>
+<section class="reveal block-card">
+<h2>三、三维重建 / 导出 3D 模型流程（PEEK 术前规划核心）</h2>
+<h3>3.1 标准路径</h3>
+<h3>```</h3>
+<p>DICOM 文件夹 ↓ ① 导入（软件直接读文件夹） 2D 切片序列 ↓ ② 阈值分割（选取&quot;骨&quot;的密度范围） 头骨体素 ↓ ③ 三维重建 头骨 3D 模型 ↓ ④ 导出 STL STL 文件（3D 打印 / 术前设计 / 展示通用格式）</p>
+<pre><code>
+3.2 CT 值（HU）参考（分割时用）
+
+| 组织 | CT 值范围（HU） |
+|---|---|
+| 空气 | -1000 |
+| 脂肪 | -100 ~ -50 |
+| 水/软组织 | 0 ~ +40 |
+| **骨（松质）** | **+300 ~ +600** |
+| **骨（皮质）** | **+700 ~ +1000** |
+
+&gt; 分割头骨时阈值区间通常取 **+300 ~ +1000 HU**（松质骨到皮质骨），可在软件里拖动滑杆预览选中区域，确保头骨完整、软组织不混入。
+
+### 3.3 质量要点
+
+1. **阈值选对**：骨头才分得干净（+300~+1000 HU）
+1. **去噪/平滑**：重建后适当平滑，去掉扫描噪声毛刺
+1. **导出 STL**：3D 打印 / 建模通用格式，导出后可继续用 Blender 等设计软件处理
+1. 商业省事：3DSkull 一条龙（导入→重建→报告）
+
+---
+
+## 四、给客户 / 团队的沟通话术（可直接用）
+
+### 4.1 跟客户要数据
+
+&gt; &quot;您好，为了给您做精准的骨相分析和术前设计，需要您提供**头颅 CT 的原始影像数据（DICOM 格式）**——通常是医院刻的一张光盘，或拷贝到 U 盘的一个文件夹（里面有很多张 .dcm 文件）。**CT 报告单和手机拍的屏幕照片无法用于三维重建**，麻烦您回医院影像科拷贝一份，一般免费或少量费用。&quot;
+
+### 4.2 团队内部流转
+
+&gt; 收到 DICOM 文件夹后：
+
+&gt; 1. **RadiAnt** 快速打开确认部位/层厚
+
+&gt; 1. **3D Slicer / InVesalius** 做三维重建
+
+&gt; 1. 导出 **STL** 交设计/术前规划
+
+&gt; 1. 数据存 `raw/` 按日期归档（隐私红线内）
+
+---
+
+## 五、常见问题 Q\&amp;A
+
+**Q1: 客户发来一个 .zip 压缩包，里面全是 .dcm？** 
+→ 正常，解压后就是 DICOM 文件夹，直接导入软件。
+
+**Q2: 客户只有报告单，没有影像数据？** 
+→ 报告单不能重建；请客户回医院影像科拷 DICOM（说明用途，一般配合）。
+
+**Q3: 层厚 3mm 的 CT 能做吗？** 
+→ 能做但精度差，重建后骨骼边缘模糊；最佳 0.5~1mm，条件允许建议重扫薄层。
+
+**Q4: 可以用手机打开 .dcm 吗？** 
+→ 部分 App 支持简易查看，但重建必须电脑端专业软件。
+
+**Q5: 导出 STL 后还能改吗？** 
+→ 能。STL 可导入 Blender/3D 设计软件继续编辑、测量、设计植入体。
+
+---
+
+## 六、边界与注意
+
+- 本标准**不做诊断**——只做数据接收、查看、三维重建的技术流程；诊断结论归医生
+- **患者隐私**：CT 数据含个人信息，接收/存储/传输按《李书远数据库团队SOP》隐私红线执行，不进公开索引
+- 工具版本以官方为准：RadiAnt（radiantviewer.com）、3D Slicer（slicer.org）、InVesalius（官网免费下载）
+
+KS_DOC_REVIEWS fHUekyf52zq02Bks5POsOV 18495 https://www.workbuddy.cn/space/d/fHUekyf52zq02Bks5POsOV</code></pre>
 </section>
 <footer>由 WorkBuddy 资料库生成</footer>
 </main>

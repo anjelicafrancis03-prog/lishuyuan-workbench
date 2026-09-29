@@ -87,11 +87,48 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px
 <body>
 <header class="hero">
   <h1>李书远数据库使用说明</h1>
-  <p class="hero-summary">{&quot;error&quot;: &quot;参数解析失败&quot;}</p>
+  <p class="hero-summary">注册制：已登记（见 <code>F:\codex\catalog\database-registry-v0.json</code>） 创建日期：2026-08-14</p>
 </header>
 <main class="wrap">
 <section class="reveal block-card">
-<p>{&quot;error&quot;: &quot;参数解析失败&quot;}</p>
+<blockquote><p>载体：Markdown 文件库 </p></blockquote>
+<p>注册制：已登记（见 <code>F:\codex\catalog\database-registry-v0.json</code>） 创建日期：2026-08-14</p>
+</section>
+<section class="reveal block-card">
+<h2>用途</h2>
+<p>收录国内医美自媒体运营素材：短视频文案、朋友圈文案、账号简介、话术、风格基准等。供国内医美/整形领域的自媒体内容创作、拍摄脚本、运营排期取用。</p>
+</section>
+<section class="reveal block-card">
+<h2>主题关系（重要）</h2>
+<ul><li><strong>骨相审美 = 理念/内容层</strong>：先立&quot;骨相审美&quot;的人设与认知（账号简介、开场钩子、金句），建立审美高度</li><li><strong>PEEK = 落地业务层</strong>：骨相审美文案最终服务于 PEEK（聚醚醚酮）3D 打印骨相填充/轮廓手术推广——审美理念引流，PEEK 技术承接</li><li>创作顺序建议：骨相审美文案做开场与主张 → PEEK 材料科普/对比/案例做承接与转化</li><li>素材对应：骨相审美见 <code>素材/骨相审美/</code>，PEEK 见 <code>素材/PEEK/</code>（含材料知识/卖点/账号源）</li></ul>
+</section>
+<section class="reveal block-card">
+<h2>目录结构</h2>
+</section>
+<section class="reveal block-card">
+<h2>```</h2>
+<p>domestic-aesthetic-media-ops/ ├── README.md # 本说明 ├── raw/ # 原始素材存档（用户原文 / 抓取原文，只读归档） ├── 需求/ # 创作要求/需求规格（用户原话 + 解析） └── 素材/ # 整理后的文案条目 ├── 骨相审美/ # 按主题分目录 ├── PEEK/ # PEEK 材料知识 / 文案关键词与卖点 / 平台账号源 / 结构化数据（2026-08-16 从 medical-aesthetic-corpus 归集） └── 风格基准/ # 文案风格基准 / 语感规范</p>
+<pre><code>
+条目规范（写库时必须遵守）
+
+- 每条文案条目 = 1 个 Markdown 文件，或同主题合集文件内的一个编号小节
+- `id`：`GM--`（GM = 国内医美 Guomei）
+- `原文`：文案原文（保留原话，不改写）
+- `主题`：骨相审美 / 鼻部 / 眼周 / ...
+- `用途`：短视频开场 / 短视频收尾 / 朋友圈 / 简介 / 金句 ...
+- `时长`（短视频类）：15s / 30s / 60s
+- `入库日期`
+- `来源`：用户提供 / 精编 / 生成
+- 用户提供的原文必须**原样归档**到 `raw/`，然后才在 `素材/` 中整理
+- 风格基准见 `素材/风格基准/`，新文案应遵守
+
+## 与医美语料库的关系
+
+- 本库 = 运营/创作素材库（文案、话术、脚本）
+- `F:\codex\data\medical-aesthetic-corpus\` = 行业知识语料库（文章、手术、风险、产品）
+- 两者互补：创作文案时先查本库找表达，需要医学事实/合规依据时查语料库
+
+KS_DOC_REVIEWS VDxW4UaJXkKhNhvcCgYrWz 4433 https://www.workbuddy.cn/space/d/VDxW4UaJXkKhNhvcCgYrWz</code></pre>
 </section>
 <footer>由 WorkBuddy 资料库生成</footer>
 </main>
